@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>News Trading — DETwal</title>
+    <meta name="description" content="DETwal News Trading — market-moving news and trading research tools.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header class="navbar">
+
+        <a href="../home/" class="logo">
+            DET<span>wal</span>
+        </a>
+
+        <div class="product-name">
+            News Trading
+        </div>
+
+        <nav class="nav-links">
+            <a href="../home/">Home</a>
+            <a href="../journal/">Journal</a>
+            <a href="../community/">Community</a>
+            <a href="../strategies-store/">Store</a>
+        </nav>
+
+        <div class="nav-actions">
+            <a href="../signup/" class="account-btn">
+                Account
+            </a>
+        </div>
+
+    </header>
+
+
+    <!-- MAIN -->
+
+    <main class="news-container">
+
+
+        <!-- HEADER -->
+
+        <section class="news-header">
+
+            <div>
+
+                <span class="section-label">
+                    DETWAL NEWS TRADING
+                </span>
+
+                <h1>
+                    Trade around
+                    <span>the news.</span>
+                </h1>
+
+                <p>
+                    Monitor important economic events and
+                    study market reactions in one focused workspace.
+                </p>
+
+            </div>
+
+            <div class="premium-badge">
+                PREMIUM
+            </div>
+
+        </section>
+
+
+        <!-- MARKET OVERVIEW -->
+
+        <section class="overview-grid">
+
+            <div class="overview-card">
+
+                <span>Next High Impact Event</span>
+
+                <strong id="nextEvent">
+                    Loading...
+                </strong>
+
+                <small id="eventTime">
+                    —
+                </small>
+
+            </div>
+
+
+            <div class="overview-card">
+
+                <span>Events Today</span>
+
+                <strong id="eventsToday">
+                    0
+                </strong>
+
+                <small>
+                    Scheduled events
+                </small>
+
+            </div>
+
+
+            <div class="overview-card">
+
+                <span>Market Focus</span>
+
+                <strong>
+                    XAUUSD
+                </strong>
+
+                <small>
+                    Gold
+                </small>
+
+            </div>
+
+
+            <div class="overview-card">
+
+                <span>Session</span>
+
+                <strong id="currentSession">
+                    —
+                </strong>
+
+                <small>
+                    Current market session
+                </small>
+
+            </div>
+
+        </section>
+
+
+        <!-- MAIN GRID -->
+
+        <section class="main-grid">
+
+
+            <!-- UPCOMING EVENTS -->
+
+            <div class="panel events-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            ECONOMIC CALENDAR
+                        </span>
+
+                        <h2>
+                            Upcoming Events
+                        </h2>
+
+                    </div>
+
+                    <select id="impactFilter">
+
+                        <option value="all">
+                            All Impact
+                        </option>
+
+                        <option value="high">
+                            High Impact
+                        </option>
+
+                        <option value="medium">
+                            Medium Impact
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="events-list" id="eventsList">
+
+                    <!-- Events will be loaded by JavaScript -->
+
+                </div>
+
+            </div>
+
+
+            <!-- WATCHLIST -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            WATCHLIST
+                        </span>
+
+                        <h2>
+                            Instruments
+                        </h2>
+
+                    </div>
+
+                    <button
+                        class="text-btn"
+                        id="addWatchBtn"
+                    >
+                        + Add
+                    </button>
+
+                </div>
+
+
+                <div class="watchlist" id="watchlist">
+
+                    <div class="watch-item">
+
+                        <div>
+
+                            <strong>
+                                XAUUSD
+                            </strong>
+
+                            <span>
+                                Gold
+                            </span>
+
+                        </div>
+
+                        <div class="watch-price">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="watch-item">
+
+                        <div>
+
+                            <strong>
+                                EURUSD
+                            </strong>
+
+                            <span>
+                                Euro / Dollar
+                            </span>
+
+                        </div>
+
+                        <div class="watch-price">
+                            —
+                        </div>
+
+                    </div>
+
+
+                    <div class="watch-item">
+
+                        <div>
+
+                            <strong>
+                                GBPUSD
+                            </strong>
+
+                            <span>
+                                Pound / Dollar
+                            </span>
+
+                        </div>
+
+                        <div class="watch-price">
+                            —
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- NEWS ANALYSIS -->
+
+        <section class="panel analysis-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-label">
+                        NEWS RESEARCH
+                    </span>
+
+                    <h2>
+                        Selected Event
+                    </h2>
+
+                </div>
+
+                <span class="status-badge">
+                    Research
+                </span>
+
+            </div>
+
+
+            <div class="analysis-content">
+
+                <div class="event-summary">
+
+                    <span class="event-impact">
+                        HIGH IMPACT
+                    </span>
+
+                    <h3 id="selectedEvent">
+                        Select an event
+                    </h3>
+
+                    <p id="eventDescription">
+                        Select an upcoming event to view
+                        its available information and market context.
+                    </p>
+
+                </div>
+
+
+                <div class="data-grid">
+
+                    <div>
+                        <span>Previous</span>
+                        <strong id="previousData">—</strong>
+                    </div>
+
+                    <div>
+                        <span>Forecast</span>
+                        <strong id="forecastData">—</strong>
+                    </div>
+
+                    <div>
+                        <span>Actual</span>
+                        <strong id="actualData">—</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- DISCLAIMER -->
+
+        <section class="disclaimer">
+
+            <strong>
+                Market information
+            </strong>
+
+            <p>
+                DETwal provides market information and research tools
+                for informational purposes. Nothing on this page should
+                be treated as a guarantee of future market movements or
+                financial results.
+            </p>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <div>
+
+            <strong>
+                DET<span>wal</span>
+            </strong>
+
+            <p>
+                News Trading
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="../terms/">
+                Terms
+            </a>
+
+            <a href="../privacy/">
+                Privacy
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
