@@ -1,170 +1,98 @@
-const events = [
-    {
-        time: "08:30",
-        name: "Non-Farm Payrolls",
-        country: "USD",
-        impact: "high",
-        previous: "—",
-        forecast: "—",
-        actual: "—",
-        description: "Employment data that can create significant volatility across financial markets."
-    },
-    {
-        time: "10:00",
-        name: "ISM Manufacturing PMI",
-        country: "USD",
-        impact: "medium",
-        previous: "—",
-        forecast: "—",
-        actual: "—",
-        description: "A business activity indicator used to assess manufacturing conditions."
-    },
-    {
-        time: "14:00",
-        name: "FOMC Interest Rate Decision",
-        country: "USD",
-        impact: "high",
-        previous: "—",
-        forecast: "—",
-        actual: "—",
-        description: "A major monetary-policy event that may affect currencies, bonds and gold."
-    }
-];
+const API_URL =
+    "https://detwal-help-bot.dakshdetwal10.workers.dev";
 
-const eventsList = document.getElementById("eventsList");
-const impactFilter = document.getElementById("impactFilter");
-
-const nextEvent = document.getElementById("nextEvent");
-const eventTime = document.getElementById("eventTime");
-const eventsToday = document.getElementById("eventsToday");
-const currentSession = document.getElementById("currentSession");
-
-const selectedEvent = document.getElementById("selectedEvent");
-const eventDescription = document.getElementById("eventDescription");
+const newsName = document.getElementById("newsName");
+const timeLeft = document.getElementById("timeLeft");
 const previousData = document.getElementById("previousData");
-const forecastData = document.getElementById("forecastData");
-const actualData = document.getElementById("actualData");
 
 
-function renderEvents(filter = "all") {
+/*
+    TEMPORARY NEWS DATA
 
-    const filteredEvents =
-        filter === "all"
-            ? events
-            : events.filter(event => event.impact === filter);
+    This will later be replaced by data
+    added through the DETwal Telegram bot
+    using /addnextnews.
+*/
 
-    if (filteredEvents.length === 0) {
-        eventsList.innerHTML = `
-            <div class="event-item">
-                <div></div>
-                <div class="event-name">
-                    No events found.
-                </div>
-            </div>
-        `;
-        return;
-    }
-
-    eventsList.innerHTML = filteredEvents.map((event, index) => {
-
-        return `
-            <div class="event-item" data-index="${events.indexOf(event)}">
-
-                <div class="event-time">
-                    ${event.time}
-                </div>
-
-                <div>
-                    <div class="event-name">
-                        ${event.name}
-                    </div>
-
-                    <div class="event-country">
-                        ${event.country}
-                    </div>
-                </div>
-
-                <span class="impact ${event.impact}">
-                    ${event.impact.toUpperCase()}
-                </span>
-
-            </div>
-        `;
-
-    }).join("");
-
-    document.querySelectorAll(".event-item[data-index]").forEach(item => {
-
-        item.addEventListener("click", () => {
-
-            const index = Number(item.dataset.index);
-
-            showEvent(events[index]);
-
-        });
-
-    });
-}
+const nextNews = {
+    name: "Non-Farm Payrolls",
+    timeLeft: "02h 34m",
+    previous: "—"
+};
 
 
-function showEvent(event) {
+/* DISPLAY NEXT NEWS */
 
-    selectedEvent.textContent = event.name;
+function displayNextNews() {
 
-    eventDescription.textContent =
-        event.description;
+    newsName.textContent =
+        nextNews.name || "No upcoming news";
+
+    timeLeft.textContent =
+        nextNews.timeLeft || "—";
 
     previousData.textContent =
-        event.previous;
-
-    forecastData.textContent =
-        event.forecast;
-
-    actualData.textContent =
-        event.actual;
+        nextNews.previous || "—";
 }
 
 
-function updateOverview() {
+/*
+    FUTURE API FUNCTION
 
-    eventsToday.textContent = events.length;
+    The Telegram bot will save the upcoming
+    news on the Cloudflare Worker.
 
-    if (events.length > 0) {
+    We will connect this function after
+    the Telegram /addnextnews system is built.
+*/
 
-        nextEvent.textContent =
-            events[0].name;
+async function loadNextNews() {
 
-        eventTime.textContent =
-            `Today at ${events[0].time}`;
+    try {
 
+        /*
+        const response = await fetch(
+            `${API_URL}/next-news`
+        );
+
+        const data = await response.json();
+
+        if (data.success && data.news) {
+
+            newsName.textContent =
+                data.news.name;
+
+            timeLeft.textContent =
+                data.news.timeLeft;
+
+            previousData.textContent =
+                data.news.previous;
+
+            return;
+        }
+        */
+
+        displayNextNews();
+
+    } catch (error) {
+
+        console.error(
+            "Failed to load upcoming news:",
+            error
+        );
+
+        newsName.textContent =
+            "Unable to load news";
+
+        timeLeft.textContent =
+            "—";
+
+        previousData.textContent =
+            "—";
     }
-
-    const hour = new Date().getHours();
-
-    if (hour >= 0 && hour < 8) {
-        currentSession.textContent = "Asia";
-    } else if (hour >= 8 && hour < 13) {
-        currentSession.textContent = "London";
-    } else if (hour >= 13 && hour < 21) {
-        currentSession.textContent = "New York";
-    } else {
-        currentSession.textContent = "Asia";
-    }
 }
 
 
-impactFilter.addEventListener("change", () => {
+/* INITIALIZE */
 
-    renderEvents(
-        impactFilter.value
-    );
-
-});
-
-
-renderEvents();
-updateOverview();
-
-if (events.length > 0) {
-    showEvent(events[0]);
-}
+loadNextNews();
