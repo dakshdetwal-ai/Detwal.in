@@ -8,7 +8,7 @@
 
     <meta
         name="description"
-        content="Subscribe to DETwal News Trading for $9 USD and access XAUUSD news forecasts."
+        content="Subscribe to DETwal News Trading and access XAUUSD news forecasts."
     >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -38,30 +38,19 @@
 
         <nav class="nav-links">
 
-            <a href="../home/">
-                Home
-            </a>
+            <a href="../home/">Home</a>
 
-            <a href="../journal/">
-                Journal
-            </a>
+            <a href="../journal/">Journal</a>
 
-            <a href="../community/">
-                Community
-            </a>
+            <a href="../community/">Community</a>
 
-            <a href="../strategies-store/">
-                Store
-            </a>
+            <a href="../strategies-store/">Store</a>
 
         </nav>
 
         <div class="nav-actions">
 
-            <a
-                href="../login/"
-                class="account-btn"
-            >
+            <a href="../login/" class="account-btn">
                 Account
             </a>
 
@@ -112,22 +101,32 @@
                     </h2>
 
                     <p>
-                        Access the forecast information for
+                        Access forecast information for
                         upcoming market-moving news events.
                     </p>
 
                 </div>
 
 
+                <!-- PRICE -->
+
                 <div class="price">
 
-                    <strong>
-                        $9
-                    </strong>
+                    <div class="original-price" id="originalPrice">
+                        $25
+                    </div>
 
-                    <span>
-                        USD
-                    </span>
+                    <div class="current-price">
+
+                        <strong id="currentPrice">
+                            $25
+                        </strong>
+
+                        <span>
+                            USD
+                        </span>
+
+                    </div>
 
                 </div>
 
@@ -228,17 +227,51 @@
             </div>
 
 
+            <!-- COUPON -->
+
+            <div class="coupon-section">
+
+                <label for="couponInput">
+                    Have a discount code?
+                </label>
+
+                <div class="coupon-row">
+
+                    <input
+                        type="text"
+                        id="couponInput"
+                        placeholder="Enter coupon code"
+                        autocomplete="off"
+                    >
+
+                    <button
+                        type="button"
+                        id="applyCouponBtn"
+                    >
+                        Apply
+                    </button>
+
+                </div>
+
+                <p
+                    id="couponMessage"
+                    class="coupon-message"
+                ></p>
+
+            </div>
+
+
             <!-- CTA -->
 
             <div class="subscription-cta">
 
                 <div>
 
-                    <strong>
+                    <strong id="ctaTitle">
                         Ready to subscribe?
                     </strong>
 
-                    <p>
+                    <p id="ctaText">
                         Continue through Telegram to
                         complete your subscription.
                     </p>
@@ -247,11 +280,11 @@
 
 
                 <a
-                    href="#"
+                    href="https://t.me/detwalhelpbot"
                     id="telegramSubscribeBtn"
                     class="subscribe-btn"
                 >
-                    Subscribe for $9
+                    Subscribe for $25
                 </a>
 
             </div>
@@ -320,6 +353,12 @@
 
     </footer>
 
+
+    <!-- COUPON CONFIGURATION -->
+
+    <script src="coupon.js"></script>
+
+    <!-- PAGE LOGIC -->
 
     <script src="script.js"></script>
 
