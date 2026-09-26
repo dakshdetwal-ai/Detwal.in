@@ -3,23 +3,10 @@
 // ==========================================
 
 const SUPABASE_URL =
-    "https://evnswenvmwhrohyzjrgq.supabase.co";
+    "https://evsnwenvmwhrohyzrjgq.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_Vfy2VLbqRYB_DOsK13iuqA_9-pk4Q5t";
-
-
-// ==========================================
-// CHECK SUPABASE LIBRARY
-// ==========================================
-
-if (!window.supabase) {
-    alert(
-        "Supabase could not be loaded. Please refresh the page and try again."
-    );
-
-    throw new Error("Supabase library is not loaded.");
-}
 
 
 // ==========================================
@@ -38,19 +25,9 @@ const supabaseClient = window.supabase.createClient(
 
 const signupForm = document.getElementById("signupForm");
 
-if (!signupForm) {
-    throw new Error("Signup form was not found.");
-}
-
-
 signupForm.addEventListener("submit", async function (event) {
 
     event.preventDefault();
-
-
-    // ======================================
-    // GET FORM VALUES
-    // ======================================
 
     const name =
         document.getElementById("name").value.trim();
@@ -69,27 +46,18 @@ signupForm.addEventListener("submit", async function (event) {
     // VALIDATION
     // ======================================
 
-    if (
-        !name ||
-        !email ||
-        !password ||
-        !confirmPassword
-    ) {
+    if (!name || !email || !password || !confirmPassword) {
         alert("Please fill in all fields.");
         return;
     }
-
 
     if (password !== confirmPassword) {
         alert("Passwords do not match.");
         return;
     }
 
-
     if (password.length < 8) {
-        alert(
-            "Password must contain at least 8 characters."
-        );
+        alert("Password must contain at least 8 characters.");
         return;
     }
 
@@ -103,7 +71,6 @@ signupForm.addEventListener("submit", async function (event) {
             'button[type="submit"]'
         );
 
-
     submitButton.disabled = true;
 
     submitButton.textContent =
@@ -116,27 +83,24 @@ signupForm.addEventListener("submit", async function (event) {
 
     try {
 
-        const {
-            data,
-            error
-        } = await supabaseClient.auth.signUp({
+        const { data, error } =
+            await supabaseClient.auth.signUp({
 
-            email: email,
+                email: email,
 
-            password: password,
+                password: password,
 
-            options: {
+                options: {
+                    data: {
+                        full_name: name
+                    },
 
-                data: {
-                    full_name: name
-                },
+                    emailRedirectTo:
+                        window.location.origin +
+                        "/DETwal/home/"
+                }
 
-                emailRedirectTo:
-                    window.location.origin +
-                    "/home/"
-            }
-
-        });
+            });
 
 
         // ==================================
@@ -171,20 +135,16 @@ signupForm.addEventListener("submit", async function (event) {
         if (data && data.user) {
 
             console.log(
-                "User created:",
+                "Account created:",
                 data.user
             );
 
 
-            /*
-             * If email confirmation is enabled,
-             * Supabase sends a confirmation email.
-             */
-
+            // Email confirmation enabled
             if (!data.session) {
 
                 alert(
-                    "Account created! Please check your email and confirm your account."
+                    "Account created successfully! Please check your email and confirm your account."
                 );
 
                 submitButton.disabled = false;
@@ -196,15 +156,10 @@ signupForm.addEventListener("submit", async function (event) {
             }
 
 
-            /*
-             * If email confirmation is disabled,
-             * the user gets a session immediately.
-             */
-
+            // Email confirmation disabled
             alert(
                 "Account created successfully!"
             );
-
 
             window.location.href =
                 "../home/";
@@ -213,14 +168,13 @@ signupForm.addEventListener("submit", async function (event) {
     } catch (error) {
 
         console.error(
-            "Signup request failed:",
+            "Signup error:",
             error
         );
 
         alert(
-            "Unable to connect to the authentication server. Please check your internet connection and try again."
+            "Unable to connect to DETwal authentication. Please try again."
         );
-
 
         submitButton.disabled = false;
 
