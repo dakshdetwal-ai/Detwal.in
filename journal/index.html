@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Trading Journal — DETwal</title>
+
     <meta
         name="description"
         content="Track, analyze and improve your trading performance with the DETwal Trading Journal."
@@ -26,7 +27,6 @@
     <!-- ================= NAVBAR ================= -->
 
     <nav class="navbar">
-
         <div class="nav-container">
 
             <a href="../home/" class="logo">
@@ -40,20 +40,177 @@
                 <a href="../community/">Community</a>
             </div>
 
-            <a href="../signup/" class="account-btn">
+            <!-- Logged-out account button -->
+            <a
+                href="../login/"
+                class="account-btn"
+                id="loginNavBtn"
+            >
                 Account
             </a>
 
-        </div>
+            <!-- Logged-in account menu -->
+            <div
+                class="account-menu"
+                id="accountMenu"
+                style="display: none;"
+            >
 
+                <button
+                    class="account-button"
+                    id="accountButton"
+                    type="button"
+                >
+                    <span
+                        class="account-button-avatar"
+                        id="accountInitial"
+                    >
+                        U
+                    </span>
+
+                    <span id="accountName">
+                        Account
+                    </span>
+
+                    <span class="account-arrow">
+                        ⌄
+                    </span>
+                </button>
+
+                <div
+                    class="account-dropdown"
+                    id="accountDropdown"
+                >
+
+                    <div class="account-info">
+
+                        <div
+                            class="account-avatar"
+                            id="accountAvatar"
+                        >
+                            U
+                        </div>
+
+                        <div class="account-details">
+
+                            <strong id="dropdownName">
+                                User
+                            </strong>
+
+                            <span id="dropdownEmail">
+                                user@example.com
+                            </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="profit-badge">
+
+                        <span class="profit-label">
+                            JOURNAL PROFIT
+                        </span>
+
+                        <strong id="navProfit">
+                            ₹0
+                        </strong>
+
+                    </div>
+
+                    <div class="account-divider"></div>
+
+                    <a href="../journal/">
+                        <span>◫</span>
+                        Trading Journal
+                    </a>
+
+                    <a href="../profile/">
+                        <span>◎</span>
+                        My Account
+                    </a>
+
+                    <a href="../profile/#password">
+                        <span>◆</span>
+                        Change Password
+                    </a>
+
+                    <button
+                        type="button"
+                        id="logoutBtn"
+                        class="logout-btn"
+                    >
+                        <span>↪</span>
+                        Log Out
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
     </nav>
 
 
-    <!-- ================= MAIN ================= -->
+    <!-- ================= AUTH LOCK ================= -->
 
-    <main class="journal-page">
+    <section
+        id="journalLock"
+        class="journal-lock"
+        style="display: none;"
+    >
 
-        <!-- HEADER -->
+        <div class="journal-lock-card">
+
+            <div class="lock-icon">
+                ◉
+            </div>
+
+            <span class="eyebrow">
+                ACCOUNT REQUIRED
+            </span>
+
+            <h1>
+                Your trading journal
+                <span>starts here.</span>
+            </h1>
+
+            <p>
+                Create a free DETwal account or log in to access
+                your personal trading journal.
+            </p>
+
+            <div class="lock-actions">
+
+                <a
+                    href="../signup/"
+                    class="primary-btn"
+                >
+                    Create Account
+                </a>
+
+                <a
+                    href="../login/"
+                    class="secondary-btn"
+                >
+                    Log In
+                </a>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= MAIN JOURNAL ================= -->
+
+    <main
+        class="journal-page"
+        id="journalContent"
+        style="display: none;"
+    >
+
+        <!-- ================= HEADER ================= -->
 
         <section class="journal-header">
 
@@ -75,7 +232,11 @@
 
             </div>
 
-            <button id="addTradeBtn" class="primary-btn">
+            <button
+                id="addTradeBtn"
+                class="primary-btn"
+                type="button"
+            >
                 + Add Trade
             </button>
 
@@ -87,23 +248,54 @@
         <section class="stats-grid">
 
             <div class="stat-card">
-                <span>Total P&L</span>
-                <strong id="totalPnl">₹0</strong>
+
+                <span>
+                    Total P&L
+                </span>
+
+                <strong id="totalPnl">
+                    ₹0
+                </strong>
+
             </div>
 
-            <div class="stat-card">
-                <span>Win Rate</span>
-                <strong id="winRate">0%</strong>
-            </div>
 
             <div class="stat-card">
-                <span>Total Trades</span>
-                <strong id="totalTrades">0</strong>
+
+                <span>
+                    Win Rate
+                </span>
+
+                <strong id="winRate">
+                    0%
+                </strong>
+
             </div>
 
+
             <div class="stat-card">
-                <span>Average R:R</span>
-                <strong id="averageRR">—</strong>
+
+                <span>
+                    Total Trades
+                </span>
+
+                <strong id="totalTrades">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>
+                    Average R:R
+                </span>
+
+                <strong id="averageRR">
+                    —
+                </strong>
+
             </div>
 
         </section>
@@ -120,6 +312,7 @@
                 <div class="card-header">
 
                     <div>
+
                         <span class="card-label">
                             PERFORMANCE
                         </span>
@@ -127,6 +320,7 @@
                         <h2>
                             Equity Curve
                         </h2>
+
                     </div>
 
                     <span class="chart-status">
@@ -135,6 +329,7 @@
 
                 </div>
 
+
                 <div class="chart-container">
 
                     <svg
@@ -142,6 +337,7 @@
                         viewBox="0 0 900 300"
                         preserveAspectRatio="none"
                     >
+
                         <line
                             x1="0"
                             y1="250"
@@ -170,15 +366,16 @@
                             id="equityLine"
                             points=""
                             class="equity-line"
-                        />
+                        ></polyline>
 
                         <polyline
                             id="equityArea"
                             points=""
                             class="equity-area"
-                        />
+                        ></polyline>
 
                     </svg>
+
 
                     <div
                         id="chartEmpty"
@@ -199,6 +396,7 @@
                 <div class="card-header">
 
                     <div>
+
                         <span class="card-label">
                             OVERVIEW
                         </span>
@@ -206,6 +404,7 @@
                         <h2>
                             Performance
                         </h2>
+
                     </div>
 
                 </div>
@@ -214,23 +413,54 @@
                 <div class="performance-list">
 
                     <div>
-                        <span>Winning Trades</span>
-                        <strong id="winningTrades">0</strong>
+
+                        <span>
+                            Winning Trades
+                        </span>
+
+                        <strong id="winningTrades">
+                            0
+                        </strong>
+
                     </div>
 
-                    <div>
-                        <span>Losing Trades</span>
-                        <strong id="losingTrades">0</strong>
-                    </div>
 
                     <div>
-                        <span>Profit Factor</span>
-                        <strong id="profitFactor">—</strong>
+
+                        <span>
+                            Losing Trades
+                        </span>
+
+                        <strong id="losingTrades">
+                            0
+                        </strong>
+
                     </div>
 
+
                     <div>
-                        <span>Best Trade</span>
-                        <strong id="bestTrade">₹0</strong>
+
+                        <span>
+                            Profit Factor
+                        </span>
+
+                        <strong id="profitFactor">
+                            —
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            Best Trade
+                        </span>
+
+                        <strong id="bestTrade">
+                            ₹0
+                        </strong>
+
                     </div>
 
                 </div>
@@ -247,6 +477,7 @@
             <div class="section-heading">
 
                 <div>
+
                     <span class="eyebrow">
                         TRADE HISTORY
                     </span>
@@ -254,6 +485,7 @@
                     <h2>
                         Recent Trades
                     </h2>
+
                 </div>
 
             </div>
@@ -266,23 +498,49 @@
                     <thead>
 
                         <tr>
-                            <th>Date</th>
-                            <th>Symbol</th>
-                            <th>Direction</th>
-                            <th>Entry</th>
-                            <th>Exit</th>
-                            <th>P&L</th>
-                            <th>R:R</th>
-                            <th>Strategy</th>
+
+                            <th>
+                                Date
+                            </th>
+
+                            <th>
+                                Symbol
+                            </th>
+
+                            <th>
+                                Direction
+                            </th>
+
+                            <th>
+                                Entry
+                            </th>
+
+                            <th>
+                                Exit
+                            </th>
+
+                            <th>
+                                P&L
+                            </th>
+
+                            <th>
+                                R:R
+                            </th>
+
+                            <th>
+                                Strategy
+                            </th>
+
                         </tr>
 
                     </thead>
 
-                    <tbody id="tradesTableBody">
 
+                    <tbody id="tradesTableBody">
                     </tbody>
 
                 </table>
+
 
                 <div
                     id="emptyTrades"
@@ -312,26 +570,32 @@
             <button
                 id="closeLoginModal"
                 class="modal-close"
+                type="button"
             >
                 ×
             </button>
+
 
             <div class="login-icon">
                 ◉
             </div>
 
+
             <span class="eyebrow">
                 ACCOUNT REQUIRED
             </span>
+
 
             <h2>
                 Sign in to add trades.
             </h2>
 
+
             <p>
-                Create a free DETwal account or log in to save and
-                manage your trading journal.
+                Create a free DETwal account or log in to save
+                and manage your trading journal.
             </p>
+
 
             <div class="login-actions">
 
@@ -343,7 +607,7 @@
                 </a>
 
                 <a
-                    href="../signup/"
+                    href="../login/"
                     class="secondary-btn"
                 >
                     Log In
@@ -381,9 +645,11 @@
 
                 </div>
 
+
                 <button
                     id="closeModal"
                     class="modal-close"
+                    type="button"
                 >
                     ×
                 </button>
@@ -394,6 +660,8 @@
             <form id="tradeForm">
 
                 <div class="form-grid">
+
+                    <!-- SYMBOL -->
 
                     <div class="form-group">
 
@@ -411,13 +679,18 @@
                     </div>
 
 
+                    <!-- DIRECTION -->
+
                     <div class="form-group">
 
                         <label for="direction">
                             Direction
                         </label>
 
-                        <select id="direction" required>
+                        <select
+                            id="direction"
+                            required
+                        >
 
                             <option value="">
                                 Select
@@ -436,6 +709,8 @@
                     </div>
 
 
+                    <!-- ENTRY -->
+
                     <div class="form-group">
 
                         <label for="entry">
@@ -452,6 +727,8 @@
 
                     </div>
 
+
+                    <!-- EXIT -->
 
                     <div class="form-group">
 
@@ -470,6 +747,8 @@
                     </div>
 
 
+                    <!-- STOP LOSS -->
+
                     <div class="form-group">
 
                         <label for="stopLoss">
@@ -485,6 +764,8 @@
 
                     </div>
 
+
+                    <!-- TAKE PROFIT -->
 
                     <div class="form-group">
 
@@ -510,7 +791,10 @@
                             Risk : Reward
                         </label>
 
-                        <select id="riskReward" required>
+                        <select
+                            id="riskReward"
+                            required
+                        >
 
                             <option value="">
                                 Select R:R
@@ -557,6 +841,8 @@
                     </div>
 
 
+                    <!-- CUSTOM R:R -->
+
                     <div
                         class="form-group hidden"
                         id="customRRGroup"
@@ -577,6 +863,8 @@
                     </div>
 
 
+                    <!-- P&L -->
+
                     <div class="form-group">
 
                         <label for="pnl">
@@ -594,6 +882,8 @@
                     </div>
 
 
+                    <!-- RISK -->
+
                     <div class="form-group">
 
                         <label for="risk">
@@ -610,6 +900,8 @@
                     </div>
 
 
+                    <!-- STRATEGY -->
+
                     <div class="form-group">
 
                         <label for="strategy">
@@ -624,6 +916,8 @@
 
                     </div>
 
+
+                    <!-- NOTES -->
 
                     <div class="form-group full-width">
 
@@ -700,6 +994,10 @@
 
     </footer>
 
+
+    <!-- ================= SUPABASE ================= -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
     <script src="script.js"></script>
 
