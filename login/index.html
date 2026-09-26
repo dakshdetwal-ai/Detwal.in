@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Log In — DETwal</title>
+
+    <meta
+        name="description"
+        content="Log in to your DETwal account."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <a href="../home/" class="logo">
+            DET<span>wal</span>
+        </a>
+
+        <a href="../home/" class="back-link">
+            ← Back to DETwal
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         LOGIN
+    ========================== -->
+
+    <main class="login-container">
+
+        <div class="login-box">
+
+            <div class="login-header">
+
+                <div class="login-badge">
+                    DETWAL ACCOUNT
+                </div>
+
+                <h1>
+                    Welcome back.
+                </h1>
+
+                <p>
+                    Log in to continue to your DETwal account.
+                </p>
+
+            </div>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+                <!-- EMAIL -->
+
+                <div class="form-group">
+
+                    <label for="email">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="password"
+                        name="password"
+                        placeholder="Enter your password"
+                        autocomplete="current-password"
+                        required
+                    >
+
+                </div>
+
+
+                <!-- FORGOT PASSWORD -->
+
+                <div class="forgot-password">
+
+                    <a href="#">
+                        Forgot password?
+                    </a>
+
+                </div>
+
+
+                <!-- SUBMIT -->
+
+                <button
+                    type="submit"
+                    class="login-button"
+                >
+
+                    <span class="button-text">
+                        Log In
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
+                </button>
+
+            </form>
+
+
+            <!-- SIGNUP -->
+
+            <div class="signup-link">
+
+                Don't have an account?
+
+                <a href="../signup/">
+                    Create one
+                </a>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+
+    <footer class="footer">
+
+        <span>
+            © 2026 DETwal
+        </span>
+
+        <div>
+
+            <a href="../terms/">
+                Terms of Use
+            </a>
+
+            <a href="../privacy/">
+                Privacy Policy
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- =========================
+         SUPABASE
+    ========================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <!-- DETWAL LOGIN SCRIPT -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
