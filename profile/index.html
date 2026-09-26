@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Account — DETwal</title>
+
+    <meta
+        name="description"
+        content="Manage your DETwal account, trading statistics and security settings."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- =========================
+         NAVBAR
+    ========================== -->
+
+    <header class="navbar">
+
+        <a href="../home/" class="logo">
+            DET<span>wal</span>
+        </a>
+
+        <a href="../home/" class="back-link">
+            ← Back to DETwal
+        </a>
+
+    </header>
+
+
+    <!-- =========================
+         MAIN
+    ========================== -->
+
+    <main class="profile-container">
+
+        <!-- PROFILE HEADER -->
+
+        <section class="profile-header">
+
+            <div class="profile-avatar" id="profileAvatar">
+                U
+            </div>
+
+            <div class="profile-heading">
+
+                <span class="section-label">
+                    MY ACCOUNT
+                </span>
+
+                <h1 id="profileName">
+                    Loading...
+                </h1>
+
+                <p id="profileEmail">
+                    Loading...
+                </p>
+
+            </div>
+
+            <div class="verified-badge" id="verifiedBadge">
+                ✓ Verified
+            </div>
+
+        </section>
+
+
+        <!-- STATS -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card profit-card">
+
+                <span class="stat-label">
+                    TOTAL PROFIT
+                </span>
+
+                <strong id="totalProfit" class="stat-value">
+                    $0.00
+                </strong>
+
+                <span class="stat-description">
+                    From your trading journal
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    TOTAL TRADES
+                </span>
+
+                <strong id="totalTrades" class="stat-value">
+                    0
+                </strong>
+
+                <span class="stat-description">
+                    Recorded trades
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    WIN RATE
+                </span>
+
+                <strong id="winRate" class="stat-value">
+                    0%
+                </strong>
+
+                <span class="stat-description">
+                    Winning trades
+                </span>
+
+            </div>
+
+            <div class="stat-card">
+
+                <span class="stat-label">
+                    AVERAGE R:R
+                </span>
+
+                <strong id="averageRR" class="stat-value">
+                    0:0
+                </strong>
+
+                <span class="stat-description">
+                    Average risk-to-reward
+                </span>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACCOUNT INFORMATION -->
+
+        <section class="profile-section">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        ACCOUNT
+                    </span>
+
+                    <h2>
+                        Account details
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <div class="details-card">
+
+                <div class="detail-row">
+
+                    <div>
+
+                        <span class="detail-label">
+                            Full Name
+                        </span>
+
+                        <strong id="detailName">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <div>
+
+                        <span class="detail-label">
+                            Email Address
+                        </span>
+
+                        <strong id="detailEmail">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <div>
+
+                        <span class="detail-label">
+                            Account Status
+                        </span>
+
+                        <strong id="accountStatus" class="status-active">
+                            Active
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <div class="detail-row">
+
+                    <div>
+
+                        <span class="detail-label">
+                            Member Since
+                        </span>
+
+                        <strong id="memberSince">
+                            Loading...
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- SECURITY -->
+
+        <section class="profile-section" id="password">
+
+            <div class="section-header">
+
+                <div>
+
+                    <span class="section-label">
+                        SECURITY
+                    </span>
+
+                    <h2>
+                        Password & security
+                    </h2>
+
+                    <p>
+                        Keep your DETwal account secure.
+                    </p>
+
+                </div>
+
+            </div>
+
+
+            <div class="security-card">
+
+                <div class="security-item">
+
+                    <div>
+
+                        <h3>
+                            Change password
+                        </h3>
+
+                        <p>
+                            Set a new password for your account.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="changePasswordBtn"
+                        class="secondary-button"
+                    >
+                        Change Password
+                    </button>
+
+                </div>
+
+
+                <form
+                    id="passwordForm"
+                    class="password-form"
+                    style="display: none;"
+                >
+
+                    <div class="form-group">
+
+                        <label for="newPassword">
+                            New Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="newPassword"
+                            minlength="8"
+                            placeholder="Enter new password"
+                            autocomplete="new-password"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="confirmNewPassword">
+                            Confirm New Password
+                        </label>
+
+                        <input
+                            type="password"
+                            id="confirmNewPassword"
+                            minlength="8"
+                            placeholder="Confirm new password"
+                            autocomplete="new-password"
+                        >
+
+                    </div>
+
+
+                    <div class="password-actions">
+
+                        <button
+                            type="submit"
+                            class="primary-button"
+                        >
+                            Update Password
+                        </button>
+
+                        <button
+                            type="button"
+                            id="cancelPasswordBtn"
+                            class="secondary-button"
+                        >
+                            Cancel
+                        </button>
+
+                    </div>
+
+                </form>
+
+
+                <div class="security-divider"></div>
+
+
+                <div class="security-item">
+
+                    <div>
+
+                        <h3>
+                            Forgot password?
+                        </h3>
+
+                        <p>
+                            Send a password reset link to your email.
+                        </p>
+
+                    </div>
+
+                    <button
+                        type="button"
+                        id="resetPasswordBtn"
+                        class="secondary-button"
+                    >
+                        Send Reset Email
+                    </button>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOGOUT -->
+
+        <section class="logout-section">
+
+            <button
+                type="button"
+                id="logoutBtn"
+                class="logout-button"
+            >
+                Log Out
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="footer">
+
+        <span>
+            © 2026 DETwal
+        </span>
+
+        <div>
+
+            <a href="../terms/">
+                Terms of Use
+            </a>
+
+            <a href="../privacy/">
+                Privacy Policy
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <!-- SUPABASE -->
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Profile JavaScript -->
+
+    <script src="script.js"></script>
+
+</body>
+</html>
