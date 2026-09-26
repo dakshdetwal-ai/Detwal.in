@@ -1,5 +1,5 @@
 const API_URL =
-    "https://detwal-help-bot.dakshdetwal10.workers.dev";
+    "https://detwal-news-bot.dakshdetwal10.workers.dev";
 
 const newsName = document.getElementById("newsName");
 const timeLeft = document.getElementById("timeLeft");
