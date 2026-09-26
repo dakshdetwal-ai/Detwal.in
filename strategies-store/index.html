@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Strategies Marketplace — DETwal</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+
+            <a href="../home/" class="logo">DETwal</a>
+
+            <div class="nav-links">
+                <a href="../home/">Home</a>
+                <a href="../journal/">Journal</a>
+                <a href="../news-trading/">News Trading</a>
+                <a href="../community/">Community</a>
+            </div>
+
+            <a href="../signup/" class="account-btn">
+                Account
+            </a>
+
+        </div>
+    </nav>
+
+
+    <!-- Header -->
+    <main>
+
+        <section class="store-header">
+
+            <div>
+                <span class="eyebrow">DETwal STORE</span>
+
+                <h1>
+                    Strategies built for
+                    <span>real traders.</span>
+                </h1>
+
+                <p>
+                    Explore trading strategies, systems and tools
+                    created for traders who want a structured approach.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- Filters -->
+        <section class="store-controls">
+
+            <div class="categories">
+                <button class="filter-btn active" data-category="all">
+                    All
+                </button>
+
+                <button class="filter-btn" data-category="forex">
+                    Forex
+                </button>
+
+                <button class="filter-btn" data-category="gold">
+                    Gold
+                </button>
+
+                <button class="filter-btn" data-category="indices">
+                    Indices
+                </button>
+
+                <button class="filter-btn" data-category="crypto">
+                    Crypto
+                </button>
+            </div>
+
+            <select id="sortSelect">
+                <option value="featured">Featured</option>
+                <option value="low">Price: Low to High</option>
+                <option value="high">Price: High to Low</option>
+            </select>
+
+        </section>
+
+
+        <!-- Products -->
+        <section class="products-section">
+
+            <div id="productsGrid" class="products-grid"></div>
+
+        </section>
+
+
+        <!-- Seller CTA -->
+        <section class="seller-cta">
+
+            <div>
+                <span class="eyebrow">FOR STRATEGY CREATORS</span>
+
+                <h2>
+                    Have a strategy worth sharing?
+                </h2>
+
+                <p>
+                    Submit your strategy to the DETwal marketplace
+                    and reach traders looking for new systems.
+                </p>
+            </div>
+
+            <button class="primary-btn">
+                Become a Creator
+            </button>
+
+        </section>
+
+    </main>
+
+
+    <!-- Footer -->
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div>
+                <div class="footer-logo">DETwal</div>
+
+                <p>
+                    Tools and infrastructure for modern traders.
+                </p>
+            </div>
+
+            <div class="footer-links">
+                <a href="../home/">Home</a>
+                <a href="../terms/">Terms of Use</a>
+                <a href="../privacy/">Privacy Policy</a>
+            </div>
+
+        </div>
+
+        <div class="footer-bottom">
+            © 2026 DETwal. All rights reserved.
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
