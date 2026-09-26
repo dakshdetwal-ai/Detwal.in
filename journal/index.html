@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Trading Journal — DETwal</title>
+    <meta name="description" content="Free trading journal by DETwal.">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ================= NAVBAR ================= -->
+
+    <header class="navbar">
+
+        <a href="../home/" class="logo">
+            DET<span>wal</span>
+        </a>
+
+        <div class="product-name">
+            Trading Journal
+        </div>
+
+        <nav class="nav-links">
+
+            <a href="../home/">Home</a>
+            <a href="../news-trading/">News</a>
+            <a href="../community/">Community</a>
+            <a href="../strategies-store/">Store</a>
+
+        </nav>
+
+        <div class="nav-actions">
+
+            <a href="../signup/" class="account-btn">
+                Account
+            </a>
+
+        </div>
+
+    </header>
+
+
+    <!-- ================= MAIN ================= -->
+
+    <main class="journal-container">
+
+
+        <!-- HEADER -->
+
+        <section class="journal-header">
+
+            <div>
+
+                <span class="section-label">
+                    DETWAL TRADING JOURNAL
+                </span>
+
+                <h1>
+                    Your trading.
+                    <span>Your data.</span>
+                </h1>
+
+                <p>
+                    Record, organize and analyze every trade
+                    in one clean workspace.
+                </p>
+
+            </div>
+
+            <button class="add-trade-btn" id="addTradeBtn">
+                + Add Trade
+            </button>
+
+        </section>
+
+
+        <!-- ================= STATS ================= -->
+
+        <section class="stats-grid">
+
+            <div class="stat-card">
+
+                <span>Total P&L</span>
+
+                <strong id="totalPnl">
+                    $0.00
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>Win Rate</span>
+
+                <strong id="winRate">
+                    0%
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>Total Trades</span>
+
+                <strong id="totalTrades">
+                    0
+                </strong>
+
+            </div>
+
+
+            <div class="stat-card">
+
+                <span>Average R:R</span>
+
+                <strong id="averageRR">
+                    0.00
+                </strong>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= DASHBOARD ================= -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- EQUITY -->
+
+            <div class="panel equity-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            PERFORMANCE
+                        </span>
+
+                        <h2>
+                            Equity Curve
+                        </h2>
+
+                    </div>
+
+                    <select id="periodSelect">
+
+                        <option value="all">
+                            All Time
+                        </option>
+
+                        <option value="month">
+                            This Month
+                        </option>
+
+                        <option value="week">
+                            This Week
+                        </option>
+
+                    </select>
+
+                </div>
+
+
+                <div class="chart-placeholder">
+
+                    <div class="chart-line"></div>
+
+                    <span>
+                        Your equity curve will appear here
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <!-- QUICK STATS -->
+
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <span class="panel-label">
+                            OVERVIEW
+                        </span>
+
+                        <h2>
+                            Performance
+                        </h2>
+
+                    </div>
+
+                </div>
+
+
+                <div class="performance-list">
+
+                    <div>
+                        <span>Winning Trades</span>
+                        <strong id="winningTrades">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Losing Trades</span>
+                        <strong id="losingTrades">0</strong>
+                    </div>
+
+                    <div>
+                        <span>Profit Factor</span>
+                        <strong id="profitFactor">0.00</strong>
+                    </div>
+
+                    <div>
+                        <span>Best Trade</span>
+                        <strong id="bestTrade">$0.00</strong>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= RECENT TRADES ================= -->
+
+        <section class="panel trades-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-label">
+                        JOURNAL
+                    </span>
+
+                    <h2>
+                        Recent Trades
+                    </h2>
+
+                </div>
+
+                <button class="text-btn" id="viewAllBtn">
+                    View All →
+                </button>
+
+            </div>
+
+
+            <div class="table-wrapper">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Date</th>
+                            <th>Symbol</th>
+                            <th>Direction</th>
+                            <th>Entry</th>
+                            <th>Exit</th>
+                            <th>R:R</th>
+                            <th>P&L</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody id="tradesTable">
+
+                        <tr class="empty-row">
+
+                            <td colspan="7">
+                                No trades recorded yet.
+                                Click <strong>+ Add Trade</strong>
+                                to create your first entry.
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </section>
+
+
+        <!-- ================= ADD TRADE MODAL ================= -->
+
+        <div class="modal" id="tradeModal">
+
+            <div class="modal-box">
+
+                <div class="modal-header">
+
+                    <div>
+
+                        <span class="section-label">
+                            NEW ENTRY
+                        </span>
+
+                        <h2>
+                            Add Trade
+                        </h2>
+
+                    </div>
+
+                    <button id="closeModal">
+                        ×
+                    </button>
+
+                </div>
+
+
+                <form id="tradeForm">
+
+
+                    <div class="form-grid">
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Symbol
+                            </label>
+
+                            <input
+                                type="text"
+                                id="symbol"
+                                placeholder="XAUUSD"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Direction
+                            </label>
+
+                            <select id="direction" required>
+
+                                <option value="BUY">
+                                    BUY
+                                </option>
+
+                                <option value="SELL">
+                                    SELL
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Entry
+                            </label>
+
+                            <input
+                                type="number"
+                                id="entry"
+                                step="any"
+                                placeholder="3750.00"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Exit
+                            </label>
+
+                            <input
+                                type="number"
+                                id="exit"
+                                step="any"
+                                placeholder="3770.00"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Stop Loss
+                            </label>
+
+                            <input
+                                type="number"
+                                id="stopLoss"
+                                step="any"
+                                placeholder="3740.00"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Take Profit
+                            </label>
+
+                            <input
+                                type="number"
+                                id="takeProfit"
+                                step="any"
+                                placeholder="3770.00"
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                P&L ($)
+                            </label>
+
+                            <input
+                                type="number"
+                                id="pnl"
+                                step="any"
+                                placeholder="25.00"
+                                required
+                            >
+
+                        </div>
+
+
+                        <div class="form-group">
+
+                            <label>
+                                Risk %
+                            </label>
+
+                            <input
+                                type="number"
+                                id="risk"
+                                step="any"
+                                placeholder="1"
+                            >
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Strategy
+                        </label>
+
+                        <input
+                            type="text"
+                            id="strategy"
+                            placeholder="Breakout / SMC / FVG..."
+                        >
+
+                    </div>
+
+
+                    <div class="form-group full">
+
+                        <label>
+                            Notes
+                        </label>
+
+                        <textarea
+                            id="notes"
+                            placeholder="Write your trade notes..."
+                        ></textarea>
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="save-trade-btn"
+                    >
+                        Save Trade
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer class="footer">
+
+        <div>
+
+            <strong>
+                DET<span>wal</span>
+            </strong>
+
+            <p>
+                Trading Journal
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <a href="../terms/">
+                Terms
+            </a>
+
+            <a href="../privacy/">
+                Privacy
+            </a>
+
+        </div>
+
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
