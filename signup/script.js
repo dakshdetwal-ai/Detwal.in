@@ -12,17 +12,9 @@ const SUPABASE_PUBLISHABLE_KEY =
 // ==========================================
 // CLOUDFLARE ACCOUNT REQUEST API
 // ==========================================
-//
-// IMPORTANT:
-// Replace this with your actual deployed
-// Cloudflare Worker URL.
-//
-// Example:
-// https://your-worker.workers.dev/account-request
-//
 
 const ACCOUNT_REQUEST_API =
-    "https://YOUR-CLOUDFLARE-WORKER-URL.workers.dev/account-request";
+    "https://detwal-help-bot.dakshdetwal10.workers.dev/account-request";
 
 
 // ==========================================
