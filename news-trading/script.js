@@ -6,73 +6,199 @@ const timeLeft = document.getElementById("timeLeft");
 const previousData = document.getElementById("previousData");
 
 
-/*
-    TEMPORARY NEWS DATA
+/* ================================
+   FORMAT COUNTDOWN
+================================ */
 
-    This will later be replaced by data
-    added through the DETwal Telegram bot
-    using /addnextnews.
-*/
+function formatCountdown(targetTime) {
 
-const nextNews = {
-    name: "Non-Farm Payrolls",
-    timeLeft: "02h 34m",
-    previous: "—"
-};
+    const now = new Date().getTime();
+    const target = new Date(targetTime).getTime();
+
+    const difference = target - now;
 
 
-/* DISPLAY NEXT NEWS */
+    /* NEWS ALREADY STARTED */
 
-function displayNextNews() {
+    if (difference <= 0) {
+        return "LIVE";
+    }
 
-    newsName.textContent =
-        nextNews.name || "No upcoming news";
 
-    timeLeft.textContent =
-        nextNews.timeLeft || "—";
+    const totalSeconds =
+        Math.floor(difference / 1000);
 
-    previousData.textContent =
-        nextNews.previous || "—";
+    const days =
+        Math.floor(totalSeconds / 86400);
+
+    const hours =
+        Math.floor((totalSeconds % 86400) / 3600);
+
+    const minutes =
+        Math.floor((totalSeconds % 3600) / 60);
+
+    const seconds =
+        totalSeconds % 60;
+
+
+    /* DAYS */
+
+    if (days > 0) {
+
+        return `${days}d ${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+
+    }
+
+
+    /* HOURS */
+
+    if (hours > 0) {
+
+        return `${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+
+    }
+
+
+    /* MINUTES */
+
+    if (minutes > 0) {
+
+        return `${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
+
+    }
+
+
+    /* SECONDS */
+
+    return `${seconds}s`;
 }
 
 
-/*
-    FUTURE API FUNCTION
 
-    The Telegram bot will save the upcoming
-    news on the Cloudflare Worker.
+/* ================================
+   LIVE COUNTDOWN
+================================ */
 
-    We will connect this function after
-    the Telegram /addnextnews system is built.
-*/
+let countdownInterval = null;
+
+function startCountdown(newsTime) {
+
+    /* Stop previous countdown */
+
+    if (countdownInterval) {
+
+        clearInterval(countdownInterval);
+
+    }
+
+
+    function updateCountdown() {
+
+        timeLeft.textContent =
+            formatCountdown(newsTime);
+
+    }
+
+
+    /* Update immediately */
+
+    updateCountdown();
+
+
+    /* Update every second */
+
+    countdownInterval =
+        setInterval(updateCountdown, 1000);
+}
+
+
+
+/* ================================
+   DISPLAY NEWS
+================================ */
+
+function displayNextNews(news) {
+
+    if (!news) {
+
+        newsName.textContent =
+            "No upcoming news";
+
+        timeLeft.textContent =
+            "—";
+
+        previousData.textContent =
+            "—";
+
+        return;
+    }
+
+
+    newsName.textContent =
+        news.name || "Unnamed News";
+
+
+    previousData.textContent =
+        news.previous || "—";
+
+
+    /* Start live countdown */
+
+    if (news.time) {
+
+        startCountdown(news.time);
+
+    } else {
+
+        timeLeft.textContent =
+            "—";
+    }
+}
+
+
+
+/* ================================
+   LOAD NEXT NEWS
+================================ */
 
 async function loadNextNews() {
 
     try {
 
-        /*
         const response = await fetch(
             `${API_URL}/next-news`
         );
 
-        const data = await response.json();
 
-        if (data.success && data.news) {
+        if (!response.ok) {
 
-            newsName.textContent =
-                data.news.name;
+            throw new Error(
+                "Failed to fetch news."
+            );
 
-            timeLeft.textContent =
-                data.news.timeLeft;
+        }
 
-            previousData.textContent =
-                data.news.previous;
+
+        const data =
+            await response.json();
+
+
+        if (
+            data.success &&
+            data.news
+        ) {
+
+            displayNextNews(
+                data.news
+            );
 
             return;
         }
-        */
 
-        displayNextNews();
+
+        /* No news available */
+
+        displayNextNews(null);
 
     } catch (error) {
 
@@ -80,6 +206,7 @@ async function loadNextNews() {
             "Failed to load upcoming news:",
             error
         );
+
 
         newsName.textContent =
             "Unable to load news";
@@ -93,6 +220,9 @@ async function loadNextNews() {
 }
 
 
-/* INITIALIZE */
+
+/* ================================
+   INITIALIZE
+================================ */
 
 loadNextNews();
