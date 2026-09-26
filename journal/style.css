@@ -1,0 +1,513 @@
+:root {
+    --bg: #05070D;
+    --card: #090C14;
+    --card2: #11141E;
+    --purple: #8B5CF6;
+    --purple-light: #A78BFA;
+    --white: #FFFFFF;
+    --text: #9298A8;
+    --muted: #606678;
+    --border: #1D2130;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: "Inter", sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}
+
+
+/* NAVBAR */
+
+.navbar {
+    height: 72px;
+    padding: 0 5%;
+
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    border-bottom: 1px solid var(--border);
+    background: rgba(5, 7, 13, .92);
+
+    position: sticky;
+    top: 0;
+    z-index: 50;
+
+    backdrop-filter: blur(15px);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+.logo span,
+.footer strong span {
+    color: var(--purple);
+}
+
+.product-name {
+    color: var(--text);
+    font-size: 13px;
+    border-left: 1px solid var(--border);
+    padding-left: 30px;
+}
+
+.nav-links {
+    margin-left: auto;
+    display: flex;
+    gap: 25px;
+}
+
+.nav-links a {
+    color: var(--text);
+    font-size: 13px;
+}
+
+.nav-links a:hover {
+    color: var(--white);
+}
+
+.account-btn {
+    background: var(--purple);
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+
+/* MAIN */
+
+.journal-container {
+    max-width: 1400px;
+    margin: auto;
+    padding: 55px 5% 100px;
+}
+
+
+/* HEADER */
+
+.journal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: end;
+    gap: 30px;
+    margin-bottom: 35px;
+}
+
+.section-label,
+.panel-label {
+    color: var(--purple-light);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.journal-header h1 {
+    margin-top: 12px;
+    font-size: clamp(38px, 5vw, 62px);
+    letter-spacing: -3px;
+}
+
+.journal-header h1 span {
+    color: var(--purple-light);
+}
+
+.journal-header p {
+    color: var(--text);
+    margin-top: 12px;
+    font-size: 14px;
+}
+
+.add-trade-btn {
+    border: 0;
+    background: var(--purple);
+    color: white;
+    padding: 13px 20px;
+    border-radius: 9px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.add-trade-btn:hover {
+    background: var(--purple-light);
+}
+
+
+/* STATS */
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.stat-card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 22px;
+}
+
+.stat-card span {
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.stat-card strong {
+    display: block;
+    margin-top: 12px;
+    font-size: 28px;
+    letter-spacing: -1px;
+}
+
+
+/* DASHBOARD */
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.panel {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 25px;
+}
+
+.panel-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.panel-header h2 {
+    margin-top: 7px;
+    font-size: 19px;
+}
+
+.panel-header select {
+    background: var(--card2);
+    color: var(--text);
+    border: 1px solid var(--border);
+    padding: 8px 10px;
+    border-radius: 7px;
+    outline: none;
+}
+
+
+/* CHART */
+
+.chart-placeholder {
+    height: 280px;
+    margin-top: 25px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--muted);
+    font-size: 12px;
+    background:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 55px 55px;
+}
+
+.chart-line {
+    position: absolute;
+    width: 70%;
+    height: 2px;
+    background: var(--purple);
+    transform: rotate(-8deg);
+    box-shadow: 0 0 15px rgba(139, 92, 246, .5);
+}
+
+
+/* PERFORMANCE */
+
+.performance-list {
+    margin-top: 20px;
+}
+
+.performance-list div {
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.performance-list span {
+    color: var(--text);
+    font-size: 13px;
+}
+
+.performance-list strong {
+    font-size: 13px;
+}
+
+
+/* TRADES */
+
+.trades-panel {
+    overflow: hidden;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 750px;
+}
+
+th {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 600;
+    text-align: left;
+    padding: 13px;
+    border-bottom: 1px solid var(--border);
+}
+
+td {
+    color: var(--text);
+    font-size: 12px;
+    padding: 16px 13px;
+    border-bottom: 1px solid var(--border);
+}
+
+.empty-row td {
+    text-align: center;
+    padding: 55px 10px;
+    color: var(--muted);
+}
+
+.empty-row strong {
+    color: var(--purple-light);
+}
+
+.text-btn {
+    background: none;
+    border: 0;
+    color: var(--purple-light);
+    cursor: pointer;
+    font-size: 12px;
+}
+
+
+/* MODAL */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .72);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 100;
+    backdrop-filter: blur(8px);
+}
+
+.modal.active {
+    display: flex;
+}
+
+.modal-box {
+    width: min(650px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 28px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: 25px;
+}
+
+.modal-header h2 {
+    margin-top: 7px;
+}
+
+.modal-header button {
+    border: 1px solid var(--border);
+    background: transparent;
+    color: var(--text);
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group.full {
+    margin-top: 15px;
+}
+
+.form-group label {
+    display: block;
+    color: var(--text);
+    font-size: 11px;
+    margin-bottom: 7px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    background: #05070D;
+    color: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px;
+    outline: none;
+}
+
+.form-group textarea {
+    min-height: 90px;
+    resize: vertical;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--purple);
+}
+
+.save-trade-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--purple);
+    border: 0;
+    border-radius: 8px;
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.save-trade-btn:hover {
+    background: var(--purple-light);
+}
+
+
+/* FOOTER */
+
+.footer {
+    border-top: 1px solid var(--border);
+    padding: 30px 5%;
+    display: flex;
+    justify-content: space-between;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.footer p {
+    margin-top: 5px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 900px) {
+
+    .nav-links {
+        display: none;
+    }
+
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .navbar {
+        gap: 12px;
+    }
+
+    .product-name {
+        display: none;
+    }
+
+    .journal-container {
+        padding: 40px 4% 70px;
+    }
+
+    .journal-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
