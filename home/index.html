@@ -43,9 +43,133 @@
                 Instagram
             </a>
 
-            <a href="../signup/" class="signup-btn">
+
+            <!-- ================= LOGGED OUT ================= -->
+
+            <a
+                href="../signup/"
+                class="signup-btn"
+                id="signupNavBtn"
+            >
                 Sign Up
             </a>
+
+
+            <!-- ================= LOGGED IN ================= -->
+
+            <div
+                class="account-menu"
+                id="accountMenu"
+                style="display: none;"
+            >
+
+                <button
+                    class="account-button"
+                    id="accountButton"
+                    type="button"
+                >
+
+                    <span
+                        class="account-button-avatar"
+                        id="accountInitial"
+                    >
+                        U
+                    </span>
+
+                    <span id="accountName">
+                        Account
+                    </span>
+
+                    <span class="account-arrow">
+                        ⌄
+                    </span>
+
+                </button>
+
+
+                <!-- ACCOUNT DROPDOWN -->
+
+                <div
+                    class="account-dropdown"
+                    id="accountDropdown"
+                >
+
+                    <!-- USER INFORMATION -->
+
+                    <div class="account-info">
+
+                        <div
+                            class="account-avatar"
+                            id="accountAvatar"
+                        >
+                            U
+                        </div>
+
+                        <div class="account-details">
+
+                            <strong id="dropdownName">
+                                User
+                            </strong>
+
+                            <span id="dropdownEmail">
+                                user@example.com
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- PROFIT BADGE -->
+
+                    <div class="profit-badge">
+
+                        <span class="profit-label">
+                            JOURNAL PROFIT
+                        </span>
+
+                        <strong id="navProfit">
+                            $0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="account-divider"></div>
+
+
+                    <!-- ACCOUNT LINKS -->
+
+                    <a href="../journal/">
+                        <span>◫</span>
+                        Trading Journal
+                    </a>
+
+                    <a href="../profile/">
+                        <span>◎</span>
+                        My Account
+                    </a>
+
+                    <a href="../profile/#password">
+                        <span>◆</span>
+                        Change Password
+                    </a>
+
+
+                    <!-- LOGOUT -->
+
+                    <button
+                        type="button"
+                        id="logoutBtn"
+                        class="logout-btn"
+                    >
+                        <span>↪</span>
+                        Log Out
+                    </button>
+
+                </div>
+
+            </div>
 
         </div>
 
@@ -116,6 +240,7 @@
             <div class="section-heading">
 
                 <div>
+
                     <span class="section-label">
                         DETWAL ECOSYSTEM
                     </span>
@@ -123,6 +248,7 @@
                     <h2>
                         Built around your trading.
                     </h2>
+
                 </div>
 
                 <p>
@@ -370,7 +496,15 @@
     </footer>
 
 
+    <!-- ================= SUPABASE ================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
     <!-- Homepage JavaScript -->
+
     <script src="script.js"></script>
 
 </body>
