@@ -5,10 +5,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Create Account — DETwal</title>
-    <meta name="description" content="Create your DETwal account.">
+    <meta
+        name="description"
+        content="Create your DETwal account."
+    >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
@@ -20,7 +27,9 @@
 
 <body>
 
-    <!-- NAVBAR -->
+    <!-- =========================
+         NAVBAR
+    ========================== -->
 
     <header class="navbar">
 
@@ -35,7 +44,9 @@
     </header>
 
 
-    <!-- SIGNUP -->
+    <!-- =========================
+         SIGNUP
+    ========================== -->
 
     <main class="signup-container">
 
@@ -58,6 +69,8 @@
             </div>
 
 
+            <!-- SIGNUP FORM -->
+
             <form id="signupForm">
 
                 <!-- NAME -->
@@ -73,6 +86,7 @@
                         id="name"
                         name="name"
                         placeholder="Enter your name"
+                        autocomplete="name"
                         required
                     >
 
@@ -92,6 +106,7 @@
                         id="email"
                         name="email"
                         placeholder="you@example.com"
+                        autocomplete="email"
                         required
                     >
 
@@ -111,6 +126,7 @@
                         id="password"
                         name="password"
                         placeholder="Create a password"
+                        autocomplete="new-password"
                         minlength="8"
                         required
                     >
@@ -135,6 +151,7 @@
                         id="confirmPassword"
                         name="confirmPassword"
                         placeholder="Confirm your password"
+                        autocomplete="new-password"
                         minlength="8"
                         required
                     >
@@ -149,14 +166,24 @@
                     <input
                         type="checkbox"
                         id="terms"
+                        name="terms"
                         required
                     >
 
                     <label for="terms">
+
                         I agree to the
-                        <a href="../terms/">Terms of Use</a>
+
+                        <a href="../terms/">
+                            Terms of Use
+                        </a>
+
                         and
-                        <a href="../privacy/">Privacy Policy</a>.
+
+                        <a href="../privacy/">
+                            Privacy Policy
+                        </a>.
+
                     </label>
 
                 </div>
@@ -168,8 +195,15 @@
                     type="submit"
                     class="signup-button"
                 >
-                    Create Account
-                    <span>→</span>
+
+                    <span class="button-text">
+                        Create Account
+                    </span>
+
+                    <span>
+                        →
+                    </span>
+
                 </button>
 
             </form>
@@ -181,7 +215,7 @@
 
                 Already have an account?
 
-                <a href="#">
+                <a href="../login/">
                     Log in
                 </a>
 
@@ -192,7 +226,9 @@
     </main>
 
 
-    <!-- FOOTER -->
+    <!-- =========================
+         FOOTER
+    ========================== -->
 
     <footer class="footer">
 
@@ -214,8 +250,18 @@
 
     </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="script.js"></script>
+
+    <!-- =========================
+         SUPABASE
+    ========================== -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+    <!-- DETWAL SIGNUP SCRIPT -->
+
+    <script src="script.js"></script>
 
 </body>
 </html>
