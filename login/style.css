@@ -1,0 +1,411 @@
+/* ==========================================
+   DETWAL LOGIN PAGE
+========================================== */
+
+:root {
+    --bg: #05070D;
+    --card: #070910;
+    --card-light: #090C14;
+
+    --accent: #8B5CF6;
+    --accent-light: #A78BFA;
+
+    --text: #FFFFFF;
+    --secondary: #9298A8;
+    --muted: #606678;
+
+    --border: #1D2130;
+}
+
+
+/* ==========================================
+   RESET
+========================================== */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--bg);
+    color: var(--text);
+
+    font-family: "Inter", sans-serif;
+
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+
+/* ==========================================
+   NAVBAR
+========================================== */
+
+.navbar {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 24px 6%;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: 800;
+    letter-spacing: -0.8px;
+}
+
+.logo span {
+    color: var(--accent-light);
+}
+
+.back-link {
+    color: var(--secondary);
+
+    font-size: 14px;
+    font-weight: 500;
+
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: var(--text);
+}
+
+
+/* ==========================================
+   LOGIN CONTAINER
+========================================== */
+
+.login-container {
+    flex: 1;
+
+    width: 100%;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 70px 20px;
+}
+
+
+/* ==========================================
+   LOGIN BOX
+========================================== */
+
+.login-box {
+    width: 100%;
+    max-width: 430px;
+
+    padding: 42px;
+
+    background:
+        radial-gradient(
+            circle at top right,
+            rgba(139, 92, 246, 0.08),
+            transparent 35%
+        ),
+        var(--card);
+
+    border: 1px solid var(--border);
+    border-radius: 16px;
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+}
+
+
+/* ==========================================
+   HEADER
+========================================== */
+
+.login-header {
+    margin-bottom: 32px;
+}
+
+.login-badge {
+    display: inline-block;
+
+    margin-bottom: 16px;
+    padding: 7px 11px;
+
+    border: 1px solid rgba(139, 92, 246, 0.25);
+    border-radius: 7px;
+
+    background: rgba(139, 92, 246, 0.08);
+
+    color: var(--accent-light);
+
+    font-size: 10px;
+    font-weight: 700;
+
+    letter-spacing: 1.2px;
+}
+
+.login-header h1 {
+    margin-bottom: 10px;
+
+    font-size: 32px;
+    line-height: 1.15;
+
+    letter-spacing: -1px;
+}
+
+.login-header p {
+    color: var(--secondary);
+
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+
+/* ==========================================
+   FORM
+========================================== */
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--text);
+
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+
+    padding: 14px 15px;
+
+    background: var(--card-light);
+
+    border: 1px solid var(--border);
+    border-radius: 10px;
+
+    outline: none;
+
+    color: var(--text);
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.form-group input::placeholder {
+    color: var(--muted);
+}
+
+.form-group input:focus {
+    border-color: var(--accent);
+
+    box-shadow:
+        0 0 0 3px rgba(139, 92, 246, 0.10);
+}
+
+
+/* ==========================================
+   FORGOT PASSWORD
+========================================== */
+
+.forgot-password {
+    display: flex;
+    justify-content: flex-end;
+
+    margin-top: -8px;
+    margin-bottom: 24px;
+}
+
+.forgot-password a {
+    color: var(--accent-light);
+
+    font-size: 12px;
+    font-weight: 500;
+
+    transition: color 0.2s ease;
+}
+
+.forgot-password a:hover {
+    color: var(--text);
+}
+
+
+/* ==========================================
+   LOGIN BUTTON
+========================================== */
+
+.login-button {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    padding: 14px 18px;
+
+    border: 1px solid var(--accent);
+    border-radius: 10px;
+
+    background: var(--accent);
+
+    color: #FFFFFF;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.login-button:hover {
+    background: #7C3AED;
+
+    box-shadow:
+        0 8px 25px rgba(139, 92, 246, 0.22);
+
+    transform: translateY(-1px);
+}
+
+.login-button:active {
+    transform: translateY(0);
+}
+
+.login-button:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+
+/* ==========================================
+   SIGNUP LINK
+========================================== */
+
+.signup-link {
+    margin-top: 24px;
+
+    text-align: center;
+
+    color: var(--secondary);
+
+    font-size: 13px;
+}
+
+.signup-link a {
+    margin-left: 4px;
+
+    color: var(--accent-light);
+
+    font-weight: 600;
+
+    transition: color 0.2s ease;
+}
+
+.signup-link a:hover {
+    color: var(--text);
+}
+
+
+/* ==========================================
+   FOOTER
+========================================== */
+
+.footer {
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    padding: 22px 6%;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--muted);
+
+    font-size: 12px;
+}
+
+.footer div {
+    display: flex;
+    gap: 20px;
+}
+
+.footer a {
+    transition: color 0.2s ease;
+}
+
+.footer a:hover {
+    color: var(--secondary);
+}
+
+
+/* ==========================================
+   MOBILE
+========================================== */
+
+@media (max-width: 600px) {
+
+    .navbar {
+        padding: 20px;
+    }
+
+    .login-container {
+        padding: 40px 16px;
+    }
+
+    .login-box {
+        padding: 28px 22px;
+    }
+
+    .login-header h1 {
+        font-size: 28px;
+    }
+
+    .footer {
+        flex-direction: column;
+        gap: 14px;
+
+        padding: 20px;
+    }
+
+    .footer div {
+        gap: 16px;
+    }
+
+}
