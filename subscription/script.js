@@ -1,327 +1,358 @@
-const subscribeButton =
-    document.getElementById("telegramSubscribeBtn");
-
-const applyCouponButton =
-    document.getElementById("applyCouponBtn");
-
-const couponInput =
-    document.getElementById("couponInput");
-
-const couponMessage =
-    document.getElementById("couponMessage");
-
-const originalPrice =
-    document.getElementById("originalPrice");
-
-const currentPrice =
-    document.getElementById("currentPrice");
-
-const ctaTitle =
-    document.getElementById("ctaTitle");
-
-const ctaText =
-    document.getElementById("ctaText");
-
-
-const TELEGRAM_BOT =
-    "https://t.me/detwalhelpbot";
-
-
-const NORMAL_PRICE = 25;
-
-let selectedCoupon = "";
-let selectedPrice = NORMAL_PRICE;
-
-
 /*
-========================================
-INITIAL PRICE
-========================================
+==================================================
+DETwal — NEWS TRADING SUBSCRIPTION
+==================================================
 */
 
-function setNormalPrice() {
+document.addEventListener("DOMContentLoaded", () => {
 
-    selectedCoupon = "";
-    selectedPrice = NORMAL_PRICE;
+    const originalPrice = document.getElementById("originalPrice");
+    const currentPrice = document.getElementById("currentPrice");
 
-    if (originalPrice) {
-        originalPrice.textContent = "$25 USD";
-        originalPrice.style.display = "none";
-    }
+    const couponInput = document.getElementById("couponInput");
+    const applyCouponBtn = document.getElementById("applyCouponBtn");
+    const couponMessage = document.getElementById("couponMessage");
 
-    if (currentPrice) {
-        currentPrice.textContent = "$25 USD";
-    }
+    const ctaTitle = document.getElementById("ctaTitle");
+    const ctaText = document.getElementById("ctaText");
 
-    if (ctaTitle) {
-        ctaTitle.textContent = "Get News Trading Access";
-    }
-
-    if (ctaText) {
-        ctaText.textContent =
-            "Subscribe through our Telegram bot to continue.";
-    }
-}
+    const telegramSubscribeBtn =
+        document.getElementById("telegramSubscribeBtn");
 
 
-/*
-========================================
-APPLY COUPON
-========================================
-*/
+    /*
+    ==============================================
+    CURRENT COUPON STATE
+    ==============================================
+    */
 
-async function applyCoupon() {
-
-    const code =
-        couponInput.value.trim().toUpperCase();
-
-    if (!code) {
-
-        couponMessage.textContent =
-            "Please enter a coupon code.";
-
-        couponMessage.className =
-            "coupon-message error";
-
-        return;
-    }
+    let appliedCoupon = "";
+    let appliedPrice = 25;
 
 
-    applyCouponButton.disabled = true;
+    /*
+    ==============================================
+    DEFAULT PRICE
+    ==============================================
+    */
 
-    applyCouponButton.textContent =
-        "Checking...";
+    function showNormalPrice() {
 
-
-    couponMessage.textContent =
-        "Checking coupon...";
-
-    couponMessage.className =
-        "coupon-message";
-
-
-    try {
-
-        const result =
-            await validateCoupon(code);
-
-
-        if (result.error) {
-
-            couponMessage.textContent =
-                "Unable to verify coupon. Please try again.";
-
-            couponMessage.className =
-                "coupon-message error";
-
-            return;
-        }
-
-
-        if (!result.valid) {
-
-            selectedCoupon = "";
-            selectedPrice = NORMAL_PRICE;
-
-            if (originalPrice) {
-                originalPrice.style.display = "none";
-            }
-
-            if (currentPrice) {
-                currentPrice.textContent = "$25 USD";
-            }
-
-            couponMessage.textContent =
-                "Invalid or inactive coupon code.";
-
-            couponMessage.className =
-                "coupon-message error";
-
-            return;
-        }
-
-
-        selectedCoupon =
-            result.code;
-
-        selectedPrice =
-            result.price;
-
+        appliedCoupon = "";
+        appliedPrice = 25;
 
         if (originalPrice) {
-            originalPrice.textContent =
-                "$25 USD";
-
-            originalPrice.style.display =
-                "inline";
+            originalPrice.textContent = "$25";
         }
-
 
         if (currentPrice) {
-            currentPrice.textContent =
-                `$${selectedPrice} USD`;
+            currentPrice.textContent = "$25";
         }
-
-
-        couponMessage.textContent =
-            `Coupon ${selectedCoupon} applied successfully.`;
-
-        couponMessage.className =
-            "coupon-message success";
-
 
         if (ctaTitle) {
-            ctaTitle.textContent =
-                `Get Access for $${selectedPrice}`;
+            ctaTitle.textContent = "Ready to subscribe?";
         }
-
 
         if (ctaText) {
             ctaText.textContent =
-                `Your coupon ${selectedCoupon} has been applied. Continue through Telegram.`;
+                "Continue through Telegram to complete your subscription.";
         }
-
-
-    } catch (error) {
-
-        console.error(
-            "Coupon error:",
-            error
-        );
-
-        couponMessage.textContent =
-            "Something went wrong. Please try again.";
-
-        couponMessage.className =
-            "coupon-message error";
-
-    } finally {
-
-        applyCouponButton.disabled = false;
-
-        applyCouponButton.textContent =
-            "Apply Coupon";
     }
-}
 
 
-/*
-========================================
-COUPON BUTTON
-========================================
-*/
+    /*
+    ==============================================
+    APPLY COUPON
+    ==============================================
+    */
 
-if (applyCouponButton) {
+    async function applyCoupon() {
 
-    applyCouponButton.addEventListener(
-        "click",
-        applyCoupon
-    );
-}
+        const code =
+            String(couponInput?.value || "")
+                .trim()
+                .toUpperCase();
 
 
-/*
-========================================
-ENTER KEY
-========================================
-*/
+        // Nothing entered
+        if (!code) {
 
-if (couponInput) {
+            showNormalPrice();
 
-    couponInput.addEventListener(
-        "keydown",
-        function (event) {
+            if (couponMessage) {
+                couponMessage.textContent =
+                    "Please enter a coupon code.";
 
-            if (event.key === "Enter") {
-
-                event.preventDefault();
-
-                applyCoupon();
+                couponMessage.style.color = "#9298A8";
             }
+
+            return;
         }
-    );
-}
 
 
-/*
-========================================
-TELEGRAM SUBSCRIBE
-========================================
-*/
+        // Disable button while checking
+        if (applyCouponBtn) {
+            applyCouponBtn.disabled = true;
+            applyCouponBtn.textContent = "Checking...";
+        }
 
-if (subscribeButton) {
 
-    subscribeButton.addEventListener(
-        "click",
-        function (event) {
+        if (couponMessage) {
+            couponMessage.textContent =
+                "Checking coupon...";
 
-            event.preventDefault();
+            couponMessage.style.color = "#9298A8";
+        }
+
+
+        try {
+
+            /*
+            validateCoupon() comes from coupon.js
+            */
+
+            const result =
+                await validateCoupon(code);
+
+
+            console.log(
+                "DETwal coupon validation result:",
+                result
+            );
 
 
             /*
-            If a coupon has been entered,
-            require successful validation first.
+            ======================================
+            VALID COUPON
+            ======================================
             */
 
-            const enteredCode =
-                couponInput
-                    ? couponInput.value.trim()
-                    : "";
+            if (result.valid === true) {
+
+                appliedCoupon =
+                    String(
+                        result.code || code
+                    ).toUpperCase();
+
+                appliedPrice =
+                    Number(result.price);
 
 
-            if (
-                enteredCode &&
-                !selectedCoupon
-            ) {
+                if (originalPrice) {
+                    originalPrice.textContent = "$25";
+                }
+
+
+                if (currentPrice) {
+                    currentPrice.textContent =
+                        `$${appliedPrice}`;
+                }
+
 
                 if (couponMessage) {
 
                     couponMessage.textContent =
-                        "Please apply your coupon before continuing.";
+                        `✓ Coupon ${appliedCoupon} applied`;
 
-                    couponMessage.className =
-                        "coupon-message error";
+                    couponMessage.style.color =
+                        "#A78BFA";
                 }
+
+
+                if (ctaTitle) {
+                    ctaTitle.textContent =
+                        "Discount applied";
+                }
+
+
+                if (ctaText) {
+
+                    ctaText.textContent =
+                        `Your News Trading subscription price is now $${appliedPrice}. Continue through Telegram to complete your subscription.`;
+                }
+
 
                 return;
             }
 
 
             /*
-            Send the user to Telegram.
-
-            The coupon is passed in the URL so
-            the bot can identify the selected
-            subscription coupon.
+            ======================================
+            INVALID COUPON
+            ======================================
             */
 
-            let telegramURL =
-                TELEGRAM_BOT;
+            appliedCoupon = "";
+            appliedPrice = 25;
 
 
-            if (selectedCoupon) {
-
-                telegramURL =
-                    `${TELEGRAM_BOT}?start=news_${encodeURIComponent(selectedCoupon)}`;
-
-            } else {
-
-                telegramURL =
-                    `${TELEGRAM_BOT}?start=news_subscription`;
+            if (currentPrice) {
+                currentPrice.textContent = "$25";
             }
 
 
-            window.location.href =
-                telegramURL;
+            if (couponMessage) {
+
+                couponMessage.textContent =
+                    "✕ Invalid or inactive coupon.";
+
+                couponMessage.style.color =
+                    "#9298A8";
+            }
+
+
+            if (ctaTitle) {
+                ctaTitle.textContent =
+                    "Ready to subscribe?";
+            }
+
+
+            if (ctaText) {
+
+                ctaText.textContent =
+                    "Continue through Telegram to complete your subscription.";
+            }
+
+
+        } catch (error) {
+
+            console.error(
+                "Coupon application error:",
+                error
+            );
+
+
+            appliedCoupon = "";
+            appliedPrice = 25;
+
+
+            if (currentPrice) {
+                currentPrice.textContent = "$25";
+            }
+
+
+            if (couponMessage) {
+
+                couponMessage.textContent =
+                    "Unable to verify coupon. Please try again.";
+
+                couponMessage.style.color =
+                    "#9298A8";
+            }
         }
-    );
-}
 
 
-/*
-========================================
-START
-========================================
-*/
+        /*
+        ======================================
+        RE-ENABLE BUTTON
+        ======================================
+        */
 
-setNormalPrice();
+        if (applyCouponBtn) {
+
+            applyCouponBtn.disabled = false;
+            applyCouponBtn.textContent = "Apply";
+        }
+    }
+
+
+    /*
+    ==============================================
+    APPLY BUTTON
+    ==============================================
+    */
+
+    if (applyCouponBtn) {
+
+        applyCouponBtn.addEventListener(
+            "click",
+            applyCoupon
+        );
+    }
+
+
+    /*
+    ==============================================
+    ENTER KEY
+    ==============================================
+    */
+
+    if (couponInput) {
+
+        couponInput.addEventListener(
+            "keydown",
+            (event) => {
+
+                if (event.key === "Enter") {
+
+                    event.preventDefault();
+
+                    applyCoupon();
+                }
+            }
+        );
+    }
+
+
+    /*
+    ==============================================
+    TELEGRAM SUBSCRIBE
+    ==============================================
+    */
+
+    if (telegramSubscribeBtn) {
+
+        telegramSubscribeBtn.addEventListener(
+            "click",
+            (event) => {
+
+                event.preventDefault();
+
+
+                /*
+                ==================================
+                NO COUPON
+                ==================================
+                */
+
+                if (!appliedCoupon) {
+
+                    window.location.href =
+                        "https://t.me/detwalhelpbot?start=news_subscription";
+
+                    return;
+                }
+
+
+                /*
+                ==================================
+                COUPON APPLIED
+                ==================================
+                */
+
+                const telegramURL =
+                    `https://t.me/detwalhelpbot?start=news_${encodeURIComponent(appliedCoupon)}`;
+
+
+                console.log(
+                    "Opening Telegram with coupon:",
+                    appliedCoupon
+                );
+
+
+                window.location.href =
+                    telegramURL;
+            }
+        );
+    }
+
+
+    /*
+    ==============================================
+    INITIAL STATE
+    ==============================================
+    */
+
+    showNormalPrice();
+
+});
