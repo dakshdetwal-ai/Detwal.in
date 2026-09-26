@@ -5,7 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>News Trading — DETwal</title>
-    <meta name="description" content="DETwal News Trading — market-moving news and trading research tools.">
+    <meta
+        name="description"
+        content="DETwal News Trading — upcoming market-moving news for XAUUSD."
+    >
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -52,7 +55,6 @@
 
     <main class="news-container">
 
-
         <!-- HEADER -->
 
         <section class="news-header">
@@ -69,8 +71,8 @@
                 </h1>
 
                 <p>
-                    Monitor important economic events and
-                    study market reactions in one focused workspace.
+                    Track the next major economic event affecting
+                    XAUUSD in one focused workspace.
                 </p>
 
             </div>
@@ -82,283 +84,190 @@
         </section>
 
 
-        <!-- MARKET OVERVIEW -->
+        <!-- UPCOMING NEWS -->
 
-        <section class="overview-grid">
-
-            <div class="overview-card">
-
-                <span>Next High Impact Event</span>
-
-                <strong id="nextEvent">
-                    Loading...
-                </strong>
-
-                <small id="eventTime">
-                    —
-                </small>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <span>Events Today</span>
-
-                <strong id="eventsToday">
-                    0
-                </strong>
-
-                <small>
-                    Scheduled events
-                </small>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <span>Market Focus</span>
-
-                <strong>
-                    XAUUSD
-                </strong>
-
-                <small>
-                    Gold
-                </small>
-
-            </div>
-
-
-            <div class="overview-card">
-
-                <span>Session</span>
-
-                <strong id="currentSession">
-                    —
-                </strong>
-
-                <small>
-                    Current market session
-                </small>
-
-            </div>
-
-        </section>
-
-
-        <!-- MAIN GRID -->
-
-        <section class="main-grid">
-
-
-            <!-- UPCOMING EVENTS -->
-
-            <div class="panel events-panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <span class="panel-label">
-                            ECONOMIC CALENDAR
-                        </span>
-
-                        <h2>
-                            Upcoming Events
-                        </h2>
-
-                    </div>
-
-                    <select id="impactFilter">
-
-                        <option value="all">
-                            All Impact
-                        </option>
-
-                        <option value="high">
-                            High Impact
-                        </option>
-
-                        <option value="medium">
-                            Medium Impact
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                <div class="events-list" id="eventsList">
-
-                    <!-- Events will be loaded by JavaScript -->
-
-                </div>
-
-            </div>
-
-
-            <!-- WATCHLIST -->
-
-            <div class="panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <span class="panel-label">
-                            WATCHLIST
-                        </span>
-
-                        <h2>
-                            Instruments
-                        </h2>
-
-                    </div>
-
-                    <button
-                        class="text-btn"
-                        id="addWatchBtn"
-                    >
-                        + Add
-                    </button>
-
-                </div>
-
-
-                <div class="watchlist" id="watchlist">
-
-                    <div class="watch-item">
-
-                        <div>
-
-                            <strong>
-                                XAUUSD
-                            </strong>
-
-                            <span>
-                                Gold
-                            </span>
-
-                        </div>
-
-                        <div class="watch-price">
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="watch-item">
-
-                        <div>
-
-                            <strong>
-                                EURUSD
-                            </strong>
-
-                            <span>
-                                Euro / Dollar
-                            </span>
-
-                        </div>
-
-                        <div class="watch-price">
-                            —
-                        </div>
-
-                    </div>
-
-
-                    <div class="watch-item">
-
-                        <div>
-
-                            <strong>
-                                GBPUSD
-                            </strong>
-
-                            <span>
-                                Pound / Dollar
-                            </span>
-
-                        </div>
-
-                        <div class="watch-price">
-                            —
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- NEWS ANALYSIS -->
-
-        <section class="panel analysis-panel">
+        <section class="panel upcoming-news-panel">
 
             <div class="panel-header">
 
                 <div>
 
                     <span class="panel-label">
-                        NEWS RESEARCH
+                        NEXT UPCOMING NEWS
                     </span>
 
-                    <h2>
-                        Selected Event
+                    <h2 id="newsName">
+                        Loading...
                     </h2>
 
                 </div>
 
-                <span class="status-badge">
-                    Research
+                <span class="instrument-badge">
+                    XAUUSD
                 </span>
 
             </div>
 
 
-            <div class="analysis-content">
+            <div class="news-details">
 
-                <div class="event-summary">
+                <div class="countdown-box">
 
-                    <span class="event-impact">
-                        HIGH IMPACT
+                    <span>
+                        TIME LEFT
                     </span>
 
-                    <h3 id="selectedEvent">
-                        Select an event
-                    </h3>
-
-                    <p id="eventDescription">
-                        Select an upcoming event to view
-                        its available information and market context.
-                    </p>
+                    <strong id="timeLeft">
+                        —
+                    </strong>
 
                 </div>
 
 
-                <div class="data-grid">
+                <div class="news-data">
 
-                    <div>
-                        <span>Previous</span>
-                        <strong id="previousData">—</strong>
+                    <div class="data-item">
+
+                        <span>
+                            Previous
+                        </span>
+
+                        <strong id="previousData">
+                            —
+                        </strong>
+
                     </div>
 
-                    <div>
-                        <span>Forecast</span>
-                        <strong id="forecastData">—</strong>
+
+                    <div class="data-item forecast-item">
+
+                        <span>
+                            Forecast
+                        </span>
+
+                        <strong>
+                            🔒 Subscribers only
+                        </strong>
+
                     </div>
 
-                    <div>
-                        <span>Actual</span>
-                        <strong id="actualData">—</strong>
-                    </div>
+                </div>
+
+            </div>
+
+
+            <!-- SUBSCRIPTION -->
+
+            <div class="subscription-box">
+
+                <div>
+
+                    <span class="subscription-label">
+                        DETWAL NEWS SUBSCRIPTION
+                    </span>
+
+                    <h3>
+                        Unlock the news forecast
+                    </h3>
+
+                    <p>
+                        Get access to our news forecast and
+                        analysis for upcoming XAUUSD events.
+                    </p>
+
+                    <small>
+                        98%* historical accuracy claim.
+                        Past performance does not guarantee future results.
+                    </small>
+
+                </div>
+
+
+                <div class="subscription-action">
+
+                    <strong class="subscription-price">
+                        $9
+                        <span>
+                            USD
+                        </span>
+                    </strong>
+
+                    <a
+                        href="../subscription/"
+                        class="subscribe-btn"
+                    >
+                        Subscribe
+                    </a>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MARKET FOCUS -->
+
+        <section class="panel market-focus-panel">
+
+            <div class="panel-header">
+
+                <div>
+
+                    <span class="panel-label">
+                        MARKET FOCUS
+                    </span>
+
+                    <h2>
+                        XAUUSD
+                    </h2>
+
+                </div>
+
+                <span class="instrument-badge">
+                    GOLD
+                </span>
+
+            </div>
+
+
+            <div class="market-focus-content">
+
+                <div>
+
+                    <span>
+                        Instrument
+                    </span>
+
+                    <strong>
+                        XAUUSD
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Asset
+                    </span>
+
+                    <strong>
+                        Gold
+                    </strong>
+
+                </div>
+
+
+                <div>
+
+                    <span>
+                        Focus
+                    </span>
+
+                    <strong>
+                        News-driven moves
+                    </strong>
 
                 </div>
 
