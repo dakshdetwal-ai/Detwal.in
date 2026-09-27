@@ -1,3 +1,76 @@
+const SUPABASE_URL =
+    "https://evsnwenvmwhrohyzrjgq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_Vfy2VLbqRYB_DOsK13iuqA_9-pk4Q5t";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+// ===============================
+// ACCOUNT SESSION
+// ===============================
+
+const accountBtn =
+    document.getElementById("accountBtn");
+
+
+async function updateAccountButton() {
+
+    if (!accountBtn) return;
+
+    try {
+
+        const { data, error } =
+            await supabaseClient.auth.getSession();
+
+        if (error) throw error;
+
+        const session = data?.session;
+
+        if (session && session.user) {
+
+            accountBtn.href = "../profile/";
+
+        } else {
+
+            accountBtn.href = "../signup/";
+
+        }
+
+        accountBtn.textContent = "Account";
+
+    } catch (error) {
+
+        console.error(
+            "Failed to check account session:",
+            error
+        );
+
+        accountBtn.href = "../signup/";
+        accountBtn.textContent = "Account";
+    }
+}
+
+
+updateAccountButton();
+
+
+supabaseClient.auth.onAuthStateChange(() => {
+
+    updateAccountButton();
+
+});
+
+
+
+// ===============================
+// PRODUCTS
+// ===============================
+
 const products = [
     {
         name: "XAUUSD News Strategy",
@@ -50,89 +123,119 @@ const products = [
 ];
 
 
-const productsGrid = document.getElementById("productsGrid");
-const filterButtons = document.querySelectorAll(".filter-btn");
-const sortSelect = document.getElementById("sortSelect");
+const productsGrid =
+    document.getElementById("productsGrid");
+
+const filterButtons =
+    document.querySelectorAll(".filter-btn");
+
+const sortSelect =
+    document.getElementById("sortSelect");
 
 
-function renderProducts(category = "all", sort = "featured") {
+
+function renderProducts(
+    category = "all",
+    sort = "featured"
+) {
 
     let filteredProducts =
         category === "all"
             ? [...products]
-            : products.filter(product => product.category === category);
+            : products.filter(
+                product =>
+                    product.category === category
+            );
 
 
     if (sort === "low") {
-        filteredProducts.sort((a, b) => a.price - b.price);
+
+        filteredProducts.sort(
+            (a, b) => a.price - b.price
+        );
+
     }
+
 
     if (sort === "high") {
-        filteredProducts.sort((a, b) => b.price - a.price);
+
+        filteredProducts.sort(
+            (a, b) => b.price - a.price
+        );
+
     }
 
+
     if (sort === "featured") {
+
         filteredProducts.sort(
-            (a, b) => Number(b.featured) - Number(a.featured)
+            (a, b) =>
+                Number(b.featured) -
+                Number(a.featured)
         );
+
     }
 
 
     if (filteredProducts.length === 0) {
+
         productsGrid.innerHTML = `
             <div class="empty-state">
                 No strategies found.
             </div>
         `;
+
         return;
     }
 
 
-    productsGrid.innerHTML = filteredProducts.map(product => {
+    productsGrid.innerHTML =
+        filteredProducts.map(product => {
 
-        return `
-            <article class="product-card">
+            return `
+                <article class="product-card">
 
-                <div class="product-image">
-                    <span>DETwal Strategy</span>
-                </div>
-
-                <div class="product-content">
-
-                    <div class="product-category">
-                        ${product.categoryName}
+                    <div class="product-image">
+                        <span>DETwal Strategy</span>
                     </div>
 
-                    <h3>
-                        ${product.name}
-                    </h3>
+                    <div class="product-content">
 
-                    <p>
-                        ${product.description}
-                    </p>
-
-                    <div class="product-bottom">
-
-                        <div class="product-price">
-                            $${product.price}
+                        <div class="product-category">
+                            ${product.categoryName}
                         </div>
 
-                        <button
-                            class="view-btn"
-                            onclick="viewStrategy('${product.name}')"
-                        >
-                            View Strategy
-                        </button>
+                        <h3>
+                            ${product.name}
+                        </h3>
+
+                        <p>
+                            ${product.description}
+                        </p>
+
+                        <div class="product-bottom">
+
+                            <div class="product-price">
+                                $${product.price}
+                            </div>
+
+                            <button
+                                class="view-btn"
+                                onclick="viewStrategy('${product.name}')"
+                            >
+                                View Strategy
+                            </button>
+
+                        </div>
 
                     </div>
 
-                </div>
+                </article>
+            `;
 
-            </article>
-        `;
-
-    }).join("");
+        }).join("");
 }
+
 
 
 function viewStrategy(strategyName) {
@@ -144,42 +247,63 @@ function viewStrategy(strategyName) {
 }
 
 
+
 filterButtons.forEach(button => {
 
-    button.addEventListener("click", () => {
+    button.addEventListener(
+        "click",
+        () => {
 
-        filterButtons.forEach(btn => {
-            btn.classList.remove("active");
-        });
+            filterButtons.forEach(btn => {
 
-        button.classList.add("active");
+                btn.classList.remove("active");
 
-        const category = button.dataset.category;
+            });
+
+
+            button.classList.add("active");
+
+
+            const category =
+                button.dataset.category;
+
+
+            renderProducts(
+                category,
+                sortSelect.value
+            );
+
+        }
+    );
+
+});
+
+
+
+sortSelect.addEventListener(
+    "change",
+    () => {
+
+        const activeButton =
+            document.querySelector(
+                ".filter-btn.active"
+            );
+
+
+        const category =
+            activeButton
+                ? activeButton.dataset.category
+                : "all";
+
 
         renderProducts(
             category,
             sortSelect.value
         );
 
-    });
+    }
+);
 
-});
-
-
-sortSelect.addEventListener("change", () => {
-
-    const activeButton =
-        document.querySelector(".filter-btn.active");
-
-    const category =
-        activeButton ? activeButton.dataset.category : "all";
-
-    renderProducts(
-        category,
-        sortSelect.value
-    );
-
-});
 
 
 renderProducts();
