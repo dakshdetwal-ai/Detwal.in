@@ -1,9 +1,124 @@
 const API_URL =
     "https://detwal-news-bot.dakshdetwal10.workers.dev";
 
-const newsName = document.getElementById("newsName");
-const timeLeft = document.getElementById("timeLeft");
-const previousData = document.getElementById("previousData");
+const SUPABASE_URL =
+    "https://evsnwenvmwhrohyzrjgq.supabase.co";
+
+const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_Vfy2VLbqRYB_DOsK13iuqA_9-pk4Q5t";
+
+const supabaseClient = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+);
+
+
+/* ================================
+   ACCOUNT / AUTH
+================================ */
+
+const accountBtn =
+    document.getElementById("accountBtn");
+
+
+async function updateAccountButton() {
+
+    if (!accountBtn) return;
+
+    try {
+
+        const {
+            data,
+            error
+        } = await supabaseClient.auth.getSession();
+
+
+        if (error) {
+            throw error;
+        }
+
+
+        const session = data?.session;
+
+
+        if (session && session.user) {
+
+            /*
+             * Logged in
+             */
+
+            accountBtn.href =
+                "../profile/";
+
+            accountBtn.textContent =
+                "Account";
+
+        } else {
+
+            /*
+             * Logged out
+             */
+
+            accountBtn.href =
+                "../signup/";
+
+            accountBtn.textContent =
+                "Account";
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Failed to check account session:",
+            error
+        );
+
+        /*
+         * Safe fallback
+         */
+
+        accountBtn.href =
+            "../signup/";
+
+        accountBtn.textContent =
+            "Account";
+    }
+}
+
+
+/*
+ * Check session when page loads
+ */
+
+updateAccountButton();
+
+
+/*
+ * Keep account button updated if
+ * login/logout happens while page
+ * is open.
+ */
+
+supabaseClient.auth.onAuthStateChange(
+    () => {
+        updateAccountButton();
+    }
+);
+
+
+/* ================================
+   NEWS ELEMENTS
+================================ */
+
+const newsName =
+    document.getElementById("newsName");
+
+const timeLeft =
+    document.getElementById("timeLeft");
+
+const previousData =
+    document.getElementById("previousData");
 
 
 /* ================================
@@ -12,10 +127,14 @@ const previousData = document.getElementById("previousData");
 
 function formatCountdown(targetTime) {
 
-    const now = new Date().getTime();
-    const target = new Date(targetTime).getTime();
+    const now =
+        new Date().getTime();
 
-    const difference = target - now;
+    const target =
+        new Date(targetTime).getTime();
+
+    const difference =
+        target - now;
 
 
     /* NEWS ALREADY STARTED */
@@ -29,13 +148,19 @@ function formatCountdown(targetTime) {
         Math.floor(difference / 1000);
 
     const days =
-        Math.floor(totalSeconds / 86400);
+        Math.floor(
+            totalSeconds / 86400
+        );
 
     const hours =
-        Math.floor((totalSeconds % 86400) / 3600);
+        Math.floor(
+            (totalSeconds % 86400) / 3600
+        );
 
     const minutes =
-        Math.floor((totalSeconds % 3600) / 60);
+        Math.floor(
+            (totalSeconds % 3600) / 60
+        );
 
     const seconds =
         totalSeconds % 60;
@@ -74,12 +199,12 @@ function formatCountdown(targetTime) {
 }
 
 
-
 /* ================================
    LIVE COUNTDOWN
 ================================ */
 
 let countdownInterval = null;
+
 
 function startCountdown(newsTime) {
 
@@ -87,7 +212,9 @@ function startCountdown(newsTime) {
 
     if (countdownInterval) {
 
-        clearInterval(countdownInterval);
+        clearInterval(
+            countdownInterval
+        );
 
     }
 
@@ -108,9 +235,11 @@ function startCountdown(newsTime) {
     /* Update every second */
 
     countdownInterval =
-        setInterval(updateCountdown, 1000);
+        setInterval(
+            updateCountdown,
+            1000
+        );
 }
-
 
 
 /* ================================
@@ -135,18 +264,22 @@ function displayNextNews(news) {
 
 
     newsName.textContent =
-        news.name || "Unnamed News";
+        news.name ||
+        "Unnamed News";
 
 
     previousData.textContent =
-        news.previous || "—";
+        news.previous ||
+        "—";
 
 
     /* Start live countdown */
 
     if (news.time) {
 
-        startCountdown(news.time);
+        startCountdown(
+            news.time
+        );
 
     } else {
 
@@ -154,7 +287,6 @@ function displayNextNews(news) {
             "—";
     }
 }
-
 
 
 /* ================================
@@ -165,9 +297,10 @@ async function loadNextNews() {
 
     try {
 
-        const response = await fetch(
-            `${API_URL}/next-news`
-        );
+        const response =
+            await fetch(
+                `${API_URL}/next-news`
+            );
 
 
         if (!response.ok) {
@@ -218,7 +351,6 @@ async function loadNextNews() {
             "—";
     }
 }
-
 
 
 /* ================================
