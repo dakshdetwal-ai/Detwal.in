@@ -1,63 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>News Trading — DETwal</title>
+
     <meta
         name="description"
         content="DETwal News Trading — upcoming market-moving news for XAUUSD."
     >
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- ================================
+         GOOGLE FONT
+    ================================= -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="style.css">
+
+    <!-- ================================
+         PAGE CSS
+    ================================= -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
 </head>
+
 
 <body>
 
-    <!-- NAVBAR -->
+
+    <!-- ================================
+         NAVBAR
+    ================================= -->
 
     <header class="navbar">
 
-        <a href="../home/" class="logo">
+
+        <!-- LOGO -->
+
+        <a
+            href="../home/"
+            class="logo"
+        >
             DET<span>wal</span>
         </a>
+
+
+        <!-- PRODUCT NAME -->
 
         <div class="product-name">
             News Trading
         </div>
 
+
+        <!-- NAVIGATION -->
+
         <nav class="nav-links">
-            <a href="../home/">Home</a>
-            <a href="../journal/">Journal</a>
-            <a href="../community/">Community</a>
-            <a href="../strategies-store/">Store</a>
+
+            <a href="../home/">
+                Home
+            </a>
+
+            <a href="../journal/">
+                Journal
+            </a>
+
+            <a href="../community/">
+                Community
+            </a>
+
+            <a href="../strategies-store/">
+                Store
+            </a>
+
         </nav>
 
+
+        <!-- ACCOUNT -->
+
         <div class="nav-actions">
-            <a href="../signup/" class="account-btn">
+
+            <a
+                href="../signup/"
+                class="account-btn"
+                id="accountBtn"
+            >
                 Account
             </a>
+
         </div>
+
 
     </header>
 
 
-    <!-- MAIN -->
+
+    <!-- ================================
+         MAIN CONTENT
+    ================================= -->
 
     <main class="news-container">
 
-        <!-- HEADER -->
+
+        <!-- ================================
+             NEWS HEADER
+        ================================= -->
 
         <section class="news-header">
+
 
             <div>
 
@@ -65,270 +140,459 @@
                     DETWAL NEWS TRADING
                 </span>
 
+
                 <h1>
+
                     Trade around
-                    <span>the news.</span>
+
+                    <span>
+                        the news.
+                    </span>
+
                 </h1>
 
+
                 <p>
+
                     Track the next major economic event affecting
                     XAUUSD in one focused workspace.
+
                 </p>
 
             </div>
 
+
             <div class="premium-badge">
+
                 PREMIUM
+
             </div>
+
 
         </section>
 
 
-        <!-- UPCOMING NEWS -->
 
-        <section class="panel upcoming-news-panel">
+        <!-- ================================
+             UPCOMING NEWS
+        ================================= -->
+
+        <section
+            class="panel upcoming-news-panel"
+        >
+
+
+            <!-- PANEL HEADER -->
 
             <div class="panel-header">
+
 
                 <div>
 
                     <span class="panel-label">
+
                         NEXT UPCOMING NEWS
+
                     </span>
 
+
                     <h2 id="newsName">
+
                         Loading...
+
                     </h2>
 
                 </div>
 
+
                 <span class="instrument-badge">
+
                     XAUUSD
+
                 </span>
+
 
             </div>
 
+
+
+            <!-- NEWS DETAILS -->
 
             <div class="news-details">
 
+
+                <!-- COUNTDOWN -->
+
                 <div class="countdown-box">
 
+
                     <span>
+
                         TIME LEFT
+
                     </span>
 
+
                     <strong id="timeLeft">
+
                         —
+
                     </strong>
+
 
                 </div>
 
+
+
+                <!-- NEWS DATA -->
 
                 <div class="news-data">
 
+
+                    <!-- PREVIOUS -->
+
                     <div class="data-item">
 
+
                         <span>
+
                             Previous
+
                         </span>
 
+
                         <strong id="previousData">
+
                             —
+
                         </strong>
+
 
                     </div>
 
+
+
+                    <!-- FORECAST -->
 
                     <div class="data-item forecast-item">
 
+
                         <span>
+
                             Forecast
+
                         </span>
 
+
                         <strong>
+
                             🔒 Subscribers only
+
                         </strong>
+
 
                     </div>
 
+
                 </div>
+
 
             </div>
 
 
-            <!-- SUBSCRIPTION -->
+
+            <!-- ================================
+                 SUBSCRIPTION
+            ================================= -->
 
             <div class="subscription-box">
 
+
                 <div>
 
+
                     <span class="subscription-label">
+
                         DETWAL NEWS SUBSCRIPTION
+
                     </span>
 
+
                     <h3>
+
                         Unlock the news forecast
+
                     </h3>
 
+
                     <p>
+
                         Get access to our news forecast and
                         analysis for upcoming XAUUSD events.
+
                     </p>
 
+
                     <small>
+
                         98%* historical accuracy claim.
                         Past performance does not guarantee future results.
+
                     </small>
+
 
                 </div>
 
 
+
+                <!-- SUBSCRIBE -->
+
                 <div class="subscription-action">
 
+
                     <strong class="subscription-price">
+
                         $9
+
                         <span>
+
                             USD
+
                         </span>
+
                     </strong>
+
 
                     <a
                         href="../subscription/"
                         class="subscribe-btn"
                     >
+
                         Subscribe
+
                     </a>
+
 
                 </div>
 
+
             </div>
+
 
         </section>
 
 
-        <!-- MARKET FOCUS -->
 
-        <section class="panel market-focus-panel">
+        <!-- ================================
+             MARKET FOCUS
+        ================================= -->
+
+        <section
+            class="panel market-focus-panel"
+        >
+
+
+            <!-- PANEL HEADER -->
 
             <div class="panel-header">
+
 
                 <div>
 
                     <span class="panel-label">
+
                         MARKET FOCUS
+
                     </span>
 
+
                     <h2>
+
                         XAUUSD
+
                     </h2>
 
                 </div>
 
+
                 <span class="instrument-badge">
+
                     GOLD
+
                 </span>
+
 
             </div>
 
+
+
+            <!-- MARKET INFORMATION -->
 
             <div class="market-focus-content">
 
+
                 <div>
 
                     <span>
+
                         Instrument
+
                     </span>
 
+
                     <strong>
+
                         XAUUSD
+
                     </strong>
 
                 </div>
 
 
+
                 <div>
 
                     <span>
+
                         Asset
+
                     </span>
 
+
                     <strong>
+
                         Gold
+
                     </strong>
 
                 </div>
+
 
 
                 <div>
 
                     <span>
+
                         Focus
+
                     </span>
 
+
                     <strong>
+
                         News-driven moves
+
                     </strong>
 
                 </div>
+
 
             </div>
+
 
         </section>
 
 
-        <!-- DISCLAIMER -->
+
+        <!-- ================================
+             DISCLAIMER
+        ================================= -->
 
         <section class="disclaimer">
 
+
             <strong>
+
                 Market information
+
             </strong>
 
+
             <p>
+
                 DETwal provides market information and research tools
                 for informational purposes. Nothing on this page should
                 be treated as a guarantee of future market movements or
                 financial results.
+
             </p>
 
+
         </section>
+
 
     </main>
 
 
-    <!-- FOOTER -->
+
+    <!-- ================================
+         FOOTER
+    ================================= -->
 
     <footer class="footer">
 
+
         <div>
 
+
             <strong>
+
                 DET<span>wal</span>
+
             </strong>
 
+
             <p>
+
                 News Trading
+
             </p>
 
+
         </div>
+
 
 
         <div class="footer-links">
 
+
             <a href="../terms/">
+
                 Terms
+
             </a>
+
 
             <a href="../privacy/">
+
                 Privacy
+
             </a>
 
+
         </div>
+
 
     </footer>
 
 
+
+    <!-- ================================
+         SUPABASE
+    ================================= -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+
+    <!-- ================================
+         NEWS TRADING JAVASCRIPT
+    ================================= -->
+
     <script src="script.js"></script>
 
+
 </body>
+
 </html>
