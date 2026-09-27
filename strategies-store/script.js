@@ -17,6 +17,9 @@ const supabaseClient = window.supabase.createClient(
 const STORE_API =
     "https://detwal-store-bot.dakshdetwal10.workers.dev";
 
+const DETWAL_UPI =
+    "dakshdetwal@fam";
+
 
 // ===============================
 // ACCOUNT SESSION
@@ -115,17 +118,25 @@ async function loadStrategies() {
             await fetch(`${STORE_API}/strategies`);
 
         if (!response.ok) {
-            throw new Error("Failed to load strategies.");
+            throw new Error(
+                "Failed to load strategies."
+            );
         }
 
         const data =
             await response.json();
 
-        if (!data.success || !Array.isArray(data.strategies)) {
-            throw new Error("Invalid strategy response.");
+        if (
+            !data.success ||
+            !Array.isArray(data.strategies)
+        ) {
+            throw new Error(
+                "Invalid strategy response."
+            );
         }
 
-        products = data.strategies;
+        products =
+            data.strategies;
 
         renderProducts();
 
@@ -166,8 +177,6 @@ function renderProducts(
             );
 
 
-    // LOWEST PRICE
-
     if (sort === "low") {
 
         filteredProducts.sort(
@@ -179,8 +188,6 @@ function renderProducts(
     }
 
 
-    // HIGHEST PRICE
-
     if (sort === "high") {
 
         filteredProducts.sort(
@@ -191,8 +198,6 @@ function renderProducts(
 
     }
 
-
-    // FEATURED
 
     if (sort === "featured") {
 
@@ -244,7 +249,9 @@ function renderProducts(
 
 
                         <h3>
-                            ${escapeHTML(product.name)}
+                            ${escapeHTML(
+                                product.name
+                            )}
                         </h3>
 
 
@@ -258,7 +265,9 @@ function renderProducts(
                         <div class="product-bottom">
 
                             <div class="product-price">
-                                $${Number(product.price).toFixed(2)}
+                                $${Number(
+                                    product.price
+                                ).toFixed(2)}
                             </div>
 
 
@@ -279,8 +288,6 @@ function renderProducts(
         }).join("");
 
 
-    // Attach buttons
-
     document
         .querySelectorAll(".view-btn")
         .forEach(button => {
@@ -289,10 +296,9 @@ function renderProducts(
                 "click",
                 () => {
 
-                    const strategyId =
-                        button.dataset.strategyId;
-
-                    viewStrategy(strategyId);
+                    viewStrategy(
+                        button.dataset.strategyId
+                    );
 
                 }
             );
@@ -311,18 +317,27 @@ async function viewStrategy(strategyId) {
 
         const response =
             await fetch(
-                `${STORE_API}/strategy?id=${encodeURIComponent(strategyId)}`
+                `${STORE_API}/strategy?id=${encodeURIComponent(
+                    strategyId
+                )}`
             );
 
         if (!response.ok) {
-            throw new Error("Failed to load strategy.");
+            throw new Error(
+                "Failed to load strategy."
+            );
         }
 
         const data =
             await response.json();
 
-        if (!data.success || !data.strategy) {
-            throw new Error("Strategy not found.");
+        if (
+            !data.success ||
+            !data.strategy
+        ) {
+            throw new Error(
+                "Strategy not found."
+            );
         }
 
         showStrategyDetails(
@@ -349,14 +364,7 @@ async function viewStrategy(strategyId) {
 
 function showStrategyDetails(strategy) {
 
-    const existing =
-        document.getElementById(
-            "strategyDetailModal"
-        );
-
-    if (existing) {
-        existing.remove();
-    }
+    closeAllModals();
 
 
     const modal =
@@ -364,6 +372,7 @@ function showStrategyDetails(strategy) {
 
     modal.id =
         "strategyDetailModal";
+
 
     modal.innerHTML = `
 
@@ -390,7 +399,9 @@ function showStrategyDetails(strategy) {
 
 
                 <h2>
-                    ${escapeHTML(strategy.name)}
+                    ${escapeHTML(
+                        strategy.name
+                    )}
                 </h2>
 
 
@@ -519,17 +530,15 @@ function showStrategyDetails(strategy) {
     document.body.appendChild(modal);
 
 
-    // Close
-
     document
-        .getElementById("closeStrategyModal")
+        .getElementById(
+            "closeStrategyModal"
+        )
         .addEventListener(
             "click",
             closeStrategyModal
         );
 
-
-    // Click outside
 
     modal
         .querySelector(
@@ -553,8 +562,6 @@ function showStrategyDetails(strategy) {
         );
 
 
-    // Purchase
-
     document
         .getElementById(
             "purchaseStrategyBtn"
@@ -563,13 +570,13 @@ function showStrategyDetails(strategy) {
             "click",
             () => {
 
-                openPurchaseForm(strategy);
+                openPurchaseForm(
+                    strategy
+                );
 
             }
         );
 
-
-    // ESC
 
     document.addEventListener(
         "keydown",
@@ -579,7 +586,812 @@ function showStrategyDetails(strategy) {
 
 
 // ===============================
-// CLOSE DETAIL
+// PURCHASE FORM
+// ===============================
+
+function openPurchaseForm(strategy) {
+
+    closeStrategyModal();
+
+
+    const originalPrice =
+        Number(strategy.price);
+
+
+    const modal =
+        document.createElement("div");
+
+    modal.id =
+        "purchaseModal";
+
+
+    modal.innerHTML = `
+
+        <div class="strategy-modal-overlay">
+
+            <div class="strategy-modal purchase-modal">
+
+                <button
+                    class="strategy-modal-close"
+                    id="closePurchaseModal"
+                    aria-label="Close"
+                >
+                    ×
+                </button>
+
+
+                <div class="product-category">
+                    DETwal STORE
+                </div>
+
+
+                <h2>
+                    Purchase Strategy
+                </h2>
+
+
+                <p class="strategy-description">
+                    ${escapeHTML(
+                        strategy.name
+                    )}
+                </p>
+
+
+                <div class="purchase-summary">
+
+                    <div class="purchase-row">
+
+                        <span>
+                            Strategy
+                        </span>
+
+                        <strong>
+                            ${escapeHTML(
+                                strategy.name
+                            )}
+                        </strong>
+
+                    </div>
+
+
+                    <div class="purchase-row">
+
+                        <span>
+                            Original Price
+                        </span>
+
+                        <strong id="originalPrice">
+                            $${originalPrice.toFixed(2)}
+                        </strong>
+
+                    </div>
+
+
+                    <div
+                        class="purchase-row"
+                        id="discountRow"
+                        style="display:none;"
+                    >
+
+                        <span>
+                            Discount
+                        </span>
+
+                        <strong id="discountAmount">
+                            -$0.00
+                        </strong>
+
+                    </div>
+
+
+                    <div class="purchase-row total-row">
+
+                        <span>
+                            Final Price
+                        </span>
+
+                        <strong id="finalPrice">
+                            $${originalPrice.toFixed(2)}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+
+                <form
+                    id="strategyPurchaseForm"
+                    novalidate
+                >
+
+                    <label for="couponCode">
+                        Coupon Code
+                    </label>
+
+                    <div class="coupon-row">
+
+                        <input
+                            type="text"
+                            id="couponCode"
+                            placeholder="Enter coupon code"
+                            autocomplete="off"
+                        >
+
+                        <button
+                            type="button"
+                            id="applyCouponBtn"
+                            class="secondary-btn"
+                        >
+                            Apply
+                        </button>
+
+                    </div>
+
+
+                    <div
+                        id="couponMessage"
+                        class="form-message"
+                    ></div>
+
+
+                    <label for="customerName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerName"
+                        placeholder="Your name"
+                        autocomplete="name"
+                        required
+                    >
+
+
+                    <label for="customerEmail">
+                        Email Address
+                    </label>
+
+                    <input
+                        type="email"
+                        id="customerEmail"
+                        placeholder="you@example.com"
+                        autocomplete="email"
+                        required
+                    >
+
+
+                    <label for="customerUpi">
+                        Your UPI ID
+                    </label>
+
+                    <input
+                        type="text"
+                        id="customerUpi"
+                        placeholder="yourname@upi"
+                        autocomplete="off"
+                        required
+                    >
+
+
+                    <div class="payment-box">
+
+                        <span>
+                            Pay DETwal
+                        </span>
+
+                        <strong>
+                            ${DETWAL_UPI}
+                        </strong>
+
+                        <small>
+                            Pay the final amount to this UPI ID,
+                            then submit your request.
+                        </small>
+
+                    </div>
+
+
+                    <div
+                        id="orderMessage"
+                        class="form-message"
+                    ></div>
+
+
+                    <button
+                        type="submit"
+                        class="purchase-submit-btn"
+                        id="submitOrderBtn"
+                    >
+                        Add Request
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+    `;
+
+
+    document.body.appendChild(modal);
+
+
+    // ===========================
+    // CLOSE
+    // ===========================
+
+    document
+        .getElementById(
+            "closePurchaseModal"
+        )
+        .addEventListener(
+            "click",
+            closePurchaseModal
+        );
+
+
+    modal
+        .querySelector(
+            ".strategy-modal-overlay"
+        )
+        .addEventListener(
+            "click",
+            event => {
+
+                if (
+                    event.target.classList.contains(
+                        "strategy-modal-overlay"
+                    )
+                ) {
+
+                    closePurchaseModal();
+
+                }
+
+            }
+        );
+
+
+    // ===========================
+    // COUPON
+    // ===========================
+
+    let appliedCoupon = "";
+    let discountAmount = 0;
+
+
+    const couponInput =
+        document.getElementById(
+            "couponCode"
+        );
+
+
+    const applyCouponBtn =
+        document.getElementById(
+            "applyCouponBtn"
+        );
+
+
+    const couponMessage =
+        document.getElementById(
+            "couponMessage"
+        );
+
+
+    const discountRow =
+        document.getElementById(
+            "discountRow"
+        );
+
+
+    const discountDisplay =
+        document.getElementById(
+            "discountAmount"
+        );
+
+
+    const finalPriceDisplay =
+        document.getElementById(
+            "finalPrice"
+        );
+
+
+    function updatePrice() {
+
+        const finalPrice =
+            Math.max(
+                0,
+                originalPrice -
+                discountAmount
+            );
+
+
+        if (
+            discountAmount > 0
+        ) {
+
+            discountRow.style.display =
+                "flex";
+
+            discountDisplay.textContent =
+                `-$${discountAmount.toFixed(2)}`;
+
+        } else {
+
+            discountRow.style.display =
+                "none";
+
+        }
+
+
+        finalPriceDisplay.textContent =
+            `$${finalPrice.toFixed(2)}`;
+
+    }
+
+
+    applyCouponBtn.addEventListener(
+        "click",
+        async () => {
+
+            const code =
+                couponInput.value
+                    .trim()
+                    .toUpperCase();
+
+
+            if (!code) {
+
+                appliedCoupon = "";
+                discountAmount = 0;
+
+                couponMessage.textContent =
+                    "Enter a coupon code.";
+
+                couponMessage.className =
+                    "form-message error";
+
+                updatePrice();
+
+                return;
+            }
+
+
+            applyCouponBtn.disabled =
+                true;
+
+            applyCouponBtn.textContent =
+                "Checking...";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${STORE_API}/coupon?code=${encodeURIComponent(
+                            code
+                        )}`
+                    );
+
+
+                if (!response.ok) {
+                    throw new Error(
+                        "Coupon request failed."
+                    );
+                }
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !data.success ||
+                    !data.valid
+                ) {
+
+                    appliedCoupon = "";
+                    discountAmount = 0;
+
+                    couponMessage.textContent =
+                        "Invalid or inactive coupon.";
+
+                    couponMessage.className =
+                        "form-message error";
+
+                    updatePrice();
+
+                    return;
+                }
+
+
+                const discountType =
+                    data.discountType;
+
+
+                const discountValue =
+                    Number(
+                        data.discountValue
+                    );
+
+
+                if (
+                    discountType === "percent"
+                ) {
+
+                    discountAmount =
+                        originalPrice *
+                        (discountValue / 100);
+
+                } else {
+
+                    discountAmount =
+                        discountValue;
+
+                }
+
+
+                discountAmount =
+                    Math.min(
+                        originalPrice,
+                        Math.max(
+                            0,
+                            discountAmount
+                        )
+                    );
+
+
+                appliedCoupon =
+                    data.code || code;
+
+
+                couponMessage.textContent =
+                    `Coupon applied: ${appliedCoupon}`;
+
+                couponMessage.className =
+                    "form-message success";
+
+
+                updatePrice();
+
+            } catch (error) {
+
+                console.error(
+                    "Coupon validation error:",
+                    error
+                );
+
+                appliedCoupon = "";
+                discountAmount = 0;
+
+                couponMessage.textContent =
+                    "Unable to validate coupon. Please try again.";
+
+                couponMessage.className =
+                    "form-message error";
+
+                updatePrice();
+
+            } finally {
+
+                applyCouponBtn.disabled =
+                    false;
+
+                applyCouponBtn.textContent =
+                    "Apply";
+
+            }
+
+        }
+    );
+
+
+    couponInput.addEventListener(
+        "keydown",
+        event => {
+
+            if (
+                event.key === "Enter"
+            ) {
+
+                event.preventDefault();
+
+                applyCouponBtn.click();
+
+            }
+
+        }
+    );
+
+
+    // ===========================
+    // ORDER SUBMISSION
+    // ===========================
+
+    const form =
+        document.getElementById(
+            "strategyPurchaseForm"
+        );
+
+
+    const orderMessage =
+        document.getElementById(
+            "orderMessage"
+        );
+
+
+    const submitOrderBtn =
+        document.getElementById(
+            "submitOrderBtn"
+        );
+
+
+    form.addEventListener(
+        "submit",
+        async event => {
+
+            event.preventDefault();
+
+
+            const customerName =
+                document
+                    .getElementById(
+                        "customerName"
+                    )
+                    .value
+                    .trim();
+
+
+            const customerEmail =
+                document
+                    .getElementById(
+                        "customerEmail"
+                    )
+                    .value
+                    .trim();
+
+
+            const customerUpi =
+                document
+                    .getElementById(
+                        "customerUpi"
+                    )
+                    .value
+                    .trim();
+
+
+            if (
+                !customerName ||
+                !customerEmail ||
+                !customerUpi
+            ) {
+
+                orderMessage.textContent =
+                    "Please complete all required fields.";
+
+                orderMessage.className =
+                    "form-message error";
+
+                return;
+            }
+
+
+            const emailValid =
+                /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+                    .test(
+                        customerEmail
+                    );
+
+
+            if (!emailValid) {
+
+                orderMessage.textContent =
+                    "Please enter a valid email address.";
+
+                orderMessage.className =
+                    "form-message error";
+
+                return;
+            }
+
+
+            const finalPrice =
+                Math.max(
+                    0,
+                    originalPrice -
+                    discountAmount
+                );
+
+
+            submitOrderBtn.disabled =
+                true;
+
+            submitOrderBtn.textContent =
+                "Submitting...";
+
+
+            orderMessage.textContent =
+                "";
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        `${STORE_API}/order`,
+                        {
+                            method: "POST",
+
+                            headers: {
+                                "Content-Type":
+                                    "application/json"
+                            },
+
+                            body: JSON.stringify({
+
+                                strategyId:
+                                    strategy.id,
+
+                                name:
+                                    customerName,
+
+                                email:
+                                    customerEmail,
+
+                                upi:
+                                    customerUpi,
+
+                                coupon:
+                                    appliedCoupon
+
+                            })
+                        }
+                    );
+
+
+                const data =
+                    await response.json();
+
+
+                if (
+                    !response.ok ||
+                    !data.success
+                ) {
+
+                    throw new Error(
+                        data.error ||
+                        "Unable to create order."
+                    );
+
+                }
+
+
+                // ===========================
+                // SUCCESS
+                // ===========================
+
+                form.innerHTML = `
+
+                    <div class="order-success">
+
+                        <div class="success-icon">
+                            ✓
+                        </div>
+
+                        <h3>
+                            Request Added
+                        </h3>
+
+                        <p>
+                            Your purchase request has been
+                            sent to the DETwal team.
+                        </p>
+
+                        <div class="order-id-box">
+
+                            <span>
+                                Order ID
+                            </span>
+
+                            <strong>
+                                ${escapeHTML(
+                                    data.orderId ||
+                                    "Pending"
+                                )}
+                            </strong>
+
+                        </div>
+
+                        <p class="success-note">
+                            Keep your Order ID for reference.
+                            The team will verify your payment
+                            and process your strategy.
+                        </p>
+
+                        <button
+                            type="button"
+                            class="purchase-submit-btn"
+                            id="successCloseBtn"
+                        >
+                            Done
+                        </button>
+
+                    </div>
+
+                `;
+
+
+                document
+                    .getElementById(
+                        "successCloseBtn"
+                    )
+                    .addEventListener(
+                        "click",
+                        closePurchaseModal
+                    );
+
+
+            } catch (error) {
+
+                console.error(
+                    "Order submission error:",
+                    error
+                );
+
+
+                orderMessage.textContent =
+                    error.message ||
+                    "Something went wrong. Please try again.";
+
+                orderMessage.className =
+                    "form-message error";
+
+
+                submitOrderBtn.disabled =
+                    false;
+
+                submitOrderBtn.textContent =
+                    "Add Request";
+
+            }
+
+        }
+    );
+
+
+    document.addEventListener(
+        "keydown",
+        handleEscapeKey
+    );
+}
+
+
+// ===============================
+// CLOSE PURCHASE MODAL
+// ===============================
+
+function closePurchaseModal() {
+
+    const modal =
+        document.getElementById(
+            "purchaseModal"
+        );
+
+
+    if (modal) {
+        modal.remove();
+    }
+
+
+    document.removeEventListener(
+        "keydown",
+        handleEscapeKey
+    );
+}
+
+
+// ===============================
+// CLOSE DETAIL MODAL
 // ===============================
 
 function closeStrategyModal() {
@@ -589,9 +1401,11 @@ function closeStrategyModal() {
             "strategyDetailModal"
         );
 
+
     if (modal) {
         modal.remove();
     }
+
 
     document.removeEventListener(
         "keydown",
@@ -600,44 +1414,57 @@ function closeStrategyModal() {
 }
 
 
-function handleEscapeKey(event) {
+// ===============================
+// CLOSE ALL MODALS
+// ===============================
 
-    if (event.key === "Escape") {
+function closeAllModals() {
 
-        closeStrategyModal();
+    const detail =
+        document.getElementById(
+            "strategyDetailModal"
+        );
 
+
+    const purchase =
+        document.getElementById(
+            "purchaseModal"
+        );
+
+
+    if (detail) {
+        detail.remove();
     }
 
+
+    if (purchase) {
+        purchase.remove();
+    }
+
+
+    document.removeEventListener(
+        "keydown",
+        handleEscapeKey
+    );
 }
 
 
 // ===============================
-// PURCHASE FORM PLACEHOLDER
+// ESCAPE KEY
 // ===============================
 
-function openPurchaseForm(strategy) {
+function handleEscapeKey(event) {
 
-    /*
-        Purchase form will be connected
-        in the next step.
+    if (
+        event.key !== "Escape"
+    ) {
+        return;
+    }
 
-        It will contain:
 
-        - Strategy name
-        - Original price
-        - Coupon code
-        - Apply coupon
-        - Final price
-        - Customer name
-        - Customer email
-        - Customer UPI ID
-        - DETwal payment UPI ID
-        - Add Request
-    */
+    closeStrategyModal();
+    closePurchaseModal();
 
-    alert(
-        `Purchase: ${strategy.name}\n\nPurchase form will be connected next.`
-    );
 }
 
 
@@ -651,13 +1478,15 @@ filterButtons.forEach(button => {
         "click",
         () => {
 
-            filterButtons.forEach(btn => {
+            filterButtons.forEach(
+                btn => {
 
-                btn.classList.remove(
-                    "active"
-                );
+                    btn.classList.remove(
+                        "active"
+                    );
 
-            });
+                }
+            );
 
 
             button.classList.add(
@@ -721,7 +1550,9 @@ if (sortSelect) {
 
 function escapeHTML(value) {
 
-    return String(value ?? "")
+    return String(
+        value ?? ""
+    )
         .replace(
             /&/g,
             "&amp;"
@@ -742,6 +1573,7 @@ function escapeHTML(value) {
             /'/g,
             "&#039;"
         );
+
 }
 
 
