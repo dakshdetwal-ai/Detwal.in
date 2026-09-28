@@ -243,7 +243,30 @@
         </section>
 
 
-        <!-- ================= STATS ================= -->
+        
+<section class="journal-tools" id="journalTools">
+    <div class="journal-account-picker">
+        <label for="accountSelect">Trading account</label>
+        <select id="accountSelect"></select>
+    </div>
+    <div class="journal-tool-buttons">
+        <button type="button" class="secondary-btn" id="addAccountBtn">+ Account</button>
+        <button type="button" class="secondary-btn" id="manageAccountBtn">Manage</button>
+        <button type="button" class="secondary-btn" id="exportJsonBtn">Export</button>
+        <button type="button" class="secondary-btn" id="exportCsvBtn">CSV</button>
+        <button type="button" class="secondary-btn" id="importBtn">Import</button>
+        <input id="importFile" type="file" accept=".json,application/json" hidden>
+    </div>
+</section>
+
+<section class="journal-account-summary" id="accountSummary">
+    <div><span>ACCOUNT</span><strong id="selectedAccountName">Main Account</strong></div>
+    <div><span>STARTING BALANCE</span><strong id="startingBalance">$10,000.00</strong></div>
+    <div><span>CURRENT BALANCE</span><strong id="currentBalance">$10,000.00</strong></div>
+    <div><span>RETURN</span><strong id="accountReturn">0.00%</strong></div>
+</section>
+
+<!-- ================= STATS ================= -->
 
         <section class="stats-grid">
 
@@ -531,6 +554,10 @@
                                 Strategy
                             </th>
 
+                            <th>
+                                Actions
+                            </th>
+
                         </tr>
 
                     </thead>
@@ -556,7 +583,29 @@
     </main>
 
 
-    <!-- ================= LOGIN REQUIRED MODAL ================= -->
+    
+<div id="accountModal" class="modal hidden">
+    <div class="modal-overlay"></div>
+    <div class="modal-card compact-modal">
+        <div class="modal-header">
+            <div><span class="eyebrow">TRADING ACCOUNT</span><h2 id="accountModalTitle">Add Account</h2></div>
+            <button id="closeAccountModal" class="modal-close" type="button">×</button>
+        </div>
+        <form id="accountForm">
+            <input type="hidden" id="accountId">
+            <div class="form-grid">
+                <div class="form-group full-width"><label for="accountNameInput">Account name</label><input id="accountNameInput" placeholder="FTMO $10K" required></div>
+                <div class="form-group"><label for="accountType">Account type</label><select id="accountType"><option>Personal</option><option>Prop Firm</option><option>Demo</option><option>Broker</option></select></div>
+                <div class="form-group"><label for="accountCurrency">Currency</label><select id="accountCurrency"><option value="USD">USD — $</option><option value="EUR">EUR — €</option><option value="GBP">GBP — £</option><option value="INR">INR — ₹</option></select></div>
+                <div class="form-group full-width"><label for="accountBalance">Starting balance</label><input id="accountBalance" type="number" step="any" min="0" required></div>
+            </div>
+            <button class="primary-btn submit-btn" type="submit" id="saveAccountBtn">Create Account</button>
+            <button class="danger-btn full-danger hidden" type="button" id="deleteAccountBtn">Delete this account</button>
+        </form>
+    </div>
+</div>
+
+<!-- ================= LOGIN REQUIRED MODAL ================= -->
 
     <div
         id="loginModal"
@@ -660,6 +709,11 @@
             <form id="tradeForm">
 
                 <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="tradeDate">Date & time</label>
+                        <input id="tradeDate" type="datetime-local" required>
+                    </div>
 
                     <!-- SYMBOL -->
 
@@ -935,6 +989,15 @@
 
                 </div>
 
+
+
+                    <div class="form-group full-width">
+                        <label for="screenshot">Trade Screenshot</label>
+                        <input id="screenshot" type="file" accept="image/*">
+                        <small class="input-help">Stored locally on this device. It is not uploaded to DETwal.</small>
+                        <div id="screenshotPreview" class="screenshot-preview hidden"></div>
+                        <button type="button" id="removeScreenshotBtn" class="text-btn hidden">Remove screenshot</button>
+                    </div>
 
                 <button
                     type="submit"
