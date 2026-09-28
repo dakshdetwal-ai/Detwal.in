@@ -1,19 +1,29 @@
 :root {
     --bg: #05070D;
     --card: #090C14;
-    --card2: #11141E;
+    --card2: #0D111B;
+
     --purple: #8B5CF6;
     --purple-light: #A78BFA;
+
     --white: #FFFFFF;
     --text: #9298A8;
     --muted: #606678;
+
     --border: #1D2130;
+
+    --green: #22C55E;
+    --red: #F43F5E;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -28,7 +38,9 @@ a {
 }
 
 
-/* NAVBAR */
+/* ================================
+   NAVBAR
+================================ */
 
 .navbar {
     height: 72px;
@@ -39,7 +51,8 @@ a {
     gap: 30px;
 
     border-bottom: 1px solid var(--border);
-    background: rgba(5, 7, 13, .92);
+
+    background: rgba(5, 7, 13, .94);
 
     position: sticky;
     top: 0;
@@ -88,6 +101,7 @@ a {
     background: var(--purple);
 
     padding: 10px 16px;
+
     border-radius: 8px;
 
     font-size: 12px;
@@ -101,22 +115,29 @@ a {
 }
 
 
-/* MAIN */
+
+/* ================================
+   MAIN
+================================ */
 
 .subscription-container {
-    max-width: 900px;
+    max-width: 950px;
+
     margin: auto;
 
-    padding: 70px 5% 90px;
+    padding: 55px 5% 80px;
 }
 
 
-/* HEADER */
+
+/* ================================
+   HEADER
+================================ */
 
 .subscription-header {
     text-align: center;
 
-    margin-bottom: 40px;
+    margin-bottom: 35px;
 }
 
 .section-label {
@@ -124,14 +145,16 @@ a {
 
     font-size: 10px;
     font-weight: 700;
+
     letter-spacing: 2px;
 }
 
 .subscription-header h1 {
     margin-top: 14px;
 
-    font-size: clamp(42px, 6vw, 64px);
-    line-height: 1.05;
+    font-size: clamp(38px, 5vw, 60px);
+
+    line-height: 1.04;
 
     letter-spacing: -3px;
 }
@@ -141,34 +164,44 @@ a {
 }
 
 .subscription-header p {
-    max-width: 600px;
+    max-width: 650px;
 
     margin: 15px auto 0;
 
     color: var(--text);
 
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: 13px;
+
+    line-height: 1.65;
 }
 
 
-/* SUBSCRIPTION CARD */
+
+/* ================================
+   CARD
+================================ */
 
 .subscription-card {
     background: var(--card);
 
     border: 1px solid var(--border);
+
     border-radius: 16px;
 
     padding: 30px;
 }
 
 
-/* CARD TOP */
+
+/* ================================
+   CARD TOP
+================================ */
 
 .card-top {
     display: flex;
+
     justify-content: space-between;
+
     align-items: flex-start;
 
     gap: 30px;
@@ -182,91 +215,140 @@ a {
     color: var(--purple-light);
 
     font-size: 9px;
+
     font-weight: 700;
+
     letter-spacing: 1.5px;
 }
 
 .card-top h2 {
     margin-top: 9px;
 
-    font-size: 23px;
+    font-size: 25px;
+
+    letter-spacing: -.7px;
 }
 
 .card-top p {
-    max-width: 550px;
+    max-width: 570px;
 
     margin-top: 8px;
 
     color: var(--text);
 
     font-size: 12px;
+
     line-height: 1.6;
 }
 
 .price {
-    display: flex;
-    align-items: baseline;
-
     flex-shrink: 0;
+
+    display: flex;
+
+    align-items: baseline;
 }
 
-.price strong {
-    font-size: 42px;
+.original-price {
+    color: var(--muted);
+
+    font-size: 13px;
+
+    text-decoration: line-through;
+
+    margin-right: 7px;
+}
+
+.current-price strong {
+    font-size: 43px;
+
     line-height: 1;
 
     letter-spacing: -2px;
 }
 
-.price span {
-    margin-left: 6px;
+.current-price span {
+    margin-left: 5px;
 
     color: var(--muted);
 
-    font-size: 11px;
+    font-size: 10px;
 }
 
 
-/* FEATURES */
+
+/* ================================
+   SECTION TITLE
+================================ */
+
+.section-title {
+    padding: 25px 0 15px;
+}
+
+.section-title > span {
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.6px;
+}
+
+.section-title h3 {
+    margin-top: 7px;
+
+    font-size: 17px;
+}
+
+
+
+/* ================================
+   FEATURES
+================================ */
 
 .features {
     display: grid;
 
     grid-template-columns: repeat(2, 1fr);
 
-    gap: 12px;
-
-    padding: 28px 0;
+    gap: 11px;
 }
 
 .feature {
     display: flex;
-    gap: 14px;
 
-    padding: 18px;
+    gap: 13px;
+
+    padding: 17px;
 
     background: var(--card2);
 
     border: 1px solid var(--border);
+
     border-radius: 10px;
 }
 
 .feature-icon {
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    width: 24px;
-    height: 24px;
+    width: 27px;
+    height: 27px;
 
     flex-shrink: 0;
 
-    border-radius: 50%;
+    border-radius: 7px;
 
     background: rgba(139, 92, 246, .12);
 
     color: var(--purple-light);
 
-    font-size: 12px;
+    font-size: 9px;
+
     font-weight: 700;
 }
 
@@ -282,61 +364,401 @@ a {
     color: var(--muted);
 
     font-size: 10px;
+
     line-height: 1.5;
 }
 
 
-/* CTA */
 
-.subscription-cta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+/* ================================
+   DIFFERENCE
+================================ */
 
-    gap: 25px;
+.difference-box {
+    margin-top: 15px;
 
-    padding: 22px;
+    padding: 20px;
+
+    border: 1px solid rgba(139, 92, 246, .22);
+
+    border-radius: 11px;
 
     background:
         linear-gradient(
             135deg,
-            rgba(139, 92, 246, .10),
+            rgba(139, 92, 246, .07),
             rgba(9, 12, 20, .8)
         );
+}
 
-    border: 1px solid rgba(139, 92, 246, .25);
+.difference-badge {
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+}
+
+.difference-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 15px;
+
+    margin-top: 16px;
+}
+
+.difference-grid > div {
+    display: flex;
+
+    gap: 12px;
+}
+
+.difference-icon {
+    width: 25px;
+    height: 25px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: rgba(244, 63, 94, .1);
+
+    color: var(--red);
+
+    font-weight: 700;
+}
+
+.difference-icon.check {
+    background: rgba(34, 197, 94, .1);
+
+    color: var(--green);
+}
+
+.difference-grid strong {
+    font-size: 11px;
+}
+
+.difference-grid p {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    line-height: 1.5;
+}
+
+
+
+/* ================================
+   SETUP PREVIEW
+================================ */
+
+.setup-preview {
+    margin-top: 15px;
+
+    padding: 20px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 11px;
+
+    background: var(--card2);
+}
+
+.preview-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 15px;
+}
+
+.preview-header span {
+    display: block;
+
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.3px;
+}
+
+.preview-header strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 13px;
+}
+
+.locked {
+    padding: 6px 9px;
+
+    border: 1px solid rgba(139, 92, 246, .3);
+
+    border-radius: 6px;
+
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.preview-levels {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 9px;
+
+    margin-top: 16px;
+}
+
+.preview-levels > div {
+    padding: 13px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    background: rgba(5, 7, 13, .4);
+}
+
+.preview-levels span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+.preview-levels strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 12px;
+}
+
+.blurred {
+    filter: blur(4px);
+
+    user-select: none;
+}
+
+.red {
+    color: var(--red);
+}
+
+.green {
+    color: var(--green);
+}
+
+.setup-preview > p {
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+
+/* ================================
+   COUPON
+================================ */
+
+.coupon-section {
+    margin-top: 25px;
+
+    padding-top: 24px;
+
+    border-top: 1px solid var(--border);
+}
+
+.coupon-section label {
+    display: block;
+
+    color: #C8CBD5;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.coupon-row {
+    display: flex;
+
+    gap: 9px;
+
+    margin-top: 9px;
+}
+
+.coupon-row input {
+    flex: 1;
+
+    min-width: 0;
+
+    padding: 12px 13px;
+
+    background: var(--card2);
+
+    border: 1px solid var(--border);
+
+    border-radius: 8px;
+
+    outline: none;
+
+    color: var(--white);
+
+    font-family: inherit;
+
+    font-size: 11px;
+}
+
+.coupon-row input:focus {
+    border-color: rgba(139, 92, 246, .55);
+}
+
+.coupon-row button {
+    padding: 0 18px;
+
+    border: 1px solid rgba(139, 92, 246, .4);
+
+    border-radius: 8px;
+
+    background: rgba(139, 92, 246, .1);
+
+    color: var(--purple-light);
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: .2s ease;
+}
+
+.coupon-row button:hover {
+    background: rgba(139, 92, 246, .2);
+}
+
+.coupon-row button:disabled {
+    opacity: .6;
+
+    cursor: wait;
+}
+
+.coupon-message {
+    min-height: 16px;
+
+    margin-top: 7px;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+
+/* ================================
+   CTA
+================================ */
+
+.subscription-cta {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 25px;
+
+    margin-top: 8px;
+
+    padding: 22px;
+
+    border: 1px solid rgba(139, 92, 246, .3);
+
     border-radius: 12px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(139, 92, 246, .13),
+            rgba(9, 12, 20, .85)
+        );
+}
+
+.cta-label {
+    display: block;
+
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
 }
 
 .subscription-cta strong {
-    font-size: 14px;
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 15px;
 }
 
 .subscription-cta p {
+    max-width: 500px;
+
     margin-top: 5px;
 
     color: var(--text);
 
-    font-size: 11px;
+    font-size: 10px;
+
     line-height: 1.5;
 }
 
 .subscribe-btn {
     display: inline-flex;
-    align-items: center;
-    justify-content: center;
 
-    padding: 12px 22px;
+    align-items: center;
+
+    justify-content: center;
 
     flex-shrink: 0;
 
-    background: var(--purple);
+    padding: 13px 23px;
 
     border-radius: 8px;
 
+    background: var(--purple);
+
     color: var(--white);
 
-    font-size: 12px;
+    font-size: 11px;
+
     font-weight: 700;
 
     transition: .2s ease;
@@ -349,45 +771,53 @@ a {
 }
 
 
-/* DISCLAIMER */
+
+/* ================================
+   DISCLAIMER
+================================ */
 
 .subscription-disclaimer {
-    margin-top: 18px;
+    margin-top: 15px;
 
-    padding: 18px;
+    padding: 16px;
 
     border: 1px solid var(--border);
-    border-radius: 10px;
+
+    border-radius: 9px;
 
     background: rgba(9, 12, 20, .5);
 }
 
 .subscription-disclaimer strong {
-    font-size: 10px;
+    font-size: 9px;
 }
 
 .subscription-disclaimer p {
-    margin-top: 7px;
+    margin-top: 6px;
 
     color: var(--muted);
 
-    font-size: 9px;
+    font-size: 8px;
+
     line-height: 1.6;
 }
 
 
-/* BACK LINK */
+
+/* ================================
+   BACK
+================================ */
 
 .back-link {
     display: block;
 
     width: fit-content;
 
-    margin: 22px auto 0;
+    margin: 20px auto 0;
 
     color: var(--muted);
 
-    font-size: 11px;
+    font-size: 10px;
 
     transition: .2s ease;
 }
@@ -397,7 +827,10 @@ a {
 }
 
 
-/* FOOTER */
+
+/* ================================
+   FOOTER
+================================ */
 
 .footer {
     border-top: 1px solid var(--border);
@@ -405,6 +838,7 @@ a {
     padding: 30px 5%;
 
     display: flex;
+
     justify-content: space-between;
 
     color: var(--muted);
@@ -422,6 +856,7 @@ a {
 
 .footer-links {
     display: flex;
+
     gap: 20px;
 }
 
@@ -430,7 +865,10 @@ a {
 }
 
 
-/* TABLET */
+
+/* ================================
+   TABLET
+================================ */
 
 @media (max-width: 750px) {
 
@@ -442,8 +880,17 @@ a {
         grid-template-columns: 1fr;
     }
 
+    .difference-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .preview-levels {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
     .subscription-cta {
         flex-direction: column;
+
         align-items: flex-start;
     }
 
@@ -453,7 +900,10 @@ a {
 }
 
 
-/* MOBILE */
+
+/* ================================
+   MOBILE
+================================ */
 
 @media (max-width: 650px) {
 
@@ -466,12 +916,18 @@ a {
         display: none;
     }
 
+    .nav-actions {
+        margin-left: auto;
+    }
+
     .subscription-container {
-        padding: 45px 4% 70px;
+        padding: 40px 4% 60px;
     }
 
     .subscription-header h1 {
         letter-spacing: -2px;
+
+        font-size: 38px;
     }
 
     .subscription-card {
@@ -482,16 +938,29 @@ a {
         padding-bottom: 22px;
     }
 
-    .price strong {
+    .current-price strong {
         font-size: 36px;
     }
 
+    .preview-levels {
+        grid-template-columns: 1fr;
+    }
+
+    .coupon-row {
+        flex-direction: column;
+    }
+
+    .coupon-row button {
+        min-height: 40px;
+    }
+
     .subscription-cta {
-        padding: 20px;
+        padding: 19px;
     }
 
     .footer {
         flex-direction: column;
+
         gap: 15px;
     }
 }
