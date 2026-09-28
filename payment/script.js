@@ -2,7 +2,8 @@
 
 /* =========================================================
    DETwal Payment Page
-   ========================================================= */
+========================================================= */
+
 
 /* ---------------------------------------------------------
    Supabase
@@ -17,17 +18,25 @@ const SUPABASE_ANON_KEY =
 let supabaseClient = null;
 
 try {
+
     if (
         window.supabase &&
         typeof window.supabase.createClient === "function"
     ) {
-        supabaseClient = window.supabase.createClient(
-            SUPABASE_URL,
-            SUPABASE_ANON_KEY
-        );
+
+        supabaseClient =
+            window.supabase.createClient(
+                SUPABASE_URL,
+                SUPABASE_ANON_KEY
+            );
     }
+
 } catch (error) {
-    console.warn("Supabase initialization failed:", error);
+
+    console.warn(
+        "Supabase initialization failed:",
+        error
+    );
 }
 
 
@@ -35,10 +44,28 @@ try {
    Configuration
 --------------------------------------------------------- */
 
-const DETWAL_UPI = "dakshdetwal@fam";
+const DETWAL_UPI =
+    "dakshdetwal@fam";
 
-const DEFAULT_PRODUCT = "DETwal News Trading";
-const DEFAULT_PRICE = 9;
+const DEFAULT_PRODUCT =
+    "DETwal News Trading";
+
+const DEFAULT_PRICE =
+    9;
+
+
+/*
+    IMPORTANT
+
+    This is the Cloudflare Worker endpoint
+    created for News Trading payment requests.
+
+    Change this URL only if you deploy the Worker
+    under a different URL.
+*/
+
+const PAYMENT_API =
+    "https://detwal-help-bot.dakshdetwal10.workers.dev/news-payment";
 
 
 /* ---------------------------------------------------------
@@ -103,6 +130,7 @@ let checkoutData = null;
 --------------------------------------------------------- */
 
 function escapeHtml(value) {
+
     return String(value ?? "")
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -113,7 +141,9 @@ function escapeHtml(value) {
 
 
 function formatUSD(value) {
-    const number = Number(value);
+
+    const number =
+        Number(value);
 
     if (!Number.isFinite(number)) {
         return "$9.00";
@@ -124,7 +154,9 @@ function formatUSD(value) {
 
 
 function generateOrderId() {
-    const now = new Date();
+
+    const now =
+        new Date();
 
     const datePart =
         now.getFullYear().toString() +
@@ -141,10 +173,17 @@ function generateOrderId() {
 }
 
 
-function showMessage(message, type = "info") {
-    if (!paymentMessage) return;
+function showMessage(
+    message,
+    type = "info"
+) {
 
-    paymentMessage.textContent = message;
+    if (!paymentMessage) {
+        return;
+    }
+
+    paymentMessage.textContent =
+        message;
 
     paymentMessage.className =
         `payment-message show ${type}`;
@@ -152,9 +191,13 @@ function showMessage(message, type = "info") {
 
 
 function clearMessage() {
-    if (!paymentMessage) return;
 
-    paymentMessage.textContent = "";
+    if (!paymentMessage) {
+        return;
+    }
+
+    paymentMessage.textContent =
+        "";
 
     paymentMessage.className =
         "payment-message";
@@ -168,13 +211,20 @@ function clearMessage() {
 function loadCheckoutData() {
 
     try {
+
         const saved =
-            sessionStorage.getItem("detwalCheckout");
+            sessionStorage.getItem(
+                "detwalCheckout"
+            );
 
         if (saved) {
-            checkoutData = JSON.parse(saved);
+
+            checkoutData =
+                JSON.parse(saved);
         }
+
     } catch (error) {
+
         console.warn(
             "Could not read checkout data:",
             error
@@ -182,14 +232,27 @@ function loadCheckoutData() {
     }
 
 
-    if (!checkoutData || typeof checkoutData !== "object") {
+    if (
+        !checkoutData ||
+        typeof checkoutData !== "object"
+    ) {
 
         checkoutData = {
-            product: DEFAULT_PRODUCT,
-            basePrice: DEFAULT_PRICE,
-            finalPrice: DEFAULT_PRICE,
-            coupon: "",
-            currency: "USD"
+
+            product:
+                DEFAULT_PRODUCT,
+
+            basePrice:
+                DEFAULT_PRICE,
+
+            finalPrice:
+                DEFAULT_PRICE,
+
+            coupon:
+                "",
+
+            currency:
+                "USD"
         };
     }
 
@@ -198,13 +261,18 @@ function loadCheckoutData() {
         checkoutData.product ||
         DEFAULT_PRODUCT;
 
+
     const finalPrice =
-        Number(checkoutData.finalPrice);
+        Number(
+            checkoutData.finalPrice
+        );
+
 
     const price =
         Number.isFinite(finalPrice)
             ? finalPrice
             : DEFAULT_PRICE;
+
 
     const coupon =
         checkoutData.coupon || "";
@@ -213,13 +281,16 @@ function loadCheckoutData() {
     /* Product */
 
     if (productName) {
-        productName.textContent = product;
+
+        productName.textContent =
+            product;
     }
 
 
     /* Price */
 
     if (paymentPrice) {
+
         paymentPrice.textContent =
             formatUSD(price);
     }
@@ -228,6 +299,7 @@ function loadCheckoutData() {
     /* Total */
 
     if (paymentTotal) {
+
         paymentTotal.textContent =
             formatUSD(price);
     }
@@ -235,16 +307,22 @@ function loadCheckoutData() {
 
     /* Coupon */
 
-    if (coupon && couponRow && paymentCoupon) {
+    if (
+        coupon &&
+        couponRow &&
+        paymentCoupon
+    ) {
 
-        couponRow.style.display = "flex";
+        couponRow.style.display =
+            "flex";
 
         paymentCoupon.textContent =
             coupon;
 
     } else if (couponRow) {
 
-        couponRow.style.display = "none";
+        couponRow.style.display =
+            "none";
     }
 }
 
@@ -264,14 +342,23 @@ async function prefillUser() {
         const {
             data,
             error
-        } = await supabaseClient.auth.getUser();
+        } =
+            await supabaseClient.auth.getUser();
 
-        if (error || !data || !data.user) {
+
+        if (
+            error ||
+            !data ||
+            !data.user
+        ) {
+
             return;
         }
 
+
         const user =
             data.user;
+
 
         const metadata =
             user.user_metadata || {};
@@ -284,6 +371,7 @@ async function prefillUser() {
             !emailInput.value &&
             user.email
         ) {
+
             emailInput.value =
                 user.email;
         }
@@ -297,11 +385,13 @@ async function prefillUser() {
             metadata.fullName ||
             "";
 
+
         if (
             nameInput &&
             !nameInput.value &&
             possibleName
         ) {
+
             nameInput.value =
                 possibleName;
         }
@@ -328,6 +418,7 @@ async function copyDetwalUpi() {
             DETWAL_UPI
         );
 
+
         if (copyUpiBtn) {
 
             copyUpiBtn.textContent =
@@ -336,6 +427,7 @@ async function copyDetwalUpi() {
             copyUpiBtn.classList.add(
                 "copied"
             );
+
 
             setTimeout(() => {
 
@@ -351,12 +443,14 @@ async function copyDetwalUpi() {
 
     } catch (error) {
 
-        /* Fallback for older browsers */
+        /* Fallback */
 
         try {
 
             const textarea =
-                document.createElement("textarea");
+                document.createElement(
+                    "textarea"
+                );
 
             textarea.value =
                 DETWAL_UPI;
@@ -366,6 +460,7 @@ async function copyDetwalUpi() {
 
             textarea.style.opacity =
                 "0";
+
 
             document.body.appendChild(
                 textarea
@@ -388,6 +483,7 @@ async function copyDetwalUpi() {
                 copyUpiBtn.classList.add(
                     "copied"
                 );
+
 
                 setTimeout(() => {
 
@@ -424,8 +520,10 @@ function validateForm() {
     const name =
         nameInput?.value.trim() || "";
 
+
     const email =
         emailInput?.value.trim() || "";
+
 
     const customerUpi =
         customerUpiInput?.value.trim() || "";
@@ -435,6 +533,19 @@ function validateForm() {
 
         showMessage(
             "Please enter your full name.",
+            "error"
+        );
+
+        nameInput?.focus();
+
+        return false;
+    }
+
+
+    if (name.length > 100) {
+
+        showMessage(
+            "Name is too long.",
             "error"
         );
 
@@ -461,7 +572,10 @@ function validateForm() {
         /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 
-    if (!emailPattern.test(email)) {
+    if (
+        !emailPattern.test(email) ||
+        email.length > 200
+    ) {
 
         showMessage(
             "Please enter a valid email address.",
@@ -487,7 +601,10 @@ function validateForm() {
     }
 
 
-    if (customerUpi.length < 4) {
+    if (
+        customerUpi.length < 4 ||
+        customerUpi.length > 200
+    ) {
 
         showMessage(
             "Please enter a valid UPI ID.",
@@ -513,17 +630,24 @@ function createPaymentRequest() {
     const orderId =
         generateOrderId();
 
+
     const name =
         nameInput.value.trim();
+
 
     const email =
         emailInput.value.trim();
 
+
     const customerUpi =
         customerUpiInput.value.trim();
 
+
     const finalPrice =
-        Number(checkoutData.finalPrice);
+        Number(
+            checkoutData.finalPrice
+        );
+
 
     const price =
         Number.isFinite(finalPrice)
@@ -533,14 +657,17 @@ function createPaymentRequest() {
 
     return {
 
-        order_id: orderId,
+        order_id:
+            orderId,
 
         product:
             checkoutData.product ||
             DEFAULT_PRODUCT,
 
         base_price:
-            Number(checkoutData.basePrice) ||
+            Number(
+                checkoutData.basePrice
+            ) ||
             DEFAULT_PRICE,
 
         final_price:
@@ -587,79 +714,186 @@ async function submitPaymentVerification() {
         createPaymentRequest();
 
 
-    /* Show generated order ID */
+    /* Show Order ID */
 
     if (orderIdDisplay) {
+
         orderIdDisplay.textContent =
             request.order_id;
     }
 
+
     if (orderIdBox) {
+
         orderIdBox.style.display =
             "block";
     }
 
 
-    /*
-       IMPORTANT:
-       The backend endpoint will be connected
-       in the next backend step.
+    /* Disable button */
 
-       For now, save the payment request locally
-       so the frontend flow is ready.
-    */
+    if (verifyPaymentBtn) {
 
-    try {
+        verifyPaymentBtn.disabled =
+            true;
 
-        sessionStorage.setItem(
-            "detwalPaymentRequest",
-            JSON.stringify(request)
-        );
-
-    } catch (error) {
-
-        console.warn(
-            "Could not save payment request:",
-            error
-        );
+        verifyPaymentBtn.textContent =
+            "Verifying...";
     }
 
 
-    /*
-       Temporary frontend state.
-
-       This DOES NOT mean the payment has been
-       verified. It only confirms that the request
-       has been prepared successfully.
-    */
-
-    verifyPaymentBtn.disabled =
-        true;
-
-    verifyPaymentBtn.textContent =
-        "Submitting...";
+    clearMessage();
 
 
-    showMessage(
-        "Payment verification request prepared. Our team will verify your payment and confirm your access.",
-        "success"
-    );
+    try {
+
+        /*
+            Send payment details
+            to Cloudflare Worker.
+        */
+
+        const response =
+            await fetch(
+                PAYMENT_API,
+                {
+                    method: "POST",
+
+                    headers: {
+                        "Content-Type":
+                            "application/json"
+                    },
+
+                    body:
+                        JSON.stringify(
+                            request
+                        )
+                }
+            );
 
 
-    /*
-       Keep this timeout only until the backend
-       endpoint is connected.
-    */
+        let result = null;
 
-    setTimeout(() => {
 
-        verifyPaymentBtn.disabled =
-            false;
+        try {
 
-        verifyPaymentBtn.innerHTML =
-            'Verify Payment <span>→</span>';
+            result =
+                await response.json();
 
-    }, 1800);
+        } catch (jsonError) {
+
+            result = null;
+        }
+
+
+        /* -----------------------------------------
+           HTTP ERROR
+        ----------------------------------------- */
+
+        if (!response.ok) {
+
+            throw new Error(
+                result?.error ||
+                "Unable to submit payment verification request."
+            );
+        }
+
+
+        /* -----------------------------------------
+           BACKEND ERROR
+        ----------------------------------------- */
+
+        if (
+            !result ||
+            result.success !== true
+        ) {
+
+            throw new Error(
+                result?.error ||
+                "Payment verification request failed."
+            );
+        }
+
+
+        /* -----------------------------------------
+           SAVE LOCALLY
+           Only after successful backend response.
+        ----------------------------------------- */
+
+        try {
+
+            sessionStorage.setItem(
+                "detwalPaymentRequest",
+                JSON.stringify({
+                    ...request,
+
+                    submittedAt:
+                        new Date().toISOString(),
+
+                    status:
+                        result.status ||
+                        "pending"
+                })
+            );
+
+        } catch (storageError) {
+
+            console.warn(
+                "Could not save payment request locally:",
+                storageError
+            );
+        }
+
+
+        /* -----------------------------------------
+           SUCCESS MESSAGE
+        ----------------------------------------- */
+
+        showMessage(
+            "Payment details submitted successfully. Our team will manually verify your payment and contact you through the email provided.",
+            "success"
+        );
+
+
+        /* -----------------------------------------
+           SUCCESS BUTTON STATE
+        ----------------------------------------- */
+
+        if (verifyPaymentBtn) {
+
+            verifyPaymentBtn.disabled =
+                true;
+
+            verifyPaymentBtn.innerHTML =
+                "Verification Submitted ✓";
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "PAYMENT SUBMISSION ERROR:",
+            error
+        );
+
+
+        showMessage(
+            error.message ||
+            "Something went wrong. Please try again.",
+            "error"
+        );
+
+
+        /* Re-enable button */
+
+        if (verifyPaymentBtn) {
+
+            verifyPaymentBtn.disabled =
+                false;
+
+            verifyPaymentBtn.innerHTML =
+                'Verify Payment <span>→</span>';
+        }
+    }
 }
 
 
@@ -695,10 +929,11 @@ if (copyUpiBtn) {
 
 
 /* ---------------------------------------------------------
-   Set UPI ID
+   Set DETwal UPI
 --------------------------------------------------------- */
 
 if (detwalUpi) {
+
     detwalUpi.textContent =
         DETWAL_UPI;
 }
@@ -715,6 +950,5 @@ document.addEventListener(
         loadCheckoutData();
 
         await prefillUser();
-
     }
 );
