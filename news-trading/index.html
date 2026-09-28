@@ -14,18 +14,10 @@
 
     <meta
         name="description"
-        content="DETwal News Trading — upcoming market-moving news for XAUUSD."
+        content="DETwal News Trading — a strategy for trading major market-moving news events."
     >
 
-
-    <!-- ================================
-         GOOGLE FONT
-    ================================= -->
-
-    <link
-        rel="preconnect"
-        href="https://fonts.googleapis.com"
-    >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
 
     <link
         rel="preconnect"
@@ -38,11 +30,6 @@
         rel="stylesheet"
     >
 
-
-    <!-- ================================
-         PAGE CSS
-    ================================= -->
-
     <link
         rel="stylesheet"
         href="style.css"
@@ -54,544 +41,699 @@
 <body>
 
 
-    <!-- ================================
-         NAVBAR
-    ================================= -->
+<!-- ================================
+     NAVBAR
+================================ -->
 
-    <header class="navbar">
+<header class="navbar">
+
+    <a
+        href="../home/"
+        class="logo"
+    >
+        DET<span>wal</span>
+    </a>
+
+    <div class="product-name">
+        News Trading
+    </div>
 
 
-        <!-- LOGO -->
+    <nav class="nav-links">
+
+        <a href="../home/">Home</a>
+
+        <a href="../journal/">Journal</a>
+
+        <a href="../community/">Community</a>
+
+        <a href="../strategies-store/">Store</a>
+
+    </nav>
+
+
+    <div class="nav-actions">
 
         <a
-            href="../home/"
-            class="logo"
+            href="../signup/"
+            class="account-btn"
+            id="accountBtn"
         >
-            DET<span>wal</span>
+            Account
         </a>
 
+    </div>
 
-        <!-- PRODUCT NAME -->
+</header>
 
-        <div class="product-name">
-            News Trading
+
+
+<!-- ================================
+     DASHBOARD
+================================ -->
+
+<main class="dashboard">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                ⚡ DETWAL NEWS TRADING
+            </div>
+
+
+            <h1>
+                Trade major news with
+                <span>98% accuracy.</span>
+            </h1>
+
+
+            <p class="hero-description">
+
+                We don't sell a news calendar.
+                We provide a trading strategy designed
+                around major market-moving events like
+                NFP, CPI and FOMC.
+
+            </p>
+
+
+            <div class="hero-features">
+
+                <div class="hero-feature">
+
+                    <strong>98%</strong>
+
+                    <span>
+                        Historical<br>
+                        accuracy
+                    </span>
+
+                </div>
+
+
+                <div class="hero-feature">
+
+                    <strong>BUY / SELL</strong>
+
+                    <span>
+                        Clear trade<br>
+                        direction
+                    </span>
+
+                </div>
+
+
+                <div class="hero-feature">
+
+                    <strong>SL + TP</strong>
+
+                    <span>
+                        Defined risk<br>
+                        levels
+                    </span>
+
+                </div>
+
+            </div>
+
         </div>
 
 
-        <!-- NAVIGATION -->
+        <!-- PLAN -->
 
-        <nav class="nav-links">
+        <div class="plan-card">
 
-            <a href="../home/">
-                Home
-            </a>
+            <div class="plan-top">
 
-            <a href="../journal/">
-                Journal
-            </a>
+                <span class="plan-icon">
+                    ◆
+                </span>
 
-            <a href="../community/">
-                Community
-            </a>
+                <span>
+                    DETwal Pro
+                </span>
 
-            <a href="../strategies-store/">
-                Store
-            </a>
-
-        </nav>
+            </div>
 
 
-        <!-- ACCOUNT -->
+            <div class="plan-price">
 
-        <div class="nav-actions">
+                $9
+
+                <span>
+                    / access
+                </span>
+
+            </div>
+
+
+            <p>
+                Access the news-trading strategy
+                and upcoming trade setups.
+            </p>
+
+
+            <ul>
+
+                <li>✓ Major news events</li>
+
+                <li>✓ Trade direction</li>
+
+                <li>✓ Entry / SL / TP</li>
+
+                <li>✓ Strategy guidance</li>
+
+            </ul>
+
 
             <a
-                href="../signup/"
-                class="account-btn"
-                id="accountBtn"
+                href="../subscription/"
+                class="primary-btn"
             >
-                Account
+                Get Started →
             </a>
 
         </div>
 
-
-    </header>
-
+    </section>
 
 
-    <!-- ================================
-         MAIN CONTENT
-    ================================= -->
 
-    <main class="news-container">
+    <!-- NEXT TRADE -->
+
+    <section class="next-trade panel">
 
 
-        <!-- ================================
-             NEWS HEADER
-        ================================= -->
-
-        <section class="news-header">
-
+        <div class="section-heading">
 
             <div>
 
                 <span class="section-label">
-                    DETWAL NEWS TRADING
+                    NEXT TRADE OPPORTUNITY
                 </span>
 
-
-                <h1>
-
-                    Trade around
-
-                    <span>
-                        the news.
-                    </span>
-
-                </h1>
-
-
-                <p>
-
-                    Track the next major economic event affecting
-                    XAUUSD in one focused workspace.
-
-                </p>
+                <h2 id="newsName">
+                    Loading...
+                </h2>
 
             </div>
 
 
-            <div class="premium-badge">
+            <span class="instrument-badge">
+                XAUUSD
+            </span>
 
-                PREMIUM
-
-            </div>
-
-
-        </section>
+        </div>
 
 
 
-        <!-- ================================
-             UPCOMING NEWS
-        ================================= -->
-
-        <section
-            class="panel upcoming-news-panel"
-        >
+        <div class="trade-grid">
 
 
-            <!-- PANEL HEADER -->
+            <!-- EVENT -->
 
-            <div class="panel-header">
+            <div class="event-card">
 
+                <div class="event-title">
 
-                <div>
+                    <span class="event-dot"></span>
 
-                    <span class="panel-label">
+                    <div>
 
-                        NEXT UPCOMING NEWS
+                        <small>
+                            HIGH IMPACT NEWS
+                        </small>
 
-                    </span>
+                        <strong id="dynamicNewsName">
+                            Loading...
+                        </strong>
 
-
-                    <h2 id="newsName">
-
-                        Loading...
-
-                    </h2>
+                    </div>
 
                 </div>
 
 
-                <span class="instrument-badge">
+                <div class="event-info">
 
-                    XAUUSD
-
-                </span>
-
-
-            </div>
-
-
-
-            <!-- NEWS DETAILS -->
-
-            <div class="news-details">
-
-
-                <!-- COUNTDOWN -->
-
-                <div class="countdown-box">
-
-
-                    <span>
-
-                        TIME LEFT
-
-                    </span>
-
-
-                    <strong id="timeLeft">
-
-                        —
-
-                    </strong>
-
-
-                </div>
-
-
-
-                <!-- NEWS DATA -->
-
-                <div class="news-data">
-
-
-                    <!-- PREVIOUS -->
-
-                    <div class="data-item">
-
+                    <div>
 
                         <span>
-
                             Previous
-
                         </span>
-
 
                         <strong id="previousData">
-
                             —
-
                         </strong>
-
 
                     </div>
 
 
-
-                    <!-- FORECAST -->
-
-                    <div class="data-item forecast-item">
-
+                    <div>
 
                         <span>
-
-                            Forecast
-
+                            Instrument
                         </span>
-
 
                         <strong>
-
-                            🔒 Subscribers only
-
+                            XAUUSD
                         </strong>
-
 
                     </div>
 
-
                 </div>
-
 
             </div>
 
 
 
-            <!-- ================================
-                 SUBSCRIPTION
-            ================================= -->
+            <!-- COUNTDOWN -->
 
-            <div class="subscription-box">
+            <div class="countdown-card">
 
-
-                <div>
-
-
-                    <span class="subscription-label">
-
-                        DETWAL NEWS SUBSCRIPTION
-
-                    </span>
+                <span>
+                    TIME UNTIL EVENT
+                </span>
 
 
-                    <h3>
-
-                        Unlock the news forecast
-
-                    </h3>
+                <strong id="timeLeft">
+                    —
+                </strong>
 
 
-                    <p>
-
-                        Get access to our news forecast and
-                        analysis for upcoming XAUUSD events.
-
-                    </p>
-
-
-                    <small>
-
-                        98%* historical accuracy claim.
-                        Past performance does not guarantee future results.
-
-                    </small>
-
-
-                </div>
-
-
-
-                <!-- SUBSCRIBE -->
-
-                <div class="subscription-action">
-
-
-                    <strong class="subscription-price">
-
-                        $9
-
-                        <span>
-
-                            USD
-
-                        </span>
-
-                    </strong>
-
-
-                    <a
-                        href="../subscription/"
-                        class="subscribe-btn"
-                    >
-
-                        Subscribe
-
-                    </a>
-
-
-                </div>
-
+                <small>
+                    Prepare your trade setup
+                </small>
 
             </div>
 
+        </div>
 
-        </section>
-
-
-
-        <!-- ================================
-             MARKET FOCUS
-        ================================= -->
-
-        <section
-            class="panel market-focus-panel"
-        >
+    </section>
 
 
-            <!-- PANEL HEADER -->
 
-            <div class="panel-header">
+    <!-- STRATEGY -->
+
+    <section class="strategy-grid">
+
+
+        <div class="panel strategy-card">
+
+            <span class="section-label">
+                WHAT YOU ACTUALLY GET
+            </span>
+
+
+            <h2>
+                A trading strategy,
+                <span>not a news calendar.</span>
+            </h2>
+
+
+            <p>
+                News times are available for free on many
+                economic calendars. DETwal is built around
+                what comes next — how to approach the market
+                when major news is released.
+            </p>
+
+
+            <div class="benefits">
+
+                <div>
+                    <b>01</b>
+                    <span>
+                        Identify major market-moving news
+                    </span>
+                </div>
 
 
                 <div>
-
-                    <span class="panel-label">
-
-                        MARKET FOCUS
-
+                    <b>02</b>
+                    <span>
+                        Follow the DETwal news-trading setup
                     </span>
+                </div>
 
+
+                <div>
+                    <b>03</b>
+                    <span>
+                        Use defined entry, stop loss and take profit
+                    </span>
+                </div>
+
+
+                <div>
+                    <b>04</b>
+                    <span>
+                        Manage risk around high-volatility events
+                    </span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- TRADE SETUP -->
+
+        <div class="panel setup-card">
+
+            <div class="setup-header">
+
+                <div>
+
+                    <span class="section-label">
+                        TRADE SETUP
+                    </span>
 
                     <h2>
-
-                        XAUUSD
-
+                        What you'll receive
                     </h2>
 
                 </div>
 
-
-                <span class="instrument-badge">
-
-                    GOLD
-
+                <span class="locked">
+                    🔒 PRO
                 </span>
 
+            </div>
+
+
+            <div class="setup-preview">
+
+                <div class="setup-row">
+
+                    <span>
+                        Direction
+                    </span>
+
+                    <strong class="blurred">
+                        BUY / SELL
+                    </strong>
+
+                </div>
+
+
+                <div class="setup-row">
+
+                    <span>
+                        Entry
+                    </span>
+
+                    <strong class="blurred">
+                        2034.50
+                    </strong>
+
+                </div>
+
+
+                <div class="setup-row">
+
+                    <span>
+                        Stop Loss
+                    </span>
+
+                    <strong class="red blurred">
+                        2032.50
+                    </strong>
+
+                </div>
+
+
+                <div class="setup-row">
+
+                    <span>
+                        Take Profit
+                    </span>
+
+                    <strong class="green blurred">
+                        2038.50
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <div class="setup-message">
+
+                Subscribe to unlock the
+                complete news-trading setup.
+
+            </div>
+
+
+            <a
+                href="../subscription/"
+                class="secondary-btn"
+            >
+                Unlock Trade Setups →
+            </a>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- SIMPLE EXPLANATION -->
+
+    <section class="how-section">
+
+        <div class="how-heading">
+
+            <span class="section-label">
+                HOW IT WORKS
+            </span>
+
+            <h2>
+                Simple. Follow the setup.
+            </h2>
+
+        </div>
+
+
+        <div class="steps">
+
+
+            <div class="step">
+
+                <div class="step-number">
+                    1
+                </div>
+
+                <div>
+
+                    <h3>
+                        Find the news
+                    </h3>
+
+                    <p>
+                        See the next major event and countdown.
+                    </p>
+
+                </div>
 
             </div>
 
 
 
-            <!-- MARKET INFORMATION -->
+            <div class="step-arrow">
+                →
+            </div>
 
-            <div class="market-focus-content">
 
+
+            <div class="step">
+
+                <div class="step-number">
+                    2
+                </div>
 
                 <div>
 
-                    <span>
+                    <h3>
+                        Get the setup
+                    </h3>
 
-                        Instrument
-
-                    </span>
-
-
-                    <strong>
-
-                        XAUUSD
-
-                    </strong>
+                    <p>
+                        Follow the DETwal trade direction,
+                        entry, SL and TP.
+                    </p>
 
                 </div>
-
-
-
-                <div>
-
-                    <span>
-
-                        Asset
-
-                    </span>
-
-
-                    <strong>
-
-                        Gold
-
-                    </strong>
-
-                </div>
-
-
-
-                <div>
-
-                    <span>
-
-                        Focus
-
-                    </span>
-
-
-                    <strong>
-
-                        News-driven moves
-
-                    </strong>
-
-                </div>
-
 
             </div>
 
 
-        </section>
+
+            <div class="step-arrow">
+                →
+            </div>
 
 
 
-        <!-- ================================
-             DISCLAIMER
-        ================================= -->
+            <div class="step">
 
-        <section class="disclaimer">
+                <div class="step-number">
+                    3
+                </div>
 
+                <div>
 
-            <strong>
+                    <h3>
+                        Manage the trade
+                    </h3>
 
-                Market information
+                    <p>
+                        Execute the setup and manage your risk.
+                    </p>
 
-            </strong>
+                </div>
 
+            </div>
 
-            <p>
+        </div>
 
-                DETwal provides market information and research tools
-                for informational purposes. Nothing on this page should
-                be treated as a guarantee of future market movements or
-                financial results.
-
-            </p>
-
-
-        </section>
-
-
-    </main>
+    </section>
 
 
 
-    <!-- ================================
-         FOOTER
-    ================================= -->
+    <!-- WHY DETWAL -->
 
-    <footer class="footer">
+    <section class="bottom-grid">
 
 
-        <div>
+        <div class="panel">
+
+            <span class="section-label">
+                WHY DETWAL
+            </span>
+
+            <h2>
+                Built for news traders.
+            </h2>
 
 
-            <strong>
+            <div class="check-list">
 
-                DET<span>wal</span>
+                <div>
+                    <span>✓</span>
+                    Major news events only
+                </div>
 
-            </strong>
+                <div>
+                    <span>✓</span>
+                    Clear BUY / SELL direction
+                </div>
 
+                <div>
+                    <span>✓</span>
+                    Defined risk levels
+                </div>
 
-            <p>
+                <div>
+                    <span>✓</span>
+                    Beginner-friendly strategy
+                </div>
 
-                News Trading
-
-            </p>
-
+            </div>
 
         </div>
 
 
 
-        <div class="footer-links">
+        <div class="panel market-card">
 
+            <span class="section-label">
+                MARKET FOCUS
+            </span>
 
-            <a href="../terms/">
+            <div class="market-symbol">
+                XAUUSD
+            </div>
 
-                Terms
-
-            </a>
-
-
-            <a href="../privacy/">
-
-                Privacy
-
-            </a>
-
+            <p>
+                Gold is the primary instrument
+                used for DETwal news trading.
+            </p>
 
         </div>
 
-
-    </footer>
-
+    </section>
 
 
-    <!-- ================================
-         SUPABASE
-    ================================= -->
 
-    <script
-        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
-    ></script>
+    <!-- DISCLAIMER -->
+
+    <section class="disclaimer">
+
+        <strong>
+            Risk disclosure
+        </strong>
+
+        <p>
+            The 98% figure is a historical/backtested
+            accuracy claim and does not guarantee future
+            results. Trading financial markets involves
+            significant risk. DETwal does not guarantee
+            profits or future market movements.
+        </p>
+
+    </section>
+
+</main>
 
 
-    <!-- ================================
-         NEWS TRADING JAVASCRIPT
-    ================================= -->
 
-    <script src="script.js"></script>
+<!-- ================================
+     FOOTER
+================================ -->
 
+<footer class="footer">
+
+    <div>
+
+        <strong>
+            DET<span>wal</span>
+        </strong>
+
+        <p>
+            News Trading
+        </p>
+
+    </div>
+
+
+    <div class="footer-links">
+
+        <a href="../terms/">
+            Terms
+        </a>
+
+        <a href="../privacy/">
+            Privacy
+        </a>
+
+    </div>
+
+</footer>
+
+
+
+<script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+></script>
+
+<script src="script.js"></script>
 
 </body>
 
