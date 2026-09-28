@@ -6,18 +6,38 @@ DETwal — NEWS TRADING SUBSCRIPTION
 
 document.addEventListener("DOMContentLoaded", () => {
 
-    const originalPrice = document.getElementById("originalPrice");
-    const currentPrice = document.getElementById("currentPrice");
+    const NORMAL_PRICE = 9;
 
-    const couponInput = document.getElementById("couponInput");
-    const applyCouponBtn = document.getElementById("applyCouponBtn");
-    const couponMessage = document.getElementById("couponMessage");
 
-    const ctaTitle = document.getElementById("ctaTitle");
-    const ctaText = document.getElementById("ctaText");
+    const originalPrice =
+        document.getElementById("originalPrice");
+
+    const currentPrice =
+        document.getElementById("currentPrice");
+
+
+    const couponInput =
+        document.getElementById("couponInput");
+
+    const applyCouponBtn =
+        document.getElementById("applyCouponBtn");
+
+    const couponMessage =
+        document.getElementById("couponMessage");
+
+
+    const ctaTitle =
+        document.getElementById("ctaTitle");
+
+    const ctaText =
+        document.getElementById("ctaText");
+
 
     const telegramSubscribeBtn =
-        document.getElementById("telegramSubscribeBtn");
+        document.getElementById(
+            "telegramSubscribeBtn"
+        );
+
 
 
     /*
@@ -27,7 +47,10 @@ document.addEventListener("DOMContentLoaded", () => {
     */
 
     let appliedCoupon = "";
-    let appliedPrice = 25;
+
+    let appliedPrice =
+        NORMAL_PRICE;
+
 
 
     /*
@@ -39,25 +62,52 @@ document.addEventListener("DOMContentLoaded", () => {
     function showNormalPrice() {
 
         appliedCoupon = "";
-        appliedPrice = 25;
+
+        appliedPrice =
+            NORMAL_PRICE;
+
 
         if (originalPrice) {
-            originalPrice.textContent = "$25";
+
+            originalPrice.textContent =
+                `$${NORMAL_PRICE}`;
+
         }
+
 
         if (currentPrice) {
-            currentPrice.textContent = "$25";
+
+            currentPrice.textContent =
+                `$${NORMAL_PRICE}`;
+
         }
+
 
         if (ctaTitle) {
-            ctaTitle.textContent = "Ready to subscribe?";
+
+            ctaTitle.textContent =
+                "Ready to trade the news?";
+
         }
 
+
         if (ctaText) {
+
             ctaText.textContent =
                 "Continue through Telegram to complete your subscription.";
+
         }
+
+
+        if (telegramSubscribeBtn) {
+
+            telegramSubscribeBtn.textContent =
+                `Subscribe for $${NORMAL_PRICE}`;
+
+        }
+
     }
+
 
 
     /*
@@ -69,46 +119,70 @@ document.addEventListener("DOMContentLoaded", () => {
     async function applyCoupon() {
 
         const code =
-            String(couponInput?.value || "")
+            String(
+                couponInput?.value || ""
+            )
                 .trim()
                 .toUpperCase();
 
 
-        // Nothing entered
+        /*
+        Nothing entered
+        */
+
         if (!code) {
 
             showNormalPrice();
 
+
             if (couponMessage) {
+
                 couponMessage.textContent =
                     "Please enter a coupon code.";
 
-                couponMessage.style.color = "#9298A8";
+                couponMessage.style.color =
+                    "#9298A8";
+
             }
 
             return;
+
         }
 
 
-        // Disable button while checking
+
+        /*
+        Disable while checking
+        */
+
         if (applyCouponBtn) {
-            applyCouponBtn.disabled = true;
-            applyCouponBtn.textContent = "Checking...";
+
+            applyCouponBtn.disabled =
+                true;
+
+            applyCouponBtn.textContent =
+                "Checking...";
+
         }
 
 
         if (couponMessage) {
+
             couponMessage.textContent =
                 "Checking coupon...";
 
-            couponMessage.style.color = "#9298A8";
+            couponMessage.style.color =
+                "#9298A8";
+
         }
+
 
 
         try {
 
             /*
-            validateCoupon() comes from coupon.js
+            validateCoupon() comes
+            from coupon.js
             */
 
             const result =
@@ -119,6 +193,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 "DETwal coupon validation result:",
                 result
             );
+
 
 
             /*
@@ -134,19 +209,33 @@ document.addEventListener("DOMContentLoaded", () => {
                         result.code || code
                     ).toUpperCase();
 
+
                 appliedPrice =
                     Number(result.price);
 
 
+
+                /*
+                Keep original/base price
+                visible as $9.
+                */
+
                 if (originalPrice) {
-                    originalPrice.textContent = "$25";
+
+                    originalPrice.textContent =
+                        "$9";
+
                 }
+
 
 
                 if (currentPrice) {
+
                     currentPrice.textContent =
                         `$${appliedPrice}`;
+
                 }
+
 
 
                 if (couponMessage) {
@@ -156,24 +245,41 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     couponMessage.style.color =
                         "#A78BFA";
+
                 }
+
 
 
                 if (ctaTitle) {
+
                     ctaTitle.textContent =
                         "Discount applied";
+
                 }
+
 
 
                 if (ctaText) {
 
                     ctaText.textContent =
                         `Your News Trading subscription price is now $${appliedPrice}. Continue through Telegram to complete your subscription.`;
+
+                }
+
+
+
+                if (telegramSubscribeBtn) {
+
+                    telegramSubscribeBtn.textContent =
+                        `Subscribe for $${appliedPrice}`;
+
                 }
 
 
                 return;
+
             }
+
 
 
             /*
@@ -183,11 +289,24 @@ document.addEventListener("DOMContentLoaded", () => {
             */
 
             appliedCoupon = "";
-            appliedPrice = 25;
+
+            appliedPrice =
+                NORMAL_PRICE;
 
 
             if (currentPrice) {
-                currentPrice.textContent = "$25";
+
+                currentPrice.textContent =
+                    `$${NORMAL_PRICE}`;
+
+            }
+
+
+            if (originalPrice) {
+
+                originalPrice.textContent =
+                    `$${NORMAL_PRICE}`;
+
             }
 
 
@@ -198,12 +317,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 couponMessage.style.color =
                     "#9298A8";
+
             }
 
 
             if (ctaTitle) {
+
                 ctaTitle.textContent =
-                    "Ready to subscribe?";
+                    "Ready to trade the news?";
+
             }
 
 
@@ -211,6 +333,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 ctaText.textContent =
                     "Continue through Telegram to complete your subscription.";
+
+            }
+
+
+            if (telegramSubscribeBtn) {
+
+                telegramSubscribeBtn.textContent =
+                    `Subscribe for $${NORMAL_PRICE}`;
+
             }
 
 
@@ -223,11 +354,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
             appliedCoupon = "";
-            appliedPrice = 25;
+
+            appliedPrice =
+                NORMAL_PRICE;
 
 
             if (currentPrice) {
-                currentPrice.textContent = "$25";
+
+                currentPrice.textContent =
+                    `$${NORMAL_PRICE}`;
+
+            }
+
+
+            if (originalPrice) {
+
+                originalPrice.textContent =
+                    `$${NORMAL_PRICE}`;
+
             }
 
 
@@ -238,8 +382,19 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 couponMessage.style.color =
                     "#9298A8";
+
             }
+
+
+            if (telegramSubscribeBtn) {
+
+                telegramSubscribeBtn.textContent =
+                    `Subscribe for $${NORMAL_PRICE}`;
+
+            }
+
         }
+
 
 
         /*
@@ -250,10 +405,16 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (applyCouponBtn) {
 
-            applyCouponBtn.disabled = false;
-            applyCouponBtn.textContent = "Apply";
+            applyCouponBtn.disabled =
+                false;
+
+            applyCouponBtn.textContent =
+                "Apply";
+
         }
+
     }
+
 
 
     /*
@@ -268,7 +429,9 @@ document.addEventListener("DOMContentLoaded", () => {
             "click",
             applyCoupon
         );
+
     }
+
 
 
     /*
@@ -288,10 +451,14 @@ document.addEventListener("DOMContentLoaded", () => {
                     event.preventDefault();
 
                     applyCoupon();
+
                 }
+
             }
         );
+
     }
+
 
 
     /*
@@ -309,6 +476,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 event.preventDefault();
 
 
+
                 /*
                 ==================================
                 NO COUPON
@@ -321,7 +489,9 @@ document.addEventListener("DOMContentLoaded", () => {
                         "https://t.me/detwalhelpbot?start=news_subscription";
 
                     return;
+
                 }
+
 
 
                 /*
@@ -342,9 +512,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 window.location.href =
                     telegramURL;
+
             }
         );
+
     }
+
 
 
     /*
