@@ -4,7 +4,138 @@ DETwal — NEWS TRADING SUBSCRIPTION
 ==================================================
 */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+
+    /*
+    ==============================================
+    SUPABASE
+    ==============================================
+    */
+
+    const SUPABASE_URL =
+        "https://evsnwenvmwhrohyzrjgq.supabase.co";
+
+    const SUPABASE_PUBLISHABLE_KEY =
+        "sb_publishable_Vfy2VLbqRYB_DOsK13iuqA_9-pk4Q5t";
+
+    const supabaseClient =
+        window.supabase.createClient(
+            SUPABASE_URL,
+            SUPABASE_PUBLISHABLE_KEY
+        );
+
+
+    /*
+    ==============================================
+    ACCOUNT BUTTON
+    ==============================================
+    */
+
+    const accountBtn =
+        document.getElementById("accountBtn");
+
+
+    async function updateAccountButton() {
+
+        if (!accountBtn) return;
+
+        try {
+
+            const {
+                data,
+                error
+            } =
+                await supabaseClient.auth.getSession();
+
+
+            if (error) {
+
+                console.error(
+                    "Failed to get Supabase session:",
+                    error
+                );
+
+                accountBtn.href =
+                    "../signup/";
+
+                accountBtn.textContent =
+                    "Account";
+
+                return;
+            }
+
+
+            const session =
+                data?.session;
+
+
+            if (
+                session &&
+                session.user
+            ) {
+
+                accountBtn.href =
+                    "../profile/";
+
+                accountBtn.textContent =
+                    "Account";
+
+            } else {
+
+                accountBtn.href =
+                    "../signup/";
+
+                accountBtn.textContent =
+                    "Account";
+
+            }
+
+        } catch (error) {
+
+            console.error(
+                "Account session error:",
+                error
+            );
+
+            accountBtn.href =
+                "../signup/";
+
+            accountBtn.textContent =
+                "Account";
+        }
+    }
+
+
+    /*
+    IMPORTANT:
+    We NEVER call supabase.auth.signOut()
+    on this page.
+    */
+
+    await updateAccountButton();
+
+
+    /*
+    ==============================================
+    AUTH STATE
+    ==============================================
+    */
+
+    supabaseClient.auth.onAuthStateChange(
+        () => {
+
+            updateAccountButton();
+
+        }
+    );
+
+
+
+    /*
+    ==============================================
+    PRICE
+    ==============================================
+    */
 
     const NORMAL_PRICE = 9;
 
@@ -12,22 +143,38 @@ document.addEventListener("DOMContentLoaded", () => {
     const originalPrice =
         document.getElementById("originalPrice");
 
+
     const currentPrice =
         document.getElementById("currentPrice");
 
 
+    /*
+    ==============================================
+    COUPON
+    ==============================================
+    */
+
     const couponInput =
         document.getElementById("couponInput");
 
+
     const applyCouponBtn =
         document.getElementById("applyCouponBtn");
+
 
     const couponMessage =
         document.getElementById("couponMessage");
 
 
+    /*
+    ==============================================
+    CTA
+    ==============================================
+    */
+
     const ctaTitle =
         document.getElementById("ctaTitle");
+
 
     const ctaText =
         document.getElementById("ctaText");
@@ -37,7 +184,6 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById(
             "telegramSubscribeBtn"
         );
-
 
 
     /*
@@ -127,7 +273,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
         /*
-        Nothing entered
+        ==========================================
+        NOTHING ENTERED
+        ==========================================
         */
 
         if (!code) {
@@ -146,13 +294,14 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             return;
-
         }
 
 
 
         /*
-        Disable while checking
+        ==========================================
+        DISABLE WHILE CHECKING
+        ==========================================
         */
 
         if (applyCouponBtn) {
@@ -181,8 +330,9 @@ document.addEventListener("DOMContentLoaded", () => {
         try {
 
             /*
-            validateCoupon() comes
-            from coupon.js
+            ======================================
+            VALIDATE COUPON
+            ======================================
             */
 
             const result =
@@ -202,7 +352,9 @@ document.addEventListener("DOMContentLoaded", () => {
             ======================================
             */
 
-            if (result.valid === true) {
+            if (
+                result.valid === true
+            ) {
 
                 appliedCoupon =
                     String(
@@ -216,8 +368,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
                 /*
-                Keep original/base price
-                visible as $9.
+                Keep base price visible
+                as $9.
                 */
 
                 if (originalPrice) {
