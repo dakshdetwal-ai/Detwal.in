@@ -7,10 +7,13 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_Vfy2VLbqRYB_DOsK13iuqA_9-pk4Q5t";
 
-const supabaseClient = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-);
+
+const supabaseClient =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_PUBLISHABLE_KEY
+    );
+
 
 
 /* ================================
@@ -38,14 +41,14 @@ async function updateAccountButton() {
         }
 
 
-        const session = data?.session;
+        const session =
+            data?.session;
 
 
-        if (session && session.user) {
-
-            /*
-             * Logged in
-             */
+        if (
+            session &&
+            session.user
+        ) {
 
             accountBtn.href =
                 "../profile/";
@@ -54,10 +57,6 @@ async function updateAccountButton() {
                 "Account";
 
         } else {
-
-            /*
-             * Logged out
-             */
 
             accountBtn.href =
                 "../signup/";
@@ -74,9 +73,6 @@ async function updateAccountButton() {
             error
         );
 
-        /*
-         * Safe fallback
-         */
 
         accountBtn.href =
             "../signup/";
@@ -87,24 +83,17 @@ async function updateAccountButton() {
 }
 
 
-/*
- * Check session when page loads
- */
-
 updateAccountButton();
 
 
-/*
- * Keep account button updated if
- * login/logout happens while page
- * is open.
- */
-
 supabaseClient.auth.onAuthStateChange(
     () => {
+
         updateAccountButton();
+
     }
 );
+
 
 
 /* ================================
@@ -114,11 +103,19 @@ supabaseClient.auth.onAuthStateChange(
 const newsName =
     document.getElementById("newsName");
 
+const dynamicNewsName =
+    document.getElementById(
+        "dynamicNewsName"
+    );
+
 const timeLeft =
     document.getElementById("timeLeft");
 
 const previousData =
-    document.getElementById("previousData");
+    document.getElementById(
+        "previousData"
+    );
+
 
 
 /* ================================
@@ -137,36 +134,41 @@ function formatCountdown(targetTime) {
         target - now;
 
 
-    /* NEWS ALREADY STARTED */
-
     if (difference <= 0) {
+
         return "LIVE";
+
     }
 
 
     const totalSeconds =
-        Math.floor(difference / 1000);
+        Math.floor(
+            difference / 1000
+        );
+
 
     const days =
         Math.floor(
             totalSeconds / 86400
         );
 
+
     const hours =
         Math.floor(
             (totalSeconds % 86400) / 3600
         );
+
 
     const minutes =
         Math.floor(
             (totalSeconds % 3600) / 60
         );
 
+
     const seconds =
         totalSeconds % 60;
 
 
-    /* DAYS */
 
     if (days > 0) {
 
@@ -175,16 +177,12 @@ function formatCountdown(targetTime) {
     }
 
 
-    /* HOURS */
-
     if (hours > 0) {
 
         return `${String(hours).padStart(2, "0")}h ${String(minutes).padStart(2, "0")}m ${String(seconds).padStart(2, "0")}s`;
 
     }
 
-
-    /* MINUTES */
 
     if (minutes > 0) {
 
@@ -193,10 +191,9 @@ function formatCountdown(targetTime) {
     }
 
 
-    /* SECONDS */
-
     return `${seconds}s`;
 }
+
 
 
 /* ================================
@@ -207,8 +204,6 @@ let countdownInterval = null;
 
 
 function startCountdown(newsTime) {
-
-    /* Stop previous countdown */
 
     if (countdownInterval) {
 
@@ -221,18 +216,17 @@ function startCountdown(newsTime) {
 
     function updateCountdown() {
 
-        timeLeft.textContent =
-            formatCountdown(newsTime);
+        if (!timeLeft) return;
 
+        timeLeft.textContent =
+            formatCountdown(
+                newsTime
+            );
     }
 
 
-    /* Update immediately */
-
     updateCountdown();
 
-
-    /* Update every second */
 
     countdownInterval =
         setInterval(
@@ -240,6 +234,7 @@ function startCountdown(newsTime) {
             1000
         );
 }
+
 
 
 /* ================================
@@ -250,30 +245,86 @@ function displayNextNews(news) {
 
     if (!news) {
 
-        newsName.textContent =
-            "No upcoming news";
+        if (newsName) {
 
-        timeLeft.textContent =
-            "—";
+            newsName.textContent =
+                "No upcoming news";
 
-        previousData.textContent =
-            "—";
+        }
+
+
+        if (dynamicNewsName) {
+
+            dynamicNewsName.textContent =
+                "No upcoming news";
+
+        }
+
+
+        if (timeLeft) {
+
+            timeLeft.textContent =
+                "—";
+
+        }
+
+
+        if (previousData) {
+
+            previousData.textContent =
+                "—";
+
+        }
 
         return;
     }
 
 
-    newsName.textContent =
+    const currentNewsName =
         news.name ||
         "Unnamed News";
 
 
-    previousData.textContent =
-        news.previous ||
-        "—";
+    /*
+     * Main dashboard heading
+     */
+
+    if (newsName) {
+
+        newsName.textContent =
+            currentNewsName;
+
+    }
 
 
-    /* Start live countdown */
+    /*
+     * Event card heading
+     */
+
+    if (dynamicNewsName) {
+
+        dynamicNewsName.textContent =
+            currentNewsName;
+
+    }
+
+
+    /*
+     * Previous data
+     */
+
+    if (previousData) {
+
+        previousData.textContent =
+            news.previous ||
+            "—";
+
+    }
+
+
+    /*
+     * Start live countdown
+     */
 
     if (news.time) {
 
@@ -283,10 +334,15 @@ function displayNextNews(news) {
 
     } else {
 
-        timeLeft.textContent =
-            "—";
+        if (timeLeft) {
+
+            timeLeft.textContent =
+                "—";
+
+        }
     }
 }
+
 
 
 /* ================================
@@ -329,9 +385,10 @@ async function loadNextNews() {
         }
 
 
-        /* No news available */
+        displayNextNews(
+            null
+        );
 
-        displayNextNews(null);
 
     } catch (error) {
 
@@ -341,16 +398,39 @@ async function loadNextNews() {
         );
 
 
-        newsName.textContent =
-            "Unable to load news";
+        if (newsName) {
 
-        timeLeft.textContent =
-            "—";
+            newsName.textContent =
+                "Unable to load news";
 
-        previousData.textContent =
-            "—";
+        }
+
+
+        if (dynamicNewsName) {
+
+            dynamicNewsName.textContent =
+                "Unable to load news";
+
+        }
+
+
+        if (timeLeft) {
+
+            timeLeft.textContent =
+                "—";
+
+        }
+
+
+        if (previousData) {
+
+            previousData.textContent =
+                "—";
+
+        }
     }
 }
+
 
 
 /* ================================
