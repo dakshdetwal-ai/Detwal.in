@@ -1456,3 +1456,116 @@ tr:last-child td {
         align-items: flex-start;
     }
 }
+
+/* =========================
+   JOURNAL V2 ADDITIONS
+========================= */
+.journal-tools{
+    display:flex;
+    align-items:end;
+    justify-content:space-between;
+    gap:20px;
+    padding:15px;
+    margin-bottom:12px;
+    background:var(--card);
+    border:1px solid var(--border);
+    border-radius:12px;
+}
+.journal-account-picker{min-width:280px}
+.journal-account-picker label{
+    display:block;
+    color:var(--muted);
+    font-size:9px;
+    text-transform:uppercase;
+    letter-spacing:1px;
+    font-weight:700;
+    margin-bottom:6px;
+}
+.journal-account-picker select{
+    width:100%;
+    min-height:40px;
+    padding:9px 11px;
+    background:var(--input);
+    color:var(--white);
+    border:1px solid var(--border);
+    border-radius:8px;
+}
+.journal-tool-buttons{display:flex;flex-wrap:wrap;gap:7px}
+.journal-account-summary{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:12px;
+    overflow:hidden;
+    margin-bottom:22px;
+}
+.journal-account-summary>div{background:var(--card);padding:14px 16px}
+.journal-account-summary span{
+    display:block;
+    color:var(--muted);
+    font-size:8px;
+    letter-spacing:1px;
+    font-weight:700;
+}
+.journal-account-summary strong{display:block;margin-top:4px;font-size:13px}
+.danger-btn{
+    width:100%;
+    margin-top:10px;
+    padding:10px;
+    border:1px solid rgba(255,123,138,.35);
+    border-radius:8px;
+    background:rgba(255,123,138,.06);
+    color:var(--danger);
+    font-size:11px;
+    font-weight:700;
+}
+.input-help{display:block;color:var(--muted);font-size:9px;margin-top:5px}
+.screenshot-preview{
+    margin-top:8px;
+    max-height:220px;
+    overflow:hidden;
+    border:1px solid var(--border);
+    border-radius:8px;
+    background:var(--input);
+}
+.screenshot-preview img{display:block;max-width:100%;max-height:220px;margin:auto}
+.text-btn{
+    border:0;
+    background:none;
+    color:var(--purple-light);
+    font-size:10px;
+    padding:4px 0;
+}
+.trade-action{
+    border:1px solid var(--border);
+    background:transparent;
+    color:var(--text);
+    border-radius:6px;
+    padding:5px 7px;
+    font-size:9px;
+    margin-right:4px;
+}
+.trade-action:hover{border-color:var(--purple);color:var(--white)}
+.trade-action.delete-action:hover{border-color:var(--danger);color:var(--danger)}
+.trade-details-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+}
+.trade-detail{background:var(--card-light);padding:12px}
+.trade-detail span{display:block;color:var(--muted);font-size:8px;text-transform:uppercase}
+.trade-detail strong{display:block;font-size:11px;margin-top:4px}
+.trade-detail.full{grid-column:1/-1}
+.trade-detail img{max-width:100%;max-height:360px;display:block;margin:auto;border-radius:7px}
+@media(max-width:850px){
+    .journal-tools{align-items:stretch;flex-direction:column}
+    .journal-account-picker{min-width:0}
+    .journal-account-summary{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){
+    .journal-account-summary{grid-template-columns:1fr}
+}
