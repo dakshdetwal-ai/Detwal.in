@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Secure Payment | DETwal</title>
+    <meta
+        name="description"
+        content="Complete your DETwal News Trading subscription payment securely."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- Background Effects -->
+    <div class="background-glow glow-one"></div>
+    <div class="background-glow glow-two"></div>
+
+    <!-- Navbar -->
+    <header class="navbar">
+        <a href="../home/" class="logo">
+            DET<span>wal</span>
+        </a>
+
+        <a href="../subscription/" class="back-link">
+            ← Back
+        </a>
+    </header>
+
+
+    <!-- Main -->
+    <main class="payment-page">
+
+        <!-- Header -->
+        <section class="payment-header">
+            <div class="secure-badge">
+                <span class="secure-dot"></span>
+                Secure Checkout
+            </div>
+
+            <h1>Complete your payment</h1>
+
+            <p>
+                Enter your details below, make the payment using UPI,
+                and then submit your payment for verification.
+            </p>
+        </section>
+
+
+        <!-- Payment Layout -->
+        <section class="payment-container">
+
+            <!-- Left: Customer Details -->
+            <div class="payment-card">
+
+                <div class="card-header">
+                    <h2>Your details</h2>
+                    <p>
+                        These details will be used to process your order.
+                    </p>
+                </div>
+
+
+                <form id="paymentForm">
+
+                    <!-- Name -->
+                    <div class="form-group">
+                        <label for="nameInput">
+                            Full name
+                        </label>
+
+                        <input
+                            type="text"
+                            id="nameInput"
+                            name="name"
+                            placeholder="Enter your full name"
+                            autocomplete="name"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="emailInput">
+                            Email address
+                        </label>
+
+                        <input
+                            type="email"
+                            id="emailInput"
+                            name="email"
+                            placeholder="you@example.com"
+                            autocomplete="email"
+                            required
+                        >
+                    </div>
+
+
+                    <!-- Customer UPI -->
+                    <div class="form-group">
+                        <label for="customerUpiInput">
+                            Your UPI ID
+                        </label>
+
+                        <input
+                            type="text"
+                            id="customerUpiInput"
+                            name="customer_upi"
+                            placeholder="example@upi"
+                            autocomplete="off"
+                            required
+                        >
+
+                        <small>
+                            Enter the UPI ID you will use to make the payment.
+                        </small>
+                    </div>
+
+
+                    <!-- Payment Instructions -->
+                    <div class="payment-instructions">
+
+                        <div class="instructions-title">
+                            <span class="instruction-icon">01</span>
+
+                            <div>
+                                <h3>Pay using UPI</h3>
+                                <p>
+                                    Send the exact amount shown below to the
+                                    official DETwal UPI ID.
+                                </p>
+                            </div>
+                        </div>
+
+
+                        <!-- DETwal UPI -->
+                        <div class="upi-box">
+
+                            <div class="upi-info">
+                                <span class="upi-label">
+                                    DETwal UPI ID
+                                </span>
+
+                                <strong id="detwalUpi">
+                                    dakshdetwal@fam
+                                </strong>
+                            </div>
+
+                            <button
+                                type="button"
+                                id="copyUpiBtn"
+                                class="copy-btn"
+                            >
+                                Copy
+                            </button>
+
+                        </div>
+
+
+                        <!-- Payment Steps -->
+                        <div class="payment-steps">
+
+                            <div class="step">
+                                <span>1</span>
+                                <p>
+                                    Copy the DETwal UPI ID.
+                                </p>
+                            </div>
+
+                            <div class="step">
+                                <span>2</span>
+                                <p>
+                                    Pay the exact amount shown in the order summary.
+                                </p>
+                            </div>
+
+                            <div class="step">
+                                <span>3</span>
+                                <p>
+                                    After completing the payment, click
+                                    <strong>Verify Payment</strong>.
+                                </p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Verify Button -->
+                    <button
+                        type="submit"
+                        id="verifyPaymentBtn"
+                        class="verify-btn"
+                    >
+                        Verify Payment
+                        <span>→</span>
+                    </button>
+
+
+                    <!-- Message -->
+                    <div
+                        id="paymentMessage"
+                        class="payment-message"
+                        aria-live="polite"
+                    ></div>
+
+                </form>
+
+            </div>
+
+
+            <!-- Right: Order Summary -->
+            <aside class="payment-card summary-card">
+
+                <div class="card-header">
+                    <h2>Order summary</h2>
+                    <p>
+                        Review your purchase before paying.
+                    </p>
+                </div>
+
+
+                <div class="product-summary">
+
+                    <div class="product-icon">
+                        D
+                    </div>
+
+                    <div class="product-info">
+                        <span class="product-label">
+                            Product
+                        </span>
+
+                        <h3 id="productName">
+                            DETwal News Trading
+                        </h3>
+                    </div>
+
+                </div>
+
+
+                <!-- Price -->
+                <div class="price-section">
+
+                    <div class="price-row">
+                        <span>Subscription</span>
+
+                        <strong id="paymentPrice">
+                            $9.00
+                        </strong>
+                    </div>
+
+
+                    <!-- Coupon -->
+                    <div
+                        class="price-row coupon-row"
+                        id="couponRow"
+                        style="display: none;"
+                    >
+                        <span>Coupon</span>
+
+                        <strong id="paymentCoupon">
+                            —
+                        </strong>
+                    </div>
+
+                </div>
+
+
+                <!-- Total -->
+                <div class="total-section">
+
+                    <span>Total</span>
+
+                    <strong id="paymentTotal">
+                        $9.00
+                    </strong>
+
+                </div>
+
+
+                <!-- Currency -->
+                <div class="currency-note">
+                    <span>USD</span>
+                    <p>
+                        Your final amount is calculated from your selected
+                        DETwal subscription and applied coupon.
+                    </p>
+                </div>
+
+
+                <!-- Order ID -->
+                <div
+                    class="order-id-box"
+                    id="orderIdBox"
+                    style="display: none;"
+                >
+                    <span>Order ID</span>
+
+                    <strong id="orderIdDisplay">
+                        —
+                    </strong>
+                </div>
+
+
+                <!-- Access Notice -->
+                <div class="access-notice">
+
+                    <div class="notice-icon">
+                        ✓
+                    </div>
+
+                    <div>
+                        <strong>After verification</strong>
+
+                        <p>
+                            Our team will verify your payment and provide
+                            access to your DETwal trading dashboard.
+                        </p>
+                    </div>
+
+                </div>
+
+
+                <!-- Security -->
+                <div class="security-note">
+
+                    <span>🔒</span>
+
+                    <p>
+                        Your payment details are used only to process and
+                        verify your DETwal order.
+                    </p>
+
+                </div>
+
+            </aside>
+
+        </section>
+
+
+        <!-- Footer Note -->
+        <section class="payment-footer">
+
+            <p>
+                By submitting this payment verification request, you confirm
+                that the information provided is accurate.
+            </p>
+
+            <div class="footer-links">
+                <a href="../terms/">Terms</a>
+                <span>•</span>
+                <a href="../privacy/">Privacy</a>
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- Supabase -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <!-- Payment Script -->
+    <script src="script.js"></script>
+
+</body>
+</html>
