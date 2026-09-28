@@ -1,7 +1,7 @@
 const COUPON_API =
     "https://detwal-help-bot.dakshdetwal10.workers.dev/subscription-coupon";
 
-const NORMAL_PRICE = 25;
+const NORMAL_PRICE = 9;
 
 
 /*
@@ -16,13 +16,17 @@ async function validateCoupon(code) {
         .trim()
         .toUpperCase();
 
+
     // No coupon entered
+
     if (!cleanCode) {
+
         return {
             valid: false,
             price: NORMAL_PRICE,
             code: ""
         };
+
     }
 
 
@@ -31,10 +35,12 @@ async function validateCoupon(code) {
         const url =
             `${COUPON_API}?code=${encodeURIComponent(cleanCode)}`;
 
-        const response = await fetch(url, {
-            method: "GET",
-            cache: "no-store"
-        });
+
+        const response =
+            await fetch(url, {
+                method: "GET",
+                cache: "no-store"
+            });
 
 
         if (!response.ok) {
@@ -50,10 +56,13 @@ async function validateCoupon(code) {
                 code: cleanCode,
                 error: true
             };
+
         }
 
 
-        const data = await response.json();
+        const data =
+            await response.json();
+
 
         console.log(
             "DETwal coupon response:",
@@ -62,15 +71,19 @@ async function validateCoupon(code) {
 
 
         // Valid coupon
+
         if (
             data &&
             data.success === true &&
             data.valid === true
         ) {
 
-            const price = Number(data.price);
+            const price =
+                Number(data.price);
+
 
             // Make sure Worker returned a valid price
+
             if (
                 !Number.isFinite(price) ||
                 price < 0 ||
@@ -88,6 +101,7 @@ async function validateCoupon(code) {
                     code: cleanCode,
                     error: true
                 };
+
             }
 
 
@@ -98,10 +112,12 @@ async function validateCoupon(code) {
                 ).toUpperCase(),
                 price: price
             };
+
         }
 
 
         // Invalid / inactive coupon
+
         return {
             valid: false,
             price: NORMAL_PRICE,
@@ -122,5 +138,7 @@ async function validateCoupon(code) {
             code: cleanCode,
             error: true
         };
+
     }
+
 }
