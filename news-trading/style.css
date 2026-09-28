@@ -1,19 +1,29 @@
 :root {
     --bg: #05070D;
     --card: #090C14;
-    --card2: #11141E;
+    --card2: #0D111B;
+
     --purple: #8B5CF6;
     --purple-light: #A78BFA;
+
     --white: #FFFFFF;
     --text: #9298A8;
     --muted: #606678;
+
     --border: #1D2130;
+
+    --green: #22C55E;
+    --red: #F43F5E;
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
 }
 
 body {
@@ -28,7 +38,9 @@ a {
 }
 
 
-/* NAVBAR */
+/* ================================
+   NAVBAR
+================================ */
 
 .navbar {
     height: 72px;
@@ -39,10 +51,12 @@ a {
     gap: 30px;
 
     border-bottom: 1px solid var(--border);
-    background: rgba(5, 7, 13, .92);
+
+    background: rgba(5, 7, 13, .94);
 
     position: sticky;
     top: 0;
+
     z-index: 50;
 
     backdrop-filter: blur(15px);
@@ -61,12 +75,15 @@ a {
 .product-name {
     color: var(--text);
     font-size: 13px;
+
     border-left: 1px solid var(--border);
+
     padding-left: 30px;
 }
 
 .nav-links {
     margin-left: auto;
+
     display: flex;
     gap: 25px;
 }
@@ -74,6 +91,7 @@ a {
 .nav-links a {
     color: var(--text);
     font-size: 13px;
+
     transition: .2s ease;
 }
 
@@ -83,7 +101,9 @@ a {
 
 .account-btn {
     background: var(--purple);
+
     padding: 10px 16px;
+
     border-radius: 8px;
 
     font-size: 12px;
@@ -97,363 +117,859 @@ a {
 }
 
 
-/* MAIN */
 
-.news-container {
-    max-width: 1150px;
+/* ================================
+   DASHBOARD
+================================ */
+
+.dashboard {
+    max-width: 1250px;
+
     margin: auto;
-    padding: 55px 5% 90px;
+
+    padding: 45px 5% 80px;
 }
 
 
-/* HEADER */
 
-.news-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 30px;
+/* ================================
+   HERO
+================================ */
 
-    margin-bottom: 35px;
+.hero {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1fr)
+        320px;
+
+    gap: 25px;
+
+    margin-bottom: 25px;
 }
 
-.section-label,
-.panel-label {
+.hero-content {
+    padding: 30px 0;
+}
+
+.eyebrow {
+    display: inline-flex;
+
+    padding: 8px 13px;
+
+    border: 1px solid rgba(139, 92, 246, .35);
+
+    border-radius: 50px;
+
+    background: rgba(139, 92, 246, .08);
+
     color: var(--purple-light);
 
     font-size: 10px;
     font-weight: 700;
-    letter-spacing: 2px;
+
+    letter-spacing: 1.3px;
 }
 
-.news-header h1 {
-    margin-top: 12px;
+.hero h1 {
+    max-width: 750px;
 
-    font-size: clamp(40px, 5vw, 64px);
-    line-height: 1.05;
+    margin-top: 20px;
+
+    font-size: clamp(38px, 5vw, 62px);
+
+    line-height: 1.03;
+
     letter-spacing: -3px;
 }
 
-.news-header h1 span {
+.hero h1 span {
     color: var(--purple-light);
 }
 
-.news-header p {
+.hero-description {
+    max-width: 680px;
+
+    margin-top: 18px;
+
     color: var(--text);
 
-    margin-top: 15px;
-    max-width: 650px;
+    font-size: 15px;
+
+    line-height: 1.65;
+}
+
+.hero-features {
+    display: flex;
+
+    gap: 35px;
+
+    margin-top: 28px;
+}
+
+.hero-feature {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.hero-feature strong {
+    color: var(--purple-light);
 
     font-size: 14px;
-    line-height: 1.6;
 }
 
-.premium-badge {
-    padding: 9px 14px;
-
-    border: 1px solid rgba(139, 92, 246, .35);
-    border-radius: 50px;
-
-    color: var(--purple-light);
-    background: rgba(139, 92, 246, .08);
-
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-
-    white-space: nowrap;
-}
-
-
-/* PANEL */
-
-.panel {
-    background: var(--card);
-
-    border: 1px solid var(--border);
-    border-radius: 14px;
-
-    padding: 25px;
-}
-
-.panel-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 20px;
-}
-
-.panel-header h2 {
-    margin-top: 7px;
-    font-size: 20px;
-}
-
-.instrument-badge {
-    padding: 7px 11px;
-
-    color: var(--purple-light);
-    background: rgba(139, 92, 246, .08);
-
-    border: 1px solid rgba(139, 92, 246, .25);
-    border-radius: 7px;
-
-    font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1px;
-}
-
-
-/* UPCOMING NEWS */
-
-.upcoming-news-panel {
-    margin-bottom: 14px;
-}
-
-.news-details {
-    display: grid;
-    grid-template-columns: 250px 1fr;
-    gap: 14px;
-
-    margin-top: 25px;
-}
-
-
-/* COUNTDOWN */
-
-.countdown-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    min-height: 145px;
-    padding: 25px;
-
-    background: var(--card2);
-
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-.countdown-box span {
+.hero-feature span {
     color: var(--muted);
 
     font-size: 10px;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-}
 
-.countdown-box strong {
-    margin-top: 12px;
-
-    color: var(--purple-light);
-
-    font-size: 28px;
-    font-weight: 700;
-    letter-spacing: -1px;
+    line-height: 1.4;
 }
 
 
-/* NEWS DATA */
 
-.news-data {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-}
+/* ================================
+   PLAN CARD
+================================ */
 
-.data-item {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    min-height: 145px;
+.plan-card {
     padding: 25px;
 
-    background: var(--card2);
+    border: 1px solid rgba(139, 92, 246, .28);
 
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-
-.data-item span {
-    color: var(--muted);
-
-    font-size: 10px;
-    font-weight: 600;
-    letter-spacing: .5px;
-}
-
-.data-item strong {
-    margin-top: 12px;
-
-    font-size: 18px;
-}
-
-.forecast-item strong {
-    color: var(--purple-light);
-
-    font-size: 13px;
-    line-height: 1.5;
-}
-
-
-/* SUBSCRIPTION */
-
-.subscription-box {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 30px;
-
-    margin-top: 14px;
-    padding: 25px;
+    border-radius: 15px;
 
     background:
         linear-gradient(
-            135deg,
-            rgba(139, 92, 246, .10),
-            rgba(9, 12, 20, .7)
+            145deg,
+            rgba(139, 92, 246, .13),
+            rgba(9, 12, 20, .95)
         );
 
-    border: 1px solid rgba(139, 92, 246, .25);
-    border-radius: 12px;
+    align-self: stretch;
 }
 
-.subscription-label {
+.plan-top {
+    display: flex;
+
+    align-items: center;
+
+    gap: 9px;
+
     color: var(--purple-light);
 
-    font-size: 9px;
+    font-size: 12px;
+
     font-weight: 700;
-    letter-spacing: 1.5px;
 }
 
-.subscription-box h3 {
+.plan-icon {
+    width: 30px;
+    height: 30px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 8px;
+
+    background: rgba(139, 92, 246, .15);
+}
+
+.plan-price {
+    margin-top: 20px;
+
+    font-size: 38px;
+
+    font-weight: 800;
+
+    letter-spacing: -2px;
+}
+
+.plan-price span {
+    color: var(--muted);
+
+    font-size: 12px;
+
+    font-weight: 500;
+
+    letter-spacing: 0;
+}
+
+.plan-card p {
     margin-top: 8px;
-
-    font-size: 18px;
-}
-
-.subscription-box p {
-    margin-top: 7px;
 
     color: var(--text);
 
     font-size: 12px;
+
     line-height: 1.5;
 }
 
-.subscription-box small {
-    display: block;
+.plan-card ul {
+    list-style: none;
 
-    margin-top: 9px;
-
-    max-width: 650px;
-
-    color: var(--muted);
-
-    font-size: 9px;
-    line-height: 1.5;
+    margin-top: 20px;
 }
 
-.subscription-action {
+.plan-card li {
+    margin-top: 11px;
+
+    color: #C8CBD5;
+
+    font-size: 11px;
+}
+
+.primary-btn {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
 
-    flex-shrink: 0;
-}
-
-.subscription-price {
-    font-size: 28px;
-    letter-spacing: -1px;
-}
-
-.subscription-price span {
-    color: var(--muted);
-
-    font-size: 10px;
-    font-weight: 500;
-    letter-spacing: 0;
-}
-
-.subscribe-btn {
-    display: inline-flex;
     align-items: center;
     justify-content: center;
 
-    margin-top: 12px;
-    padding: 11px 20px;
+    width: 100%;
+
+    margin-top: 22px;
+
+    padding: 13px;
+
+    border-radius: 9px;
 
     background: var(--purple);
-    color: var(--white);
 
-    border-radius: 8px;
+    color: white;
 
     font-size: 12px;
+
     font-weight: 700;
 
     transition: .2s ease;
 }
 
-.subscribe-btn:hover {
+.primary-btn:hover {
     background: var(--purple-light);
+
     transform: translateY(-1px);
 }
 
 
-/* MARKET FOCUS */
 
-.market-focus-panel {
-    margin-bottom: 14px;
+/* ================================
+   PANELS
+================================ */
+
+.panel {
+    background: var(--card);
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    padding: 25px;
 }
 
-.market-focus-content {
+
+
+/* ================================
+   NEXT TRADE
+================================ */
+
+.next-trade {
+    margin-bottom: 25px;
+}
+
+.section-heading {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.section-label {
+    display: block;
+
+    color: var(--purple-light);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.8px;
+}
+
+.section-heading h2 {
+    margin-top: 8px;
+
+    font-size: 23px;
+
+    letter-spacing: -.7px;
+}
+
+.instrument-badge {
+    padding: 8px 12px;
+
+    border: 1px solid rgba(139, 92, 246, .3);
+
+    border-radius: 7px;
+
+    background: rgba(139, 92, 246, .08);
+
+    color: var(--purple-light);
+
+    font-size: 10px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.trade-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 14px;
 
-    margin-top: 22px;
+    grid-template-columns:
+        minmax(0, 1fr)
+        310px;
+
+    gap: 15px;
+
+    margin-top: 20px;
 }
 
-.market-focus-content > div {
-    padding: 20px;
-
+.event-card,
+.countdown-card {
     background: var(--card2);
 
     border: 1px solid var(--border);
-    border-radius: 10px;
+
+    border-radius: 12px;
+
+    padding: 23px;
 }
 
-.market-focus-content span {
+.event-title {
+    display: flex;
+
+    align-items: center;
+
+    gap: 14px;
+}
+
+.event-dot {
+    width: 12px;
+    height: 12px;
+
+    border-radius: 50%;
+
+    background: var(--red);
+
+    box-shadow:
+        0 0 0 5px rgba(244, 63, 94, .1);
+}
+
+.event-title small {
     display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.event-title strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 19px;
+}
+
+.event-info {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.event-info div {
+    padding: 14px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: rgba(5, 7, 13, .4);
+}
+
+.event-info span {
+    display: block;
+
+    color: var(--muted);
+
+    font-size: 9px;
+
+    text-transform: uppercase;
+}
+
+.event-info strong {
+    display: block;
+
+    margin-top: 7px;
+
+    font-size: 13px;
+}
+
+.countdown-card {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+}
+
+.countdown-card > span {
+    color: var(--muted);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+.countdown-card > strong {
+    margin-top: 13px;
+
+    color: var(--purple-light);
+
+    font-size: 29px;
+
+    line-height: 1.15;
+
+    letter-spacing: -1.2px;
+}
+
+.countdown-card small {
+    margin-top: 9px;
 
     color: var(--muted);
 
     font-size: 10px;
 }
 
-.market-focus-content strong {
-    display: block;
 
-    margin-top: 9px;
 
-    font-size: 14px;
+/* ================================
+   STRATEGY GRID
+================================ */
+
+.strategy-grid {
+    display: grid;
+
+    grid-template-columns:
+        1.1fr
+        .9fr;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.strategy-card h2,
+.setup-card h2 {
+    margin-top: 10px;
+
+    font-size: 24px;
+
+    letter-spacing: -.8px;
+}
+
+.strategy-card h2 span {
+    color: var(--purple-light);
+}
+
+.strategy-card > p {
+    max-width: 650px;
+
+    margin-top: 12px;
+
+    color: var(--text);
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+.benefits {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 23px;
+}
+
+.benefits > div {
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+
+    padding: 13px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 9px;
+
+    background: var(--card2);
+}
+
+.benefits b {
+    color: var(--purple-light);
+
+    font-size: 11px;
+}
+
+.benefits span {
+    color: #B8BCC8;
+
+    font-size: 10px;
+
+    line-height: 1.4;
 }
 
 
-/* DISCLAIMER */
 
-.disclaimer {
-    padding: 20px;
+/* ================================
+   SETUP CARD
+================================ */
+
+.setup-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+}
+
+.locked {
+    padding: 6px 9px;
+
+    border: 1px solid rgba(139, 92, 246, .3);
+
+    border-radius: 6px;
+
+    color: var(--purple-light);
+
+    font-size: 9px;
+
+    font-weight: 700;
+}
+
+.setup-preview {
+    margin-top: 20px;
+
+    padding: 5px 15px;
 
     border: 1px solid var(--border);
-    border-radius: 12px;
+
+    border-radius: 10px;
+
+    background: var(--card2);
+}
+
+.setup-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 14px 0;
+
+    border-bottom: 1px solid var(--border);
+}
+
+.setup-row:last-child {
+    border-bottom: 0;
+}
+
+.setup-row span {
+    color: var(--muted);
+
+    font-size: 10px;
+}
+
+.setup-row strong {
+    font-size: 13px;
+}
+
+.blurred {
+    filter: blur(4px);
+
+    user-select: none;
+}
+
+.red {
+    color: var(--red);
+}
+
+.green {
+    color: var(--green);
+}
+
+.setup-message {
+    margin-top: 13px;
+
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: rgba(139, 92, 246, .08);
+
+    color: var(--purple-light);
+
+    text-align: center;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.secondary-btn {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    margin-top: 13px;
+
+    padding: 12px;
+
+    border: 1px solid rgba(139, 92, 246, .4);
+
+    border-radius: 8px;
+
+    color: var(--purple-light);
+
+    font-size: 11px;
+
+    font-weight: 700;
+
+    transition: .2s ease;
+}
+
+.secondary-btn:hover {
+    background: rgba(139, 92, 246, .1);
+}
+
+
+
+/* ================================
+   HOW IT WORKS
+================================ */
+
+.how-section {
+    margin-bottom: 25px;
+
+    padding: 27px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 15px;
+
+    background: var(--card);
+}
+
+.how-heading h2 {
+    margin-top: 8px;
+
+    font-size: 25px;
+
+    letter-spacing: -.8px;
+}
+
+.steps {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        30px
+        1fr
+        30px
+        1fr;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 22px;
+}
+
+.step {
+    display: flex;
+
+    gap: 13px;
+
+    padding: 17px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
+
+    background: var(--card2);
+}
+
+.step-number {
+    flex-shrink: 0;
+
+    width: 29px;
+    height: 29px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    border-radius: 50%;
+
+    background: var(--purple);
+
+    font-size: 11px;
+
+    font-weight: 700;
+}
+
+.step h3 {
+    font-size: 12px;
+}
+
+.step p {
+    margin-top: 5px;
+
+    color: var(--muted);
+
+    font-size: 10px;
+
+    line-height: 1.5;
+}
+
+.step-arrow {
+    color: var(--purple-light);
+
+    text-align: center;
+
+    font-size: 18px;
+}
+
+
+
+/* ================================
+   BOTTOM
+================================ */
+
+.bottom-grid {
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        320px;
+
+    gap: 15px;
+
+    margin-bottom: 25px;
+}
+
+.bottom-grid h2 {
+    margin-top: 9px;
+
+    font-size: 22px;
+}
+
+.check-list {
+    display: grid;
+
+    grid-template-columns: repeat(2, 1fr);
+
+    gap: 10px;
+
+    margin-top: 20px;
+}
+
+.check-list div {
+    padding: 12px;
+
+    border-radius: 8px;
+
+    background: var(--card2);
+
+    border: 1px solid var(--border);
+
+    color: var(--text);
+
+    font-size: 10px;
+}
+
+.check-list span {
+    color: var(--green);
+
+    margin-right: 7px;
+}
+
+.market-card p {
+    margin-top: 12px;
+
+    color: var(--text);
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+.market-symbol {
+    margin-top: 20px;
+
+    color: var(--purple-light);
+
+    font-size: 32px;
+
+    font-weight: 800;
+
+    letter-spacing: -1.5px;
+}
+
+
+
+/* ================================
+   DISCLAIMER
+================================ */
+
+.disclaimer {
+    padding: 17px;
+
+    border: 1px solid var(--border);
+
+    border-radius: 10px;
 
     background: rgba(9, 12, 20, .6);
 }
 
 .disclaimer strong {
-    font-size: 11px;
+    font-size: 10px;
 }
 
 .disclaimer p {
@@ -461,12 +977,16 @@ a {
 
     color: var(--muted);
 
-    font-size: 10px;
+    font-size: 9px;
+
     line-height: 1.6;
 }
 
 
-/* FOOTER */
+
+/* ================================
+   FOOTER
+================================ */
 
 .footer {
     border-top: 1px solid var(--border);
@@ -474,9 +994,11 @@ a {
     padding: 30px 5%;
 
     display: flex;
+
     justify-content: space-between;
 
     color: var(--muted);
+
     font-size: 11px;
 }
 
@@ -490,6 +1012,7 @@ a {
 
 .footer-links {
     display: flex;
+
     gap: 20px;
 }
 
@@ -498,33 +1021,60 @@ a {
 }
 
 
-/* MOBILE */
 
-@media (max-width: 800px) {
+/* ================================
+   TABLET
+================================ */
 
-    .news-details {
+@media (max-width: 950px) {
+
+    .hero {
         grid-template-columns: 1fr;
     }
 
-    .market-focus-content {
+    .plan-card {
+        max-width: 500px;
+    }
+
+    .trade-grid {
         grid-template-columns: 1fr;
     }
 
-    .subscription-box {
-        flex-direction: column;
-        align-items: flex-start;
+    .strategy-grid {
+        grid-template-columns: 1fr;
     }
 
-    .subscription-action {
-        align-items: flex-start;
+    .bottom-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .steps {
+        grid-template-columns: 1fr;
+    }
+
+    .step-arrow {
+        display: none;
     }
 }
 
 
+
+/* ================================
+   MOBILE
+================================ */
+
 @media (max-width: 650px) {
 
     .navbar {
+        height: 64px;
+
+        padding: 0 4%;
+
         gap: 12px;
+    }
+
+    .logo {
+        font-size: 21px;
     }
 
     .product-name,
@@ -532,33 +1082,93 @@ a {
         display: none;
     }
 
-    .news-container {
-        padding: 40px 4% 70px;
+    .nav-actions {
+        margin-left: auto;
     }
 
-    .news-header {
-        flex-direction: column;
-        align-items: flex-start;
+    .dashboard {
+        padding: 30px 4% 60px;
     }
 
-    .news-header h1 {
+    .hero-content {
+        padding: 10px 0;
+    }
+
+    .hero h1 {
+        font-size: 39px;
+
         letter-spacing: -2px;
     }
 
-    .news-data {
-        grid-template-columns: 1fr;
+    .hero-description {
+        font-size: 13px;
+    }
+
+    .hero-features {
+        display: grid;
+
+        grid-template-columns: repeat(3, 1fr);
+
+        gap: 10px;
+    }
+
+    .hero-feature {
+        display: block;
+    }
+
+    .hero-feature strong {
+        display: block;
+
+        margin-bottom: 4px;
+    }
+
+    .hero-feature span {
+        font-size: 9px;
+    }
+
+    .plan-card {
+        padding: 20px;
     }
 
     .panel {
+        padding: 19px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+    }
+
+    .section-heading h2 {
+        font-size: 19px;
+    }
+
+    .event-title strong {
+        font-size: 16px;
+    }
+
+    .event-info {
+        grid-template-columns: 1fr;
+    }
+
+    .countdown-card > strong {
+        font-size: 25px;
+    }
+
+    .benefits {
+        grid-template-columns: 1fr;
+    }
+
+    .how-section {
         padding: 20px;
     }
 
-    .subscription-box {
-        padding: 20px;
+    .check-list {
+        grid-template-columns: 1fr;
     }
 
     .footer {
         flex-direction: column;
+
         gap: 15px;
     }
 }
