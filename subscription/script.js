@@ -107,9 +107,11 @@ document.addEventListener("DOMContentLoaded", async () => {
 
 
     /*
+    ==============================================
     IMPORTANT:
     We NEVER call supabase.auth.signOut()
     on this page.
+    ==============================================
     */
 
     await updateAccountButton();
@@ -128,7 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         }
     );
-
 
 
     /*
@@ -172,18 +173,18 @@ document.addEventListener("DOMContentLoaded", async () => {
     ==============================================
     */
 
+    const paymentSubscribeBtn =
+        document.getElementById(
+            "paymentSubscribeBtn"
+        );
+
+
     const ctaTitle =
         document.getElementById("ctaTitle");
 
 
     const ctaText =
         document.getElementById("ctaText");
-
-
-    const telegramSubscribeBtn =
-        document.getElementById(
-            "telegramSubscribeBtn"
-        );
 
 
     /*
@@ -197,6 +198,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     let appliedPrice =
         NORMAL_PRICE;
 
+
+    /*
+    ==============================================
+    SAVE CHECKOUT DATA
+    ==============================================
+    */
+
+    function saveCheckoutData() {
+
+        const checkoutData = {
+
+            product:
+                "DETwal News Trading",
+
+            basePrice:
+                NORMAL_PRICE,
+
+            finalPrice:
+                Number(appliedPrice),
+
+            coupon:
+                appliedCoupon || "",
+
+            currency:
+                "USD",
+
+            createdAt:
+                new Date().toISOString()
+
+        };
+
+
+        sessionStorage.setItem(
+            "detwalCheckout",
+            JSON.stringify(checkoutData)
+        );
+    }
 
 
     /*
@@ -240,20 +278,19 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (ctaText) {
 
             ctaText.textContent =
-                "Continue through Telegram to complete your subscription.";
+                "Continue to secure your access through DETwal.";
 
         }
 
 
-        if (telegramSubscribeBtn) {
+        if (paymentSubscribeBtn) {
 
-            telegramSubscribeBtn.textContent =
+            paymentSubscribeBtn.textContent =
                 `Subscribe for $${NORMAL_PRICE}`;
 
         }
 
     }
-
 
 
     /*
@@ -297,7 +334,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
 
-
         /*
         ==========================================
         DISABLE WHILE CHECKING
@@ -326,7 +362,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         }
 
 
-
         try {
 
             /*
@@ -343,7 +378,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 "DETwal coupon validation result:",
                 result
             );
-
 
 
             /*
@@ -366,10 +400,10 @@ document.addEventListener("DOMContentLoaded", async () => {
                     Number(result.price);
 
 
-
                 /*
-                Keep base price visible
-                as $9.
+                ==================================
+                KEEP BASE PRICE VISIBLE
+                ==================================
                 */
 
                 if (originalPrice) {
@@ -380,14 +414,12 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-
                 if (currentPrice) {
 
                     currentPrice.textContent =
                         `$${appliedPrice}`;
 
                 }
-
 
 
                 if (couponMessage) {
@@ -401,7 +433,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-
                 if (ctaTitle) {
 
                     ctaTitle.textContent =
@@ -410,19 +441,17 @@ document.addEventListener("DOMContentLoaded", async () => {
                 }
 
 
-
                 if (ctaText) {
 
                     ctaText.textContent =
-                        `Your News Trading subscription price is now $${appliedPrice}. Continue through Telegram to complete your subscription.`;
+                        `Your News Trading subscription price is now $${appliedPrice}. Continue to secure your access through DETwal.`;
 
                 }
 
 
+                if (paymentSubscribeBtn) {
 
-                if (telegramSubscribeBtn) {
-
-                    telegramSubscribeBtn.textContent =
+                    paymentSubscribeBtn.textContent =
                         `Subscribe for $${appliedPrice}`;
 
                 }
@@ -431,7 +460,6 @@ document.addEventListener("DOMContentLoaded", async () => {
                 return;
 
             }
-
 
 
             /*
@@ -484,14 +512,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             if (ctaText) {
 
                 ctaText.textContent =
-                    "Continue through Telegram to complete your subscription.";
+                    "Continue to secure your access through DETwal.";
 
             }
 
 
-            if (telegramSubscribeBtn) {
+            if (paymentSubscribeBtn) {
 
-                telegramSubscribeBtn.textContent =
+                paymentSubscribeBtn.textContent =
                     `Subscribe for $${NORMAL_PRICE}`;
 
             }
@@ -538,15 +566,14 @@ document.addEventListener("DOMContentLoaded", async () => {
             }
 
 
-            if (telegramSubscribeBtn) {
+            if (paymentSubscribeBtn) {
 
-                telegramSubscribeBtn.textContent =
+                paymentSubscribeBtn.textContent =
                     `Subscribe for $${NORMAL_PRICE}`;
 
             }
 
         }
-
 
 
         /*
@@ -568,7 +595,6 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-
     /*
     ==============================================
     APPLY BUTTON
@@ -583,7 +609,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
     }
-
 
 
     /*
@@ -612,64 +637,43 @@ document.addEventListener("DOMContentLoaded", async () => {
     }
 
 
-
     /*
     ==============================================
-    TELEGRAM SUBSCRIBE
+    PAYMENT PAGE
     ==============================================
     */
 
-    if (telegramSubscribeBtn) {
+    if (paymentSubscribeBtn) {
 
-        telegramSubscribeBtn.addEventListener(
+        paymentSubscribeBtn.addEventListener(
             "click",
             (event) => {
 
                 event.preventDefault();
 
 
-
                 /*
                 ==================================
-                NO COUPON
+                SAVE CURRENT CHECKOUT
                 ==================================
                 */
 
-                if (!appliedCoupon) {
-
-                    window.location.href =
-                        "https://t.me/detwalhelpbot?start=news_subscription";
-
-                    return;
-
-                }
-
+                saveCheckoutData();
 
 
                 /*
                 ==================================
-                COUPON APPLIED
+                OPEN DETWAL PAYMENT PAGE
                 ==================================
                 */
-
-                const telegramURL =
-                    `https://t.me/detwalhelpbot?start=news_${encodeURIComponent(appliedCoupon)}`;
-
-
-                console.log(
-                    "Opening Telegram with coupon:",
-                    appliedCoupon
-                );
-
 
                 window.location.href =
-                    telegramURL;
+                    "../payment/";
 
             }
         );
 
     }
-
 
 
     /*
