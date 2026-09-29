@@ -6,7 +6,7 @@ const NORMAL_PRICE = 9;
 
 /*
 ==================================================
-VALIDATE NEWS TRADING COUPON
+VALIDATE DETwal NEWS TRADING COUPON
 ==================================================
 */
 
@@ -17,7 +17,9 @@ async function validateCoupon(code) {
         .toUpperCase();
 
 
-    // No coupon entered
+    // ==================================================
+    // NO COUPON
+    // ==================================================
 
     if (!cleanCode) {
 
@@ -43,10 +45,14 @@ async function validateCoupon(code) {
             });
 
 
+        // ==================================================
+        // HTTP ERROR
+        // ==================================================
+
         if (!response.ok) {
 
             console.error(
-                "Coupon API HTTP error:",
+                "DETwal Coupon API HTTP Error:",
                 response.status
             );
 
@@ -70,11 +76,20 @@ async function validateCoupon(code) {
         );
 
 
-        // Valid coupon
+        // ==================================================
+        // VALID COUPON
+        //
+        // IMPORTANT:
+        // Worker returns:
+        //
+        // valid: true
+        // price: 8
+        //
+        // It does NOT need success: true.
+        // ==================================================
 
         if (
             data &&
-            data.success === true &&
             data.valid === true
         ) {
 
@@ -82,16 +97,18 @@ async function validateCoupon(code) {
                 Number(data.price);
 
 
-            // Make sure Worker returned a valid price
+            // ==================================================
+            // PRICE VALIDATION
+            // ==================================================
 
             if (
                 !Number.isFinite(price) ||
-                price < 0 ||
+                price <= 0 ||
                 price >= NORMAL_PRICE
             ) {
 
                 console.error(
-                    "Invalid coupon price:",
+                    "DETwal invalid coupon price:",
                     data.price
                 );
 
@@ -107,16 +124,36 @@ async function validateCoupon(code) {
 
             return {
                 valid: true,
+
                 code: String(
                     data.code || cleanCode
-                ).toUpperCase(),
-                price: price
+                )
+                    .trim()
+                    .toUpperCase(),
+
+                price: price,
+
+                originalPrice:
+                    Number(
+                        data.originalPrice ||
+                        NORMAL_PRICE
+                    ),
+
+                discount:
+                    Number(
+                        data.discount ||
+                        (
+                            NORMAL_PRICE - price
+                        )
+                    )
             };
 
         }
 
 
-        // Invalid / inactive coupon
+        // ==================================================
+        // INVALID / INACTIVE COUPON
+        // ==================================================
 
         return {
             valid: false,
